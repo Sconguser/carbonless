@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../auth/views/auth_choice.dart';
 import '../auth/views/sign_in.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -35,8 +36,8 @@ class RouterNotifier extends ChangeNotifier {
     if (loginState is LoginStateInitial) {
       return isLoggingIn ? null : '/login';
     }
-    if (isLoggingIn) {
-      return '/';
+    if (loginState is LoginStateSuccess) {
+      return goRouterState.location == '/home' ? null : '/home';
     }
     return null;
   }
@@ -49,7 +50,12 @@ class RouterNotifier extends ChangeNotifier {
         GoRoute(
           name: 'Home',
           builder: (context, state) => HomeView(),
-          path: '/',
+          path: '/home',
         ),
+        GoRoute(
+          name: 'AuthChoice',
+          builder: (context, state) => AuthChoice(),
+          path: '/',
+        )
       ];
 }

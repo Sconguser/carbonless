@@ -1,4 +1,5 @@
 import 'package:carbonless/providers/router_provider.dart';
+import 'package:carbonless/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,8 +17,10 @@ class MyApp extends ConsumerWidget {
     return MaterialApp.router(
       title: 'Carbonless',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          primarySwatch: Colors.blue,
+          inputDecorationTheme: InputDecorationTheme(
+            fillColor: textInputFillColor,
+          )),
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
       routeInformationProvider: router.routeInformationProvider,

@@ -12,6 +12,7 @@ class LoginController extends StateNotifier<LoginState> {
     try {
       await ref.read(authRepositoryProvider).login(email, password);
     } catch (e) {
+      print(e);
       state = LoginStateError(e.toString());
       return;
     }
