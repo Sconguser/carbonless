@@ -1,7 +1,9 @@
 import 'dart:math';
 
 import 'package:carbonless/home/home_view.dart';
+import 'package:carbonless/providers/auth_controller_provider.dart';
 import 'package:carbonless/providers/login_controller_provider.dart';
+import 'package:carbonless/providers/states/auth_state.dart';
 import 'package:carbonless/providers/states/login_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,6 +26,10 @@ class RouterNotifier extends ChangeNotifier {
   final Ref _ref;
 
   RouterNotifier(this._ref) {
+    _ref.listen<AuthState>(
+      authControllerProvider,
+      (_, __) => notifyListeners(),
+    );
     _ref.listen<LoginState>(
       loginControllerProvider,
       (_, __) => notifyListeners(),
@@ -31,15 +37,20 @@ class RouterNotifier extends ChangeNotifier {
   }
 
   String? _redirectLogic(GoRouterState goRouterState) {
-    final loginState = _ref.read(loginControllerProvider);
-    final isLoggingIn = goRouterState.location == '/login';
-    if (loginState is LoginStateInitial) {
-      return isLoggingIn ? null : '/login';
+    final authState = _ref.read(authControllerProvider);
+    if (authState is AuthStateLogin) {
+      final loginState = _ref.read(loginControllerProvider);
+      final isLoggingIn = goRouterState.location == '/login';
+      if (loginState is LoginStateInitial) {
+        return isLoggingIn ? null : '/login';
+      }
+      if (loginState is LoginStateSuccess) {
+        return goRouterState.location == '/home' ? null : '/home';
+      }
+      return null;
+    } else if (authState is AuthStateChoice) {
+      return goRouterState.location == '/' ? null : '/';
     }
-    if (loginState is LoginStateSuccess) {
-      return goRouterState.location == '/home' ? null : '/home';
-    }
-    return null;
   }
 
   List<GoRoute> get _routes => [
