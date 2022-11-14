@@ -10,17 +10,17 @@ void main() {
 class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
     return MaterialApp.router(
       title: 'Carbonless',
       theme: ThemeData(
-          primarySwatch: Colors.blue,
-          inputDecorationTheme: InputDecorationTheme(
-            fillColor: textInputFillColor,
-          )),
+        primarySwatch: Colors.grey,
+        inputDecorationTheme: InputDecorationTheme(
+          fillColor: textInputFillColor,
+        ),
+      ),
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
       routeInformationProvider: router.routeInformationProvider,

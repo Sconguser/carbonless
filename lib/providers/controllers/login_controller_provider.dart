@@ -1,4 +1,5 @@
 import 'package:carbonless/auth/auth_repository.dart';
+import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
 import 'package:carbonless/providers/states/login_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -17,6 +18,10 @@ class LoginController extends StateNotifier<LoginState> {
       return;
     }
     state = const LoginStateSuccess();
+  }
+
+  void showChoice() {
+    ref.read(authControllerProvider.notifier).showChoice();
   }
 }
 

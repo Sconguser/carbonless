@@ -1,10 +1,11 @@
 import 'dart:math';
 
-import 'package:carbonless/providers/login_controller_provider.dart';
 import 'package:carbonless/providers/states/login_state.dart';
 import 'package:carbonless/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../providers/controllers/login_controller_provider.dart';
 
 final emailStateProvider = StateProvider<String>((ref) {
   return '';
@@ -37,14 +38,12 @@ class SignIn extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('log in'),
-                  SizedBox(
-                    height: 21,
-                  ),
-                  buildTextFormField(email, ref, false, 'email'),
-                  SizedBox(
-                    height: 21,
-                  ),
-                  buildTextFormField(password, ref, true, 'password'),
+                  buildSizedBoxBetweenTextInputs(),
+                  buildTextFormField(
+                      email, ref, emailStateProvider, false, 'email'),
+                  buildSizedBoxBetweenTextInputs(),
+                  buildTextFormField(
+                      password, ref, passwordStateProvider, true, 'password'),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -63,7 +62,7 @@ class SignIn extends ConsumerWidget {
   Widget buildIconButton(
       LoginState loginState, WidgetRef ref, String email, String password) {
     return loginState is LoginStateLoading
-        ? spinKitDualRing
+        ? spinner
         : IconButton(
             icon: Icon(Icons.arrow_forward_outlined),
             onPressed: () {
@@ -75,25 +74,5 @@ class SignIn extends ConsumerWidget {
               }
             },
           );
-  }
-
-  TextFormField buildTextFormField(
-      String inValue, WidgetRef ref, bool isSecret, String hintText) {
-    return TextFormField(
-      decoration: InputDecoration(
-        border: InputBorder.none,
-        hintText: hintText,
-        filled: true,
-      ),
-      obscureText: isSecret,
-      initialValue: inValue,
-      onChanged: (value) {
-        if (!isSecret) {
-          ref.read(emailStateProvider.notifier).state = value;
-        } else {
-          ref.read(passwordStateProvider.notifier).state = value;
-        }
-      },
-    );
   }
 }
