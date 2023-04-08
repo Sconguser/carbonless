@@ -1,0 +1,17 @@
+button:
+  log_in: zaloguj się
+  sign_up: zarejestruj się
+
+text:
+  log_in: zaloguj się
+  sign_up: zarejestruj się
+
+forms:
+  email: email
+  password: hasło
+  password_confirmation: potwierdzenie hasła
+  name: imię
+  lastname: nazwisko
+validators:
+  errors:
+    passwords_must_match: hasła muszą się zgadzać

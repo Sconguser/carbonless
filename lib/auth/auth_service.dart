@@ -13,7 +13,7 @@ class AuthService {
   final String _urlSignIn = '/users/sign_in.json';
   final String _urlSignUp = '/users.json';
 
-  Future<User?> login(String email, String password) async {
+  Future<http.Response> login(String email, String password) async {
     try {
       final response = await http.post(Uri.https(_url, _urlSignIn),
           headers: <String, String>{
@@ -27,8 +27,9 @@ class AuthService {
           }));
       print('LOGIN USER: ${response.statusCode}');
       if (response.statusCode == 200 || response.statusCode == 201) {
-        User user = User.fromJson(jsonDecode(response.body));
-        return user;
+        // User user = User.fromJson(jsonDecode(response.body));
+        // return user;
+        return response;
       } else {
         throw Exception('Login failed');
       }

@@ -3,7 +3,9 @@ import 'dart:math';
 import 'package:carbonless/providers/states/login_state.dart';
 import 'package:carbonless/shared/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
 import '../../providers/controllers/login_controller_provider.dart';
 
@@ -16,7 +18,7 @@ final passwordStateProvider = StateProvider<String>((ref) {
 
 class SignIn extends ConsumerWidget {
   SignIn({Key? key}) : super(key: key);
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormBuilderState>();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loginState = ref.read(loginControllerProvider);
@@ -27,7 +29,7 @@ class SignIn extends ConsumerWidget {
     return Scaffold(
       // appBar: AppBar(),
       body: SafeArea(
-        child: Form(
+        child: FormBuilder(
           key: _formKey,
           child: Center(
             child: Container(
@@ -40,16 +42,35 @@ class SignIn extends ConsumerWidget {
                   Text('log in'),
                   buildSizedBoxBetweenTextInputs(),
                   buildTextFormField(
-                      email, ref, emailStateProvider, false, 'email'),
+                    email,
+                    ref,
+                    emailStateProvider,
+                    false,
+                    'email',
+                    'email',
+                    FormBuilderValidators.email(),
+                  ),
                   buildSizedBoxBetweenTextInputs(),
                   buildTextFormField(
-                      password, ref, passwordStateProvider, true, 'password'),
+                    password,
+                    ref,
+                    passwordStateProvider,
+                    true,
+                    'password',
+                    'password',
+                    FormBuilderValidators.required(),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      buildIconButton(loginState, ref, email, password),
+                      buildIconButton(
+                        loginState,
+                        ref,
+                        email,
+                        password,
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

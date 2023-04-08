@@ -47,24 +47,33 @@ class RouterNotifier extends ChangeNotifier {
     /// todo: pomyslec nad zastosowaniem wzorca strategii!
     final authState = _ref.read(authControllerProvider);
     if (authState is AuthStateLogin) {
-      final loginState = _ref.read(loginControllerProvider);
-      final isLoggingIn = goRouterState.location == '/login';
-      if (loginState is LoginStateInitial) {
-        return isLoggingIn ? null : '/login';
-      } else if (loginState is LoginStateSuccess) {
-        return goRouterState.location == '/home' ? null : '/home';
-      }
-      return null;
+      return loginRedirect(goRouterState);
     } else if (authState is AuthStateSignup) {
-      final signUpState = _ref.read(signUpControllerProvider);
-      if (signUpState is SignUpStateInitial) {
-        return goRouterState.location == '/signup' ? null : '/signup';
-      } else if (signUpState is SignUpStateSuccess) {
-        return goRouterState.location == '/home' ? null : '/home';
-      }
+      return signUpRedirect(goRouterState);
     } else if (authState is AuthStateChoice) {
       return goRouterState.location == '/' ? null : '/';
     }
+  }
+
+  String? signUpRedirect(GoRouterState goRouterState) {
+    final signUpState = _ref.read(signUpControllerProvider);
+    if (signUpState is SignUpStateInitial) {
+      return goRouterState.location == '/signup' ? null : '/signup';
+    } else if (signUpState is SignUpStateSuccess) {
+      return goRouterState.location == '/home' ? null : '/home';
+    }
+    return null;
+  }
+
+  String? loginRedirect(GoRouterState goRouterState) {
+    final loginState = _ref.read(loginControllerProvider);
+    final isLoggingIn = goRouterState.location == '/login';
+    if (loginState is LoginStateInitial) {
+      return isLoggingIn ? null : '/login';
+    } else if (loginState is LoginStateSuccess) {
+      return goRouterState.location == '/home' ? null : '/home';
+    }
+    return null;
   }
 
   List<GoRoute> get _routes => [

@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:carbonless/auth/auth_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'auth_models/user_model.dart';
+import 'package:http/http.dart' as http;
 
 enum AuthorizationStatus {
   uninitialized,
@@ -21,8 +24,15 @@ class AuthRepository {
 
   AuthRepository({required this.authService});
 
-  Future<User?> login(String email, String password) async {
-    return authService.login(email, password);
+  Future<bool> login(String email, String password) async {
+    try {
+      http.Response response = await authService.login(email, password);
+      _user = User.fromJson(jsonDecode(response.body));
+      bearerToken = response.headers['authorization'];
+      return true;
+    } catch (e) {
+      rethrow;
+    }
   }
 }
 

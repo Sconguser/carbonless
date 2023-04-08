@@ -34,3 +34,10 @@ class AuthStateSignup extends AuthState {
   @override
   List<Object?> get props => [];
 }
+
+class AuthStateSuccess extends AuthState {
+  const AuthStateSuccess();
+
+  @override
+  List<Object?> get props => [];
+}

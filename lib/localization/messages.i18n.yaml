@@ -1,0 +1,17 @@
+button:
+  log_in: log in
+  sign_up: sign up
+
+text:
+  log_in: log in
+  sign_up: sign up
+
+forms:
+  email: email
+  password: password
+  password_confirmation: password confirmation
+  name: name
+  lastname: lastname
+validators:
+  errors:
+    passwords_must_match: passwords must match

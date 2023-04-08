@@ -2,6 +2,7 @@ import 'package:carbonless/providers/states/signup_state.dart';
 import 'package:carbonless/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
 import '../../providers/controllers/signup_controller_provider.dart';
 
@@ -56,6 +57,8 @@ class SignUp extends ConsumerWidget {
                     nameStateProvider,
                     false,
                     'name',
+                    'name',
+                    FormBuilderValidators.required(),
                   ),
                   buildSizedBoxBetweenTextInputs(),
                   buildTextFormField(
@@ -64,6 +67,8 @@ class SignUp extends ConsumerWidget {
                     lastnameStateProvider,
                     false,
                     'lastname',
+                    'lastname',
+                    FormBuilderValidators.required(),
                   ),
                   buildSizedBoxBetweenTextInputs(),
                   buildTextFormField(
@@ -72,6 +77,8 @@ class SignUp extends ConsumerWidget {
                     emailStateProvider,
                     false,
                     'email',
+                    'email',
+                    FormBuilderValidators.email(),
                   ),
                   buildSizedBoxBetweenTextInputs(),
                   buildTextFormField(
@@ -80,14 +87,21 @@ class SignUp extends ConsumerWidget {
                     passwordStateProvider,
                     true,
                     'password',
+                    'password',
+                    FormBuilderValidators.required(),
                   ),
                   buildSizedBoxBetweenTextInputs(),
                   buildTextFormField(
-                      passwordConfirmation,
-                      ref,
-                      passwordConfirmationStateProvider,
-                      true,
-                      'confirm password'),
+                    passwordConfirmation,
+                    ref,
+                    passwordConfirmationStateProvider,
+                    true,
+                    'confirm password',
+                    'confirm password',
+                    FormBuilderValidators.equal(password,
+                        errorText: 'Hasła muszą się zgadzać'),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
