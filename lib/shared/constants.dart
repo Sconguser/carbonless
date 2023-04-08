@@ -26,4 +26,9 @@ ThemeData appTheme = ThemeData(
       foregroundColor: MaterialStateProperty.all(Colors.black),
     ),
   ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ButtonStyle(
+      elevation: MaterialStateProperty.all(0),
+    ),
+  ),
 );

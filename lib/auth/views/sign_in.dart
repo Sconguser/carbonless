@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:carbonless/auth/views/widgets.dart';
+import 'package:carbonless/main.dart';
 import 'package:carbonless/providers/states/login_state.dart';
 import 'package:carbonless/shared/constants.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
+import '../../localization/messages.i18n.dart';
 import '../../providers/controllers/login_controller_provider.dart';
 import '../../shared/widgets.dart';
 
@@ -22,13 +25,13 @@ class SignIn extends ConsumerWidget {
   final _formKey = GlobalKey<FormBuilderState>();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Messages _locale = ref.watch(messagesProvider);
     final loginState = ref.read(loginControllerProvider);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     String email = ref.watch(emailStateProvider);
     String password = ref.watch(passwordStateProvider);
     return Scaffold(
-      // appBar: AppBar(),
       body: SafeArea(
         child: FormBuilder(
           key: _formKey,
@@ -40,14 +43,14 @@ class SignIn extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('log in'),
+                  Text(_locale.text.log_in),
                   buildSizedBoxBetweenTextInputs(),
                   buildTextFormField(
                     email,
                     ref,
                     emailStateProvider,
                     false,
-                    'email',
+                    _locale.forms.email,
                     'email',
                     FormBuilderValidators.email(),
                   ),
@@ -57,21 +60,21 @@ class SignIn extends ConsumerWidget {
                     ref,
                     passwordStateProvider,
                     true,
-                    'password',
+                    _locale.forms.password,
                     'password',
                     FormBuilderValidators.required(),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      buildIconButton(
-                        loginState,
-                        ref,
-                        email,
-                        password,
-                      ),
-                    ],
-                  ),
+                  loginState is LoginStateLoading
+                      ? spinner
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            SignInButton(
+                              email: email,
+                              password: password,
+                            ),
+                          ],
+                        ),
                 ],
               ),
             ),

@@ -1,6 +1,7 @@
 button:
   log_in: log in
   sign_up: sign up
+  cont: continue
 
 text:
   log_in: log in

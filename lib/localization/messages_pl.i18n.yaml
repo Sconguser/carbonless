@@ -1,10 +1,11 @@
 button:
   log_in: logowanie
   sign_up: rejestracja
+  cont: dalej
 
 text:
-  log_in: zaloguj się
-  sign_up: zarejestruj się
+  log_in: logowanie
+  sign_up: rejestracja
   appName: carbonless
 
 forms:
