@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 import '../../providers/controllers/login_controller_provider.dart';
+import '../../shared/widgets.dart';
 
 final emailStateProvider = StateProvider<String>((ref) {
   return '';

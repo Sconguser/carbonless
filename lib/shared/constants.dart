@@ -8,40 +8,22 @@ Color textInputFillColor = const Color(0xFFFD9D9D9);
 
 Widget spinner = SpinKitDualRing(color: textInputFillColor);
 
-TextStyle authChoiceTextStyle = TextStyle(
-  fontSize: authChoiceFontSize,
+TextStyle logoTextStyle = TextStyle(
+  fontFamily: 'Baloo Da 2',
+  fontSize: logoFontSize,
+  fontWeight: FontWeight.bold,
 );
-double authChoiceFontSize = 30;
 
-FormBuilderTextField buildTextFormField(
-  String inValue,
-  WidgetRef ref,
-  StateProvider stateProvider,
-  bool isSecret,
-  String hintText,
-  String name,
-  String? Function(String?) validator, {
-  AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
-}) {
-  return FormBuilderTextField(
-    validator: validator,
-    autovalidateMode: autovalidateMode,
-    name: name,
-    decoration: InputDecoration(
-      border: InputBorder.none,
-      hintText: hintText,
-      filled: true,
+const double logoFontSize = 25;
+
+ThemeData appTheme = ThemeData(
+  primarySwatch: Colors.grey,
+  inputDecorationTheme: InputDecorationTheme(
+    fillColor: textInputFillColor,
+  ),
+  textButtonTheme: TextButtonThemeData(
+    style: ButtonStyle(
+      foregroundColor: MaterialStateProperty.all(Colors.black),
     ),
-    obscureText: isSecret,
-    initialValue: inValue,
-    onChanged: (value) {
-      ref.read(stateProvider.notifier).state = value;
-    },
-  );
-}
-
-SizedBox buildSizedBoxBetweenTextInputs() {
-  return SizedBox(
-    height: 21,
-  );
-}
+  ),
+);
