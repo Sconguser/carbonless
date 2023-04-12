@@ -15,7 +15,7 @@ TextStyle logoTextStyle = TextStyle(
 );
 
 const double logoFontSize = 25;
-
+Color highlightedTextColor = Colors.green;
 ThemeData appTheme = ThemeData(
   primarySwatch: Colors.grey,
   inputDecorationTheme: InputDecorationTheme(
@@ -28,7 +28,14 @@ ThemeData appTheme = ThemeData(
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all(highlightedTextColor),
       elevation: MaterialStateProperty.all(0),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+          // side: BorderSide(color: Colors.red),
+        ),
+      ),
     ),
   ),
 );

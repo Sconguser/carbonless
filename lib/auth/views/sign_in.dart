@@ -38,12 +38,14 @@ class SignIn extends ConsumerWidget {
           child: Center(
             child: Container(
               alignment: Alignment.center,
-              width: width / 3 * 2,
+              width: width / 4 * 3,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(_locale.text.log_in),
+                  Center(child: LogoText()),
+                  // Text(_locale.text.log_in),
+                  Center(child: AuthSwitchButton(selectedIndex: 0)),
                   buildSizedBoxBetweenTextInputs(),
                   buildTextFormField(
                     email,

@@ -1,9 +1,12 @@
+import 'package:carbonless/auth/views/widgets.dart';
+import 'package:carbonless/main.dart';
 import 'package:carbonless/providers/states/signup_state.dart';
 import 'package:carbonless/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
+import '../../localization/messages.i18n.dart';
 import '../../providers/controllers/signup_controller_provider.dart';
 import '../../shared/widgets.dart';
 
@@ -38,6 +41,7 @@ class SignUp extends ConsumerWidget {
     String passwordConfirmation = ref.watch(passwordConfirmationStateProvider);
     String name = ref.watch(nameStateProvider);
     String lastname = ref.watch(lastnameStateProvider);
+    Messages _locale = ref.watch(messagesProvider);
 
     return Scaffold(
       body: SafeArea(
@@ -46,18 +50,19 @@ class SignUp extends ConsumerWidget {
           child: Center(
             child: Container(
               alignment: Alignment.center,
-              width: width / 3 * 2,
+              width: width / 4 * 3,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('sign up'),
+                  Center(child: LogoText()),
+                  Center(child: AuthSwitchButton(selectedIndex: 1)),
                   buildTextFormField(
                     name,
                     ref,
                     nameStateProvider,
                     false,
-                    'name',
+                    _locale.forms.name,
                     'name',
                     FormBuilderValidators.required(),
                   ),
@@ -67,7 +72,7 @@ class SignUp extends ConsumerWidget {
                     ref,
                     lastnameStateProvider,
                     false,
-                    'lastname',
+                    _locale.forms.lastname,
                     'lastname',
                     FormBuilderValidators.required(),
                   ),
@@ -77,7 +82,7 @@ class SignUp extends ConsumerWidget {
                     ref,
                     emailStateProvider,
                     false,
-                    'email',
+                    _locale.forms.email,
                     'email',
                     FormBuilderValidators.email(),
                   ),
@@ -87,7 +92,7 @@ class SignUp extends ConsumerWidget {
                     ref,
                     passwordStateProvider,
                     true,
-                    'password',
+                    _locale.forms.password,
                     'password',
                     FormBuilderValidators.required(),
                   ),
@@ -97,17 +102,24 @@ class SignUp extends ConsumerWidget {
                     ref,
                     passwordConfirmationStateProvider,
                     true,
+                    _locale.forms.password_confirmation,
                     'confirm password',
-                    'confirm password',
-                    FormBuilderValidators.equal(password,
-                        errorText: 'Hasła muszą się zgadzać'),
+                    FormBuilderValidators.equal(
+                      password,
+                      errorText: _locale.validators.errors.passwords_must_match,
+                    ),
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      buildSignUpIconButton(signUpState, ref, email, password,
-                          passwordConfirmation, name, lastname),
+                      SignUpButton(
+                        email: email,
+                        password: password,
+                        passwordConfirmation: passwordConfirmation,
+                        name: name,
+                        lastname: lastname,
+                      ),
                     ],
                   ),
                 ],

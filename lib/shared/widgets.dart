@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../localization/messages.i18n.dart';
 import 'constants.dart';
 
-FormBuilderTextField buildTextFormField(
+Widget buildTextFormField(
   String inValue,
   WidgetRef ref,
   StateProvider stateProvider,
@@ -16,26 +16,29 @@ FormBuilderTextField buildTextFormField(
   String? Function(String?) validator, {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
 }) {
-  return FormBuilderTextField(
-    validator: validator,
-    autovalidateMode: autovalidateMode,
-    name: name,
-    decoration: InputDecoration(
-      border: InputBorder.none,
-      hintText: hintText,
-      filled: true,
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(10),
+    child: FormBuilderTextField(
+      validator: validator,
+      autovalidateMode: autovalidateMode,
+      name: name,
+      decoration: InputDecoration(
+        border: InputBorder.none,
+        hintText: hintText,
+        filled: true,
+      ),
+      obscureText: isSecret,
+      initialValue: inValue,
+      onChanged: (value) {
+        ref.read(stateProvider.notifier).state = value;
+      },
     ),
-    obscureText: isSecret,
-    initialValue: inValue,
-    onChanged: (value) {
-      ref.read(stateProvider.notifier).state = value;
-    },
   );
 }
 
 SizedBox buildSizedBoxBetweenTextInputs() {
   return SizedBox(
-    height: 21,
+    height: 10,
   );
 }
 
