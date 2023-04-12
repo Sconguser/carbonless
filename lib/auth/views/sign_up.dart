@@ -110,7 +110,7 @@ class SignUp extends ConsumerWidget {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ErrorMessage(),
                       SignUpButton(

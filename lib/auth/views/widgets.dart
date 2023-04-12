@@ -97,7 +97,6 @@ class AuthSwitchButton extends ConsumerWidget {
           ),
           onPressed: selectedIndex == 1
               ? () {
-                  print('dupa');
                   ref.read(authControllerProvider.notifier).showLogin();
                 }
               : null,

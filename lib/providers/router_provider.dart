@@ -1,8 +1,7 @@
-import 'dart:math';
-
 import 'package:carbonless/auth/views/sign_up.dart';
 import 'package:carbonless/home/home_view.dart';
 import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
+import 'package:carbonless/providers/controllers/error_message_controller_provider.dart';
 import 'package:carbonless/providers/controllers/signup_controller_provider.dart';
 import 'package:carbonless/providers/states/auth_state.dart';
 import 'package:carbonless/providers/states/login_state.dart';
@@ -46,6 +45,7 @@ class RouterNotifier extends ChangeNotifier {
   String? _redirectLogic(GoRouterState goRouterState) {
     /// todo: pomyslec nad zastosowaniem wzorca strategii!
     final authState = _ref.read(authControllerProvider);
+    _ref.read(errorMessageControllerProvider.notifier).hideError();
     if (authState is AuthStateLogin) {
       return loginRedirect(goRouterState);
     } else if (authState is AuthStateSignup) {
@@ -57,7 +57,7 @@ class RouterNotifier extends ChangeNotifier {
 
   String? signUpRedirect(GoRouterState goRouterState) {
     final signUpState = _ref.read(signUpControllerProvider);
-    if (signUpState is SignUpStateInitial) {
+    if (signUpState is SignUpStateInitial || signUpState is SignUpStateError) {
       return goRouterState.location == '/signup' ? null : '/signup';
     } else if (signUpState is SignUpStateSuccess) {
       return goRouterState.location == '/home' ? null : '/home';
@@ -68,7 +68,7 @@ class RouterNotifier extends ChangeNotifier {
   String? loginRedirect(GoRouterState goRouterState) {
     final loginState = _ref.read(loginControllerProvider);
     final isLoggingIn = goRouterState.location == '/login';
-    if (loginState is LoginStateInitial) {
+    if (loginState is LoginStateInitial || loginState is LoginStateError) {
       return isLoggingIn ? null : '/login';
     } else if (loginState is LoginStateSuccess) {
       return goRouterState.location == '/home' ? null : '/home';

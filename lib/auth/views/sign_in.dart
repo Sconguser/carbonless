@@ -44,7 +44,6 @@ class SignIn extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Center(child: LogoText()),
-                  // Text(_locale.text.log_in),
                   Center(child: AuthSwitchButton(selectedIndex: 0)),
                   buildSizedBoxBetweenTextInputs(),
                   buildTextFormField(
