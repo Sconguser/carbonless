@@ -5,16 +5,21 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 Color textInputFillColor = const Color(0xFFFD9D9D9);
-
-Widget spinner = SpinKitDualRing(color: textInputFillColor);
-
+Color warningTextColor = Colors.red;
+Color warningIconColor = Colors.red;
+String defaultFontFamily = 'Baloo Da 2';
+TextStyle warningTextStyle = TextStyle(
+  fontFamily: defaultFontFamily,
+  fontSize: warningFontSize,
+);
 TextStyle logoTextStyle = TextStyle(
-  fontFamily: 'Baloo Da 2',
+  fontFamily: defaultFontFamily,
   fontSize: logoFontSize,
   fontWeight: FontWeight.bold,
 );
 
 const double logoFontSize = 25;
+const double warningFontSize = 15;
 Color highlightedTextColor = Colors.green;
 ThemeData appTheme = ThemeData(
   primarySwatch: Colors.grey,

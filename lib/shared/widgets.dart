@@ -2,6 +2,7 @@ import 'package:carbonless/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../localization/messages.i18n.dart';
 import 'constants.dart';
@@ -54,3 +55,9 @@ class LogoText extends ConsumerWidget {
     );
   }
 }
+
+Widget spinner = SpinKitDualRing(color: textInputFillColor);
+Widget warningIcon = Icon(
+  Icons.error_outline,
+  color: warningIconColor,
+);

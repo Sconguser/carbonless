@@ -17,3 +17,9 @@ forms:
 validators:
   errors:
     passwords_must_match: passwords must match
+
+authErrors:
+  invalid_credentials: invalid credentials
+
+serverErrors:
+  server_unreachable: server is unreachable

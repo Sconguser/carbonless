@@ -25,14 +25,10 @@ class AuthRepository {
   AuthRepository({required this.authService});
 
   Future<bool> login(String email, String password) async {
-    try {
-      http.Response response = await authService.login(email, password);
-      _user = User.fromJson(jsonDecode(response.body));
-      bearerToken = response.headers['authorization'];
-      return true;
-    } catch (e) {
-      rethrow;
-    }
+    http.Response response = await authService.login(email, password);
+    _user = User.fromJson(jsonDecode(response.body));
+    bearerToken = response.headers['authorization'];
+    return true;
   }
 }
 

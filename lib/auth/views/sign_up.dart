@@ -1,7 +1,6 @@
 import 'package:carbonless/auth/views/widgets.dart';
 import 'package:carbonless/main.dart';
 import 'package:carbonless/providers/states/signup_state.dart';
-import 'package:carbonless/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -113,6 +112,7 @@ class SignUp extends ConsumerWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      ErrorMessage(),
                       SignUpButton(
                         email: email,
                         password: password,

@@ -69,8 +69,9 @@ class SignIn extends ConsumerWidget {
                   loginState is LoginStateLoading
                       ? spinner
                       : Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            ErrorMessage(),
                             SignInButton(
                               email: email,
                               password: password,

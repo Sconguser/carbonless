@@ -1,6 +1,7 @@
 import 'package:carbonless/auth/views/stylesheet.dart';
 import 'package:carbonless/main.dart';
 import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
+import 'package:carbonless/providers/controllers/error_message_controller_provider.dart';
 import 'package:carbonless/providers/controllers/signup_controller_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,6 +11,7 @@ import '../../providers/controllers/login_controller_provider.dart';
 import '../../providers/states/login_state.dart';
 import '../../providers/states/signup_state.dart';
 import '../../shared/constants.dart';
+import '../../shared/widgets.dart';
 
 class SignInButton extends ConsumerWidget {
   String email;
@@ -115,6 +117,33 @@ class AuthSwitchButton extends ConsumerWidget {
               : null,
         ),
       ],
+    );
+  }
+}
+
+class ErrorMessage extends ConsumerWidget {
+  const ErrorMessage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    ErrorMessageController errorMessageController =
+        ref.watch(errorMessageControllerProvider);
+    return Visibility(
+      visible: errorMessageController.getError() != null,
+      child: Row(
+        children: [
+          warningIcon,
+          SizedBox(
+            width: 10,
+          ),
+          Text(
+            errorMessageController.getError() ?? '',
+            style: warningTextStyle,
+          ),
+        ],
+      ),
     );
   }
 }
