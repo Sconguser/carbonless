@@ -109,19 +109,21 @@ class SignUp extends ConsumerWidget {
                     ),
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ErrorMessage(),
-                      SignUpButton(
-                        email: email,
-                        password: password,
-                        passwordConfirmation: passwordConfirmation,
-                        name: name,
-                        lastname: lastname,
-                      ),
-                    ],
-                  ),
+                  signUpState is SignUpStateLoading
+                      ? spinner
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ErrorMessage(),
+                            SignUpButton(
+                              email: email,
+                              password: password,
+                              passwordConfirmation: passwordConfirmation,
+                              name: name,
+                              lastname: lastname,
+                            ),
+                          ],
+                        ),
                 ],
               ),
             ),

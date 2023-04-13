@@ -30,6 +30,15 @@ class AuthRepository {
     bearerToken = response.headers['authorization'];
     return true;
   }
+
+  Future<bool> signup(String email, String password,
+      String passwordConfirmation, String name, String lastname) async {
+    http.Response response = await authService.registerUser(
+        email, password, passwordConfirmation, name, lastname);
+    _user = User.fromJson(jsonDecode(response.body));
+    bearerToken = response.headers['authorization'];
+    return true;
+  }
 }
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
