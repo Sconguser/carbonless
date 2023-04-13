@@ -53,7 +53,13 @@ class SignIn extends ConsumerWidget {
                     false,
                     _locale.forms.email,
                     'email',
-                    FormBuilderValidators.email(),
+                    FormBuilderValidators.compose([
+                      FormBuilderValidators.email(
+                          errorText:
+                              _locale.validators.errors.invalid_email_format),
+                      FormBuilderValidators.required(
+                          errorText: _locale.validators.errors.cannot_be_empty),
+                    ]),
                   ),
                   buildSizedBoxBetweenTextInputs(),
                   buildTextFormField(
@@ -63,7 +69,9 @@ class SignIn extends ConsumerWidget {
                     true,
                     _locale.forms.password,
                     'password',
-                    FormBuilderValidators.required(),
+                    FormBuilderValidators.required(
+                      errorText: _locale.validators.errors.cannot_be_empty,
+                    ),
                   ),
                   loginState is LoginStateLoading
                       ? spinner
@@ -74,6 +82,7 @@ class SignIn extends ConsumerWidget {
                             SignInButton(
                               email: email,
                               password: password,
+                              formKey: _formKey,
                             ),
                           ],
                         ),

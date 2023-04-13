@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
+int maxCharactersInForm = 20;
+int minPasswordCharacters = 6;
 Color textInputFillColor = const Color(0xFFFD9D9D9);
 Color warningTextColor = Colors.red;
 Color warningIconColor = Colors.red;

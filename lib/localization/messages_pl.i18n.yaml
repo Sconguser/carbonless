@@ -17,6 +17,12 @@ forms:
 validators:
   errors:
     passwords_must_match: hasła muszą się zgadzać
+    invalid_email_format: niepoprawny format emaila
+    cannot_be_empty: to pole nie może być puste
+    name_max_20_characters: imię może mieć maksymalnie 20 znaków
+    lastname_max_20_characters: nazwisko może mieć maksymalnie 20 znaków
+    password_min_6_characters: hasło musi mieć minimum 6 znaków
+    password_max_20_characters: hasło może mieć maksymalnie 20 znaków
 
 authErrors:
   invalid_credentials: niepoprawne dane

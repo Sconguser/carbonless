@@ -17,6 +17,12 @@ forms:
 validators:
   errors:
     passwords_must_match: passwords must match
+    invalid_email_format: invalid email format
+    cannot_be_empty: this field cannot be empty
+    name_max_20_characters: name can only have up to 20 characters
+    lastname_max_20_characters: lastname can only have up to 20 characters
+    password_min_6_characters: password needs to have at least 6 characters
+    password_max_20_characters: password can only have up to 20 characters
 
 authErrors:
   invalid_credentials: invalid credentials

@@ -2,11 +2,13 @@ import 'package:carbonless/auth/views/widgets.dart';
 import 'package:carbonless/main.dart';
 import 'package:carbonless/providers/states/signup_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 import '../../localization/messages.i18n.dart';
 import '../../providers/controllers/signup_controller_provider.dart';
+import '../../shared/constants.dart';
 import '../../shared/widgets.dart';
 
 final emailStateProvider = StateProvider<String>((ref) {
@@ -28,7 +30,7 @@ final lastnameStateProvider = StateProvider<String>((ref) {
 class SignUp extends ConsumerWidget {
   SignUp({Key? key}) : super(key: key);
 
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,7 +46,7 @@ class SignUp extends ConsumerWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: Form(
+        child: FormBuilder(
           key: _formKey,
           child: Center(
             child: Container(
@@ -63,7 +65,18 @@ class SignUp extends ConsumerWidget {
                     false,
                     _locale.forms.name,
                     'name',
-                    FormBuilderValidators.required(),
+                    FormBuilderValidators.compose(
+                      [
+                        FormBuilderValidators.required(
+                            errorText:
+                                _locale.validators.errors.cannot_be_empty),
+                        FormBuilderValidators.max(
+                          maxCharactersInForm,
+                          errorText:
+                              _locale.validators.errors.name_max_20_characters,
+                        )
+                      ],
+                    ),
                   ),
                   buildSizedBoxBetweenTextInputs(),
                   buildTextFormField(
@@ -73,7 +86,18 @@ class SignUp extends ConsumerWidget {
                     false,
                     _locale.forms.lastname,
                     'lastname',
-                    FormBuilderValidators.required(),
+                    FormBuilderValidators.compose(
+                      [
+                        FormBuilderValidators.required(
+                            errorText:
+                                _locale.validators.errors.cannot_be_empty),
+                        FormBuilderValidators.max(
+                          maxCharactersInForm,
+                          errorText: _locale
+                              .validators.errors.lastname_max_20_characters,
+                        )
+                      ],
+                    ),
                   ),
                   buildSizedBoxBetweenTextInputs(),
                   buildTextFormField(
@@ -83,7 +107,13 @@ class SignUp extends ConsumerWidget {
                     false,
                     _locale.forms.email,
                     'email',
-                    FormBuilderValidators.email(),
+                    FormBuilderValidators.compose([
+                      FormBuilderValidators.email(
+                          errorText:
+                              _locale.validators.errors.invalid_email_format),
+                      FormBuilderValidators.required(
+                          errorText: _locale.validators.errors.cannot_be_empty),
+                    ]),
                   ),
                   buildSizedBoxBetweenTextInputs(),
                   buildTextFormField(
@@ -93,7 +123,23 @@ class SignUp extends ConsumerWidget {
                     true,
                     _locale.forms.password,
                     'password',
-                    FormBuilderValidators.required(),
+                    FormBuilderValidators.compose(
+                      [
+                        FormBuilderValidators.required(
+                            errorText:
+                                _locale.validators.errors.cannot_be_empty),
+                        FormBuilderValidators.max(
+                          maxCharactersInForm,
+                          errorText: _locale
+                              .validators.errors.password_max_20_characters,
+                        ),
+                        FormBuilderValidators.min(
+                          minPasswordCharacters,
+                          errorText: _locale
+                              .validators.errors.password_min_6_characters,
+                        )
+                      ],
+                    ),
                   ),
                   buildSizedBoxBetweenTextInputs(),
                   buildTextFormField(
@@ -121,6 +167,7 @@ class SignUp extends ConsumerWidget {
                               passwordConfirmation: passwordConfirmation,
                               name: name,
                               lastname: lastname,
+                              formKey: _formKey,
                             ),
                           ],
                         ),
@@ -131,32 +178,5 @@ class SignUp extends ConsumerWidget {
         ),
       ),
     );
-  }
-
-  Widget buildSignUpIconButton(
-      SignUpState signUpState,
-      WidgetRef ref,
-      String email,
-      String password,
-      String passwordConfirmation,
-      String name,
-      String lastname) {
-    return signUpState is SignUpStateLoading
-        ? spinner
-        : IconButton(
-            icon: Icon(Icons.arrow_forward_outlined),
-            onPressed: () {
-              if (signUpState is SignUpStateInitial ||
-                  signUpState is SignUpStateError) {
-                ref.read(signUpControllerProvider.notifier).signUp(
-                      email,
-                      password,
-                      passwordConfirmation,
-                      name,
-                      lastname,
-                    );
-              }
-            },
-          );
   }
 }

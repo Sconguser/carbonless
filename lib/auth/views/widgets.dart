@@ -4,6 +4,7 @@ import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
 import 'package:carbonless/providers/controllers/error_message_controller_provider.dart';
 import 'package:carbonless/providers/controllers/signup_controller_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../localization/messages.i18n.dart';
@@ -16,11 +17,12 @@ import '../../shared/widgets.dart';
 class SignInButton extends ConsumerWidget {
   String email;
   String password;
-
+  GlobalKey<FormBuilderState> formKey;
   SignInButton({
     Key? key,
     required this.email,
     required this.password,
+    required this.formKey,
   }) : super(key: key);
 
   @override
@@ -30,7 +32,9 @@ class SignInButton extends ConsumerWidget {
     return ElevatedButton(
       child: Text(_locale.button.cont),
       onPressed: () {
-        if (loginState is LoginStateInitial || loginState is LoginStateError) {
+        if (formKey.currentState!.validate() &&
+            (loginState is LoginStateInitial ||
+                loginState is LoginStateError)) {
           ref.read(loginControllerProvider.notifier).login(email, password);
         }
       },
@@ -44,6 +48,7 @@ class SignUpButton extends ConsumerWidget {
   String passwordConfirmation;
   String name;
   String lastname;
+  GlobalKey<FormBuilderState> formKey;
   SignUpButton({
     Key? key,
     required this.email,
@@ -51,6 +56,7 @@ class SignUpButton extends ConsumerWidget {
     required this.passwordConfirmation,
     required this.name,
     required this.lastname,
+    required this.formKey,
   }) : super(key: key);
 
   @override
@@ -60,8 +66,9 @@ class SignUpButton extends ConsumerWidget {
     return ElevatedButton(
       child: Text(_locale.button.cont),
       onPressed: () {
-        if (signUpState is SignUpStateInitial ||
-            signUpState is SignUpStateError) {
+        if (formKey.currentState!.validate() &&
+            (signUpState is SignUpStateInitial ||
+                signUpState is SignUpStateError)) {
           ref.read(signUpControllerProvider.notifier).signUp(
                 email,
                 password,
