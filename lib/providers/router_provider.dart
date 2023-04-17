@@ -1,11 +1,11 @@
 import 'package:carbonless/auth/views/sign_up.dart';
-import 'package:carbonless/home/home_view.dart';
 import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
 import 'package:carbonless/providers/controllers/error_message_controller_provider.dart';
 import 'package:carbonless/providers/controllers/signup_controller_provider.dart';
 import 'package:carbonless/providers/states/auth_state.dart';
 import 'package:carbonless/providers/states/login_state.dart';
 import 'package:carbonless/providers/states/signup_state.dart';
+import 'package:carbonless/shared/bottom_nav_bar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -89,7 +89,7 @@ class RouterNotifier extends ChangeNotifier {
         ),
         GoRoute(
           name: 'Home',
-          builder: (context, state) => HomeView(),
+          builder: (context, state) => BottomNavigationBarView(),
           path: '/home',
         ),
         GoRoute(
