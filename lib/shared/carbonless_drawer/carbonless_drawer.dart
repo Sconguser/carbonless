@@ -1,4 +1,9 @@
+import 'package:carbonless/main.dart';
+import 'package:carbonless/shared/carbonless_drawer/drawer_controller_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../localization/messages.i18n.dart';
 
 class CarbonlessDrawer extends StatelessWidget {
   const CarbonlessDrawer({Key? key}) : super(key: key);
@@ -43,11 +48,12 @@ class DrawerHeader extends StatelessWidget {
   }
 }
 
-class DrawerMenuItems extends StatelessWidget {
+class DrawerMenuItems extends ConsumerWidget {
   const DrawerMenuItems({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    Messages _locale = ref.read(messagesProvider);
     return Container(
       padding: EdgeInsets.all(24),
       child: Wrap(
@@ -55,32 +61,42 @@ class DrawerMenuItems extends StatelessWidget {
         children: [
           ListTile(
             leading: Icon(Icons.person),
-            title: Text('Edytuj dane'),
-            onTap: () {},
+            title: Text(_locale.drawer.edit_data),
+            onTap: () {
+              ref.read(drawerControllerProvider.notifier).showEditDataView();
+            },
           ),
           ListTile(
             leading: Icon(Icons.people),
-            title: Text('Rankingi'),
-            onTap: () {},
+            title: Text(_locale.drawer.highscores),
+            onTap: () {
+              ref.read(drawerControllerProvider.notifier).showHighscores();
+            },
           ),
           ListTile(
             leading: Icon(Icons.watch_later),
-            title: Text('Historia'),
-            onTap: () {},
+            title: Text(_locale.drawer.history),
+            onTap: () {
+              ref.read(drawerControllerProvider.notifier).showHistory();
+            },
           ),
           ListTile(
             leading: Icon(Icons.sports_handball),
-            title: Text('Firmy Carbonless'),
-            onTap: () {},
+            title: Text(_locale.drawer.partners),
+            onTap: () {
+              ref.read(drawerControllerProvider.notifier).showPartners();
+            },
           ),
           ListTile(
             leading: Icon(Icons.settings),
-            title: Text('Ustawienia'),
-            onTap: () {},
+            title: Text(_locale.drawer.settings),
+            onTap: () {
+              ref.read(drawerControllerProvider.notifier).showSettings();
+            },
           ),
           ListTile(
             leading: Icon(Icons.logout),
-            title: Text('Wyloguj się'),
+            title: Text(_locale.drawer.log_out),
             onTap: () {},
           ),
         ],

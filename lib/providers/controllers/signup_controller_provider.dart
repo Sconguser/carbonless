@@ -28,10 +28,15 @@ class SignUpController extends StateNotifier<SignUpState> {
       return;
     }
     state = const SignUpStateSuccess();
+    showApp();
   }
 
   void showChoice() {
     ref.read(authControllerProvider.notifier).showChoice();
+  }
+
+  void showApp() {
+    ref.read(authControllerProvider.notifier).showApp();
   }
 }
 

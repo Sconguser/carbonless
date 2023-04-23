@@ -29,3 +29,14 @@ authErrors:
 
 serverErrors:
   server_unreachable: server is unreachable
+
+generalErrors:
+  errorView: coś poszło nie tak. proszę uruchom aplikację ponownie
+
+drawer:
+  edit_data: edytuj dane
+  highscores: rankingi
+  partners: firmy carbonless
+  settings: ustawienia
+  log_out: wyloguj się
+  history: historia

@@ -84,6 +84,7 @@ class SignIn extends ConsumerWidget {
                               password: password,
                               formKey: _formKey,
                             ),
+                            SignInDebug(),
                           ],
                         ),
                 ],

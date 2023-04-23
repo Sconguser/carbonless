@@ -35,6 +35,7 @@ class AuthService {
         throw Exception('Login failed');
       }
     } catch (e) {
+      print(e);
       rethrow;
     }
   }

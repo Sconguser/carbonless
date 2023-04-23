@@ -29,3 +29,14 @@ authErrors:
 
 serverErrors:
   server_unreachable: server is unreachable
+
+generalErrors:
+  errorView: something went wrong. please restart application
+
+drawer:
+  edit_data: edit data
+  highscores: highscores
+  partners: partners
+  settings: settings
+  log_out: log out
+  history: history

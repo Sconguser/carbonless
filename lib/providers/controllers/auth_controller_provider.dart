@@ -17,6 +17,10 @@ class AuthController extends StateNotifier<AuthState> {
   void showChoice() {
     state = AuthStateChoice();
   }
+
+  void showApp() {
+    state = AuthStateSuccess();
+  }
 }
 
 final authControllerProvider =

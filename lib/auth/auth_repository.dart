@@ -31,6 +31,19 @@ class AuthRepository {
     return true;
   }
 
+  Future<bool> debugLogin() async {
+    _user = new User(
+      id: 1,
+      name: "Mioszek",
+      lastname: "Paproszek",
+      email: "miosz@miosz.com",
+      points: 30,
+      total_carbon_saved: '100',
+    );
+    bearerToken = "dupa";
+    return true;
+  }
+
   Future<bool> signup(String email, String password,
       String passwordConfirmation, String name, String lastname) async {
     http.Response response = await authService.registerUser(

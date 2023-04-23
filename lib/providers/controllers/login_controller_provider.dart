@@ -25,10 +25,22 @@ class LoginController extends StateNotifier<LoginState> {
       return;
     }
     state = const LoginStateSuccess();
+    showApp();
+  }
+
+  void debugLogin() async {
+    state = const LoginStateLoading();
+    await Future.delayed(Duration(seconds: 3));
+    state = const LoginStateSuccess();
+    showApp();
   }
 
   void showChoice() {
     ref.read(authControllerProvider.notifier).showChoice();
+  }
+
+  void showApp() {
+    ref.read(authControllerProvider.notifier).showApp();
   }
 }
 

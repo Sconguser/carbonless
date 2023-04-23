@@ -42,6 +42,20 @@ class SignInButton extends ConsumerWidget {
   }
 }
 
+class SignInDebug extends ConsumerWidget {
+  const SignInDebug({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    Messages _locale = ref.watch(messagesProvider);
+    return ElevatedButton(
+        child: Text('Debug'),
+        onPressed: () {
+          ref.read(loginControllerProvider.notifier).debugLogin();
+        });
+  }
+}
+
 class SignUpButton extends ConsumerWidget {
   String email;
   String password;
