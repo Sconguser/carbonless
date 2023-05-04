@@ -1,4 +1,5 @@
 import 'package:carbonless/providers/controllers/app_navigation_controller_provider.dart';
+import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'drawer_state.dart';
@@ -34,7 +35,7 @@ class DrawerController extends StateNotifier<DrawerState> {
   }
 
   void logout() {
-    state = Logout();
+    ref.read(authControllerProvider.notifier).logout();
   }
 
   void _setAppNavigationToAuxiliary() {

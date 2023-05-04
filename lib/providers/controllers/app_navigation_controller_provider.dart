@@ -1,3 +1,4 @@
+import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
 import 'package:carbonless/providers/states/app_navigation_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,6 +11,10 @@ class AppNavigationController extends StateNotifier<AppNavigationState> {
 
   void showAuxiliary() {
     state = const AppNavigationAuxiliary();
+  }
+
+  void reset() {
+    state = const AppNavigationMain();
   }
 }
 

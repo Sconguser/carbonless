@@ -16,6 +16,10 @@ class ErrorMessageController extends ChangeNotifier {
   String? getError() {
     return error;
   }
+
+  void reset() {
+    hideError();
+  }
 }
 
 final errorMessageControllerProvider =

@@ -20,6 +20,10 @@ class QrScannerController extends StateNotifier<QrScannerState> {
     }
     state = const QrScannerStateSuccess();
   }
+
+  void reset() {
+    state = const QrScannerStateInitial();
+  }
 }
 
 final qrScannerControllerProvider =

@@ -97,7 +97,9 @@ class DrawerMenuItems extends ConsumerWidget {
           ListTile(
             leading: Icon(Icons.logout),
             title: Text(_locale.drawer.log_out),
-            onTap: () {},
+            onTap: () {
+              ref.read(drawerControllerProvider.notifier).logout();
+            },
           ),
         ],
       ),

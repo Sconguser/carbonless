@@ -38,6 +38,10 @@ class SignUpController extends StateNotifier<SignUpState> {
   void showApp() {
     ref.read(authControllerProvider.notifier).showApp();
   }
+
+  void reset() {
+    state = SignUpStateInitial();
+  }
 }
 
 final signUpControllerProvider =

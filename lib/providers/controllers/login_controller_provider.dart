@@ -42,6 +42,10 @@ class LoginController extends StateNotifier<LoginState> {
   void showApp() {
     ref.read(authControllerProvider.notifier).showApp();
   }
+
+  void reset() {
+    state = LoginStateInitial();
+  }
 }
 
 final loginControllerProvider =
