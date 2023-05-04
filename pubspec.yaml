@@ -46,6 +46,7 @@ dependencies:
   i18n: ^3.4.1
   form_builder_validators: ^8.4.0
   flutter_form_builder: ^7.7.0
+  mobile_scanner: ^3.2.0
 
 dev_dependencies:
   flutter_test:

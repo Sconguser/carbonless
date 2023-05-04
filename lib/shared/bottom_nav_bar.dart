@@ -48,29 +48,41 @@ class BottomNavigationBarView extends ConsumerWidget {
           ref.read(appNavigationControllerProvider.notifier).showMain();
           ref.read(bottomNavIndexProvider.notifier).state = index;
         },
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
+        // showSelectedLabels: false,
+        // showUnselectedLabels: false,
         items: [
           BottomNavigationBarItem(
             icon: const Icon(
+              Icons.star_border,
+              size: 30,
+            ),
+            activeIcon: Icon(
               Icons.star,
               size: 30,
             ),
-            label: 'Home',
+            label: _locale.bottomNavBar.prizes,
           ),
           BottomNavigationBarItem(
             icon: const Icon(
               Icons.qr_code,
               size: 30,
             ),
-            label: 'Notifications',
+            activeIcon: Icon(
+              Icons.qr_code_scanner,
+              size: 30,
+            ),
+            label: _locale.bottomNavBar.scanner,
           ),
           BottomNavigationBarItem(
             icon: const Icon(
               Icons.map_outlined,
               size: 30,
             ),
-            label: 'Checkout',
+            activeIcon: const Icon(
+              Icons.map,
+              size: 30,
+            ),
+            label: _locale.bottomNavBar.map,
           ),
         ],
       ),

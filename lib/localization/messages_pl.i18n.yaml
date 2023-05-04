@@ -40,3 +40,8 @@ drawer:
   settings: ustawienia
   log_out: wyloguj się
   history: historia
+
+bottomNavBar:
+  prizes: nagrody
+  scanner: skaner
+  map: mapa

@@ -1,3 +1,4 @@
+import 'package:carbonless/shared/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,6 +10,9 @@ int minPasswordCharacters = 6;
 Color textInputFillColor = const Color(0xFFFD9D9D9);
 Color warningTextColor = Colors.red;
 Color warningIconColor = Colors.red;
+Color buttonColor = const Color(0xFFC9E8D7);
+Color primaryColor = const Color(0xFF516E5E);
+Color secondaryColor = const Color(0xFFAAA5F2);
 String defaultFontFamily = 'Baloo Da 2';
 TextStyle warningTextStyle = TextStyle(
   fontFamily: defaultFontFamily,
@@ -24,7 +28,10 @@ const double logoFontSize = 25;
 const double warningFontSize = 15;
 Color highlightedTextColor = Colors.green;
 ThemeData appTheme = ThemeData(
-  primarySwatch: Colors.grey,
+  colorScheme: ColorScheme.fromSwatch().copyWith(
+    primary: primaryColor,
+    secondary: secondaryColor,
+  ),
   inputDecorationTheme: InputDecorationTheme(
     fillColor: textInputFillColor,
   ),
@@ -35,7 +42,8 @@ ThemeData appTheme = ThemeData(
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.all(highlightedTextColor),
+      foregroundColor: MaterialStateProperty.all(primaryColor),
+      backgroundColor: MaterialStateProperty.all(buttonColor),
       elevation: MaterialStateProperty.all(0),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
@@ -43,6 +51,23 @@ ThemeData appTheme = ThemeData(
           // side: BorderSide(color: Colors.red),
         ),
       ),
+    ),
+  ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    backgroundColor: primaryColor,
+    selectedItemColor: secondaryColor,
+    unselectedItemColor: Colors.white,
+    selectedLabelStyle: TextStyle(
+      color: secondaryColor,
+    ),
+    unselectedLabelStyle: TextStyle(
+      color: Colors.white,
+    ),
+    selectedIconTheme: IconThemeData(
+      color: secondaryColor,
+    ),
+    unselectedIconTheme: IconThemeData(
+      color: Colors.white,
     ),
   ),
 );
