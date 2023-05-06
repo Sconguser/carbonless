@@ -20,6 +20,7 @@ class _BarcodeScannerWithScanWindowState
   Future<void> onDetect(BarcodeCapture barcode) async {
     capture = barcode;
     setState(() => this.barcode = barcode.barcodes.first);
+    print(this.barcode);
   }
 
   MobileScannerArguments? arguments;

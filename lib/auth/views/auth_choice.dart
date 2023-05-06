@@ -25,7 +25,7 @@ class _AuthChoiceState extends ConsumerState<AuthChoice>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const LogoText(),
+            LogoText(),
             TweenAnimationBuilder(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

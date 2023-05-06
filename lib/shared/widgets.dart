@@ -44,14 +44,15 @@ SizedBox buildSizedBoxBetweenTextInputs() {
 }
 
 class LogoText extends ConsumerWidget {
-  const LogoText({Key? key}) : super(key: key);
+  Color? color;
+  LogoText({Key? key, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Messages _locale = ref.watch(messagesProvider);
     return Text(
       _locale.text.appName,
-      style: logoTextStyle,
+      style: logoTextStyle.copyWith(color: color),
     );
   }
 }

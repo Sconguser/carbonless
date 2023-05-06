@@ -27,7 +27,9 @@ class BottomNavigationBarView extends ConsumerWidget {
     return DefaultScaffold(
       appBar: CarbonLessAppBar(
         context: context,
-        title: LogoText(),
+        title: LogoText(
+          color: Colors.white,
+        ),
         showLeading: false,
       ),
       drawer: CarbonlessDrawer(),

@@ -22,11 +22,12 @@ TextStyle logoTextStyle = TextStyle(
   fontFamily: defaultFontFamily,
   fontSize: logoFontSize,
   fontWeight: FontWeight.bold,
+  color: primaryColor,
 );
 
 const double logoFontSize = 25;
 const double warningFontSize = 15;
-Color highlightedTextColor = Colors.green;
+Color highlightedTextColor = buttonColor;
 ThemeData appTheme = ThemeData(
   colorScheme: ColorScheme.fromSwatch().copyWith(
     primary: primaryColor,
@@ -37,7 +38,7 @@ ThemeData appTheme = ThemeData(
   ),
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
-      foregroundColor: MaterialStateProperty.all(Colors.black),
+      foregroundColor: MaterialStateProperty.all(primaryColor),
     ),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
