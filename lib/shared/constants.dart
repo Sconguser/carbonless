@@ -27,7 +27,7 @@ TextStyle logoTextStyle = TextStyle(
 );
 TextStyle labelTextStyle = TextStyle(
   fontFamily: defaultFontFamily,
-  fontSize: logoFontSize,
+  fontSize: labelFontSize,
   fontWeight: FontWeight.bold,
   color: secondaryColor,
 );
@@ -56,6 +56,7 @@ ButtonStyle unselectedButtonStyle = ButtonStyle(
   ),
 );
 const double logoFontSize = 25;
+const double labelFontSize = 20;
 const double warningFontSize = 15;
 Color highlightedTextColor = secondaryColor;
 ThemeData appTheme = ThemeData(

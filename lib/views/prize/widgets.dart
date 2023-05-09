@@ -1,3 +1,4 @@
+import 'package:carbonless/main.dart';
 import 'package:carbonless/models/prize_model.dart';
 import 'package:carbonless/providers/controllers/prize_list/prize_list_filter_controller_provider.dart';
 import 'package:carbonless/providers/states/prize_list/prize_filter_state.dart';
@@ -7,11 +8,14 @@ import 'package:carbonless/views/prize/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../localization/messages.i18n.dart';
+
 class PointsPlate extends ConsumerWidget {
   const PointsPlate({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Messages _locale = ref.watch(messagesProvider);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: Container(
@@ -20,7 +24,7 @@ class PointsPlate extends ConsumerWidget {
           child: Column(
             children: [
               Text(
-                'Twoje punkty:',
+                _locale.prizes.your_points,
                 style: labelTextStyle,
               ),
               Text(
@@ -38,6 +42,7 @@ class PrizeViewSwitch extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Messages _locale = ref.watch(messagesProvider);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     PrizeFilterState filterState = ref.watch(prizeListFilterControllerProvider);
@@ -64,7 +69,10 @@ class PrizeViewSwitch extends ConsumerWidget {
                       .showUnlocked();
                 }
               },
-              child: Text('Twoje nagrody'),
+              child: Text(
+                _locale.prizes.unlocked_prizes,
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
           Container(
@@ -85,7 +93,10 @@ class PrizeViewSwitch extends ConsumerWidget {
                       .showLocked();
                 }
               },
-              child: Text('Nagrody do odblokowania'),
+              child: Text(
+                _locale.prizes.locked_prizes,
+                textAlign: TextAlign.center,
+              ),
             ),
           )
         ],
@@ -104,15 +115,24 @@ class PrizeList extends ConsumerStatefulWidget {
 class _PrizeListState extends ConsumerState<PrizeList> {
   @override
   Widget build(BuildContext context) {
+    Messages _locale = ref.watch(messagesProvider);
     List<Prize>? prizes = filter(ref.watch(prizeRepositoryProvider).prizes,
         ref.read(prizeListFilterControllerProvider));
+    prizes.sort((a, b) {
+      if (a.isObtained) {
+        return -1;
+      } else if (b.isObtained) {
+        return 1;
+      }
+      return 0;
+    });
     ref.watch(prizeListFilterControllerProvider.notifier).addListener((state) {
       prizes = filter(prizes, state);
       setState(() {});
     });
     final rows = <Widget>[];
     if (prizes == null || prizes!.isEmpty) {
-      return Center(child: Text('W tym momencie nie ma żadnych nagród'));
+      return Center(child: Text(_locale.prizes.empty_prizes));
     }
     for (int i = 0; i < prizes!.length; i += 2) {
       final tile1 =

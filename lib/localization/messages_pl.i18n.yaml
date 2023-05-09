@@ -45,3 +45,9 @@ bottomNavBar:
   prizes: nagrody
   scanner: skaner
   map: mapa
+
+prizes:
+  unlocked_prizes: twoje nagrody
+  locked_prizes: nagrody do odblokowania
+  empty_prizes: w tym momencie nie ma żadnych nagród
+  your_points: twoje punkty
