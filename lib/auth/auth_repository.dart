@@ -32,6 +32,7 @@ class AuthRepository {
   }
 
   Future<bool> debugLogin() async {
+    await Future.delayed(Duration(seconds: 3));
     _user = new User(
       id: 1,
       name: "Mioszek",

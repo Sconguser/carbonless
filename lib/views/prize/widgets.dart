@@ -1,3 +1,5 @@
+import 'package:carbonless/auth/auth_models/user_model.dart';
+import 'package:carbonless/auth/auth_repository.dart';
 import 'package:carbonless/main.dart';
 import 'package:carbonless/models/prize_model.dart';
 import 'package:carbonless/providers/controllers/prize_list/prize_list_filter_controller_provider.dart';
@@ -16,6 +18,7 @@ class PointsPlate extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Messages _locale = ref.watch(messagesProvider);
+    User? user = ref.watch(authRepositoryProvider).user;
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: Container(
@@ -28,7 +31,7 @@ class PointsPlate extends ConsumerWidget {
                 style: labelTextStyle,
               ),
               Text(
-                '1234',
+                user != null ? user.points.toString() : '0',
                 style: labelTextStyle,
               ),
             ],
