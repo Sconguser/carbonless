@@ -1,3 +1,4 @@
+import 'package:carbonless/views/prize/widgets.dart';
 import 'package:flutter/material.dart';
 
 class PrizeView extends StatelessWidget {
@@ -7,8 +8,26 @@ class PrizeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        padding: EdgeInsets.all(15),
         alignment: Alignment.center,
-        child: Text('Prize'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Column(
+              children: const [
+                Padding(
+                  padding: EdgeInsets.only(bottom: 8.0),
+                  child: PointsPlate(),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 8.0),
+                  child: PrizeViewSwitch(),
+                ),
+              ],
+            ),
+            PrizeList(),
+          ],
+        ),
       ),
     );
   }

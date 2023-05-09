@@ -10,9 +10,10 @@ int minPasswordCharacters = 6;
 Color textInputFillColor = const Color(0xFFFD9D9D9);
 Color warningTextColor = Colors.red;
 Color warningIconColor = Colors.red;
-Color buttonColor = const Color(0xFFC9E8D7);
+Color secondaryColor = const Color(0xFFC9E8D7);
 Color primaryColor = const Color(0xFF516E5E);
-Color secondaryColor = const Color(0xFFAAA5F2);
+Color tertiaryColor = const Color(0xFFAAA5F2);
+Color inactiveColor = const Color(0xFFB7B8B7);
 String defaultFontFamily = 'Baloo Da 2';
 TextStyle warningTextStyle = TextStyle(
   fontFamily: defaultFontFamily,
@@ -24,14 +25,43 @@ TextStyle logoTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   color: primaryColor,
 );
-
+TextStyle labelTextStyle = TextStyle(
+  fontFamily: defaultFontFamily,
+  fontSize: logoFontSize,
+  fontWeight: FontWeight.bold,
+  color: secondaryColor,
+);
+ButtonStyle selectedButtonStyle = ButtonStyle(
+  textStyle: MaterialStateProperty.all(labelTextStyle),
+  foregroundColor: MaterialStateProperty.all(Colors.white),
+  backgroundColor: MaterialStateProperty.all(tertiaryColor),
+  elevation: MaterialStateProperty.all(0),
+  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+      // side: BorderSide(color: Colors.red),
+    ),
+  ),
+);
+ButtonStyle unselectedButtonStyle = ButtonStyle(
+  textStyle: MaterialStateProperty.all(labelTextStyle),
+  foregroundColor: MaterialStateProperty.all(primaryColor),
+  backgroundColor: MaterialStateProperty.all(secondaryColor),
+  elevation: MaterialStateProperty.all(0),
+  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+      // side: BorderSide(color: Colors.red),
+    ),
+  ),
+);
 const double logoFontSize = 25;
 const double warningFontSize = 15;
-Color highlightedTextColor = buttonColor;
+Color highlightedTextColor = secondaryColor;
 ThemeData appTheme = ThemeData(
   colorScheme: ColorScheme.fromSwatch().copyWith(
     primary: primaryColor,
-    secondary: secondaryColor,
+    secondary: tertiaryColor,
   ),
   inputDecorationTheme: InputDecorationTheme(
     fillColor: textInputFillColor,
@@ -44,7 +74,7 @@ ThemeData appTheme = ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       foregroundColor: MaterialStateProperty.all(primaryColor),
-      backgroundColor: MaterialStateProperty.all(buttonColor),
+      backgroundColor: MaterialStateProperty.all(secondaryColor),
       elevation: MaterialStateProperty.all(0),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
@@ -56,16 +86,16 @@ ThemeData appTheme = ThemeData(
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: primaryColor,
-    selectedItemColor: secondaryColor,
+    selectedItemColor: tertiaryColor,
     unselectedItemColor: Colors.white,
     selectedLabelStyle: TextStyle(
-      color: secondaryColor,
+      color: tertiaryColor,
     ),
     unselectedLabelStyle: TextStyle(
       color: Colors.white,
     ),
     selectedIconTheme: IconThemeData(
-      color: secondaryColor,
+      color: tertiaryColor,
     ),
     unselectedIconTheme: IconThemeData(
       color: Colors.white,
