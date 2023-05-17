@@ -10,14 +10,21 @@ class CarbonlessDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            DrawerHeader(),
-            DrawerMenuItems(),
-          ],
+    return SizedBox(
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 70),
+        child: Drawer(
+          backgroundColor: Colors.transparent,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // DrawerHeader(),
+                DrawerMenuItems(),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -55,53 +62,90 @@ class DrawerMenuItems extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     Messages _locale = ref.read(messagesProvider);
     return Container(
+      color: Colors.transparent,
       padding: EdgeInsets.all(24),
       child: Wrap(
         runSpacing: 16,
         children: [
-          ListTile(
-            leading: Icon(Icons.person),
-            title: Text(_locale.drawer.edit_data),
-            onTap: () {
+          DrawerButton(
+            icon: Icon(Icons.person),
+            text: _locale.drawer.edit_data,
+            onPressed: () {
               ref.read(drawerControllerProvider.notifier).showEditDataView();
             },
           ),
-          ListTile(
-            leading: Icon(Icons.people),
-            title: Text(_locale.drawer.highscores),
-            onTap: () {
+          DrawerButton(
+            icon: Icon(Icons.people),
+            text: _locale.drawer.highscores,
+            onPressed: () {
               ref.read(drawerControllerProvider.notifier).showHighscores();
             },
           ),
-          ListTile(
-            leading: Icon(Icons.watch_later),
-            title: Text(_locale.drawer.history),
-            onTap: () {
+          DrawerButton(
+            icon: Icon(Icons.watch_later),
+            text: _locale.drawer.history,
+            onPressed: () {
               ref.read(drawerControllerProvider.notifier).showHistory();
             },
           ),
-          ListTile(
-            leading: Icon(Icons.sports_handball),
-            title: Text(_locale.drawer.partners),
-            onTap: () {
+          DrawerButton(
+            icon: Icon(Icons.sports_handball),
+            text: _locale.drawer.partners,
+            onPressed: () {
               ref.read(drawerControllerProvider.notifier).showPartners();
             },
           ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text(_locale.drawer.settings),
-            onTap: () {
+          DrawerButton(
+            icon: Icon(Icons.settings),
+            text: _locale.drawer.settings,
+            onPressed: () {
               ref.read(drawerControllerProvider.notifier).showSettings();
             },
           ),
-          ListTile(
-            leading: Icon(Icons.logout),
-            title: Text(_locale.drawer.log_out),
-            onTap: () {
+          DrawerButton(
+            icon: Icon(Icons.logout),
+            text: _locale.drawer.log_out,
+            onPressed: () {
               ref.read(drawerControllerProvider.notifier).logout();
             },
           ),
         ],
+      ),
+    );
+  }
+}
+
+class DrawerButton extends StatelessWidget {
+  Icon icon;
+  String text;
+  VoidCallback onPressed;
+  DrawerButton(
+      {Key? key,
+      required this.icon,
+      required this.text,
+      required this.onPressed})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 60,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: Colors.white,
+        ),
+        child: Row(
+          children: [
+            icon,
+            Expanded(
+              child: Align(
+                alignment: Alignment.center,
+                child: Text(text),
+              ),
+            ),
+          ],
+        ),
+        onPressed: onPressed,
       ),
     );
   }
