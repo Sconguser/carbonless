@@ -51,3 +51,7 @@ prizes:
   locked_prizes: prizes to unlock
   empty_prizes: currently there are no prizes to show
   your_points: your points
+
+languages:
+  english: english
+  polish: polski

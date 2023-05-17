@@ -6,7 +6,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'localization/messages.i18n.dart';
 import 'localization/messages_pl.i18n.dart';
 
-final messagesProvider = StateProvider((ref) => const MessagesPl());
+final messagesProvider = StateProvider((ref) => const Messages());
+final languageProvider =
+    StateProvider((ref) => const Locale.fromSubtags(languageCode: 'en'));
 
 void main() {
   runApp(ProviderScope(child: const MyApp()));
@@ -18,8 +20,16 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
+    ref.read(languageProvider.notifier).addListener((state) {
+      if (state.languageCode == 'en') {
+        ref.read(messagesProvider.notifier).state = const Messages();
+      } else if (state.languageCode == 'pl') {
+        ref.read(messagesProvider.notifier).state = const MessagesPl();
+      }
+    });
     return MaterialApp.router(
       title: 'Carbonless',
+      locale: ref.watch(languageProvider),
       theme: appTheme,
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
