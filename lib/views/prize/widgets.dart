@@ -9,6 +9,7 @@ import 'package:carbonless/shared/constants.dart';
 import 'package:carbonless/views/prize/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:slide_to_confirm/slide_to_confirm.dart';
 
 import '../../localization/messages.i18n.dart';
 
@@ -121,14 +122,7 @@ class _PrizeListState extends ConsumerState<PrizeList> {
     Messages _locale = ref.watch(messagesProvider);
     List<Prize>? prizes = filter(ref.watch(prizeRepositoryProvider).prizes,
         ref.read(prizeListFilterControllerProvider));
-    prizes.sort((a, b) {
-      if (a.isObtained) {
-        return -1;
-      } else if (b.isObtained) {
-        return 1;
-      }
-      return 0;
-    });
+    sortPrizes(prizes);
     ref.watch(prizeListFilterControllerProvider.notifier).addListener((state) {
       prizes = filter(prizes, state);
       setState(() {});
@@ -138,10 +132,9 @@ class _PrizeListState extends ConsumerState<PrizeList> {
       return Center(child: Text(_locale.prizes.empty_prizes));
     }
     for (int i = 0; i < prizes!.length; i += 2) {
-      final tile1 =
-          DialogGestureDetector(prizeTile: PrizeTile(prize: prizes![i]));
+      final tile1 = DialogGestureDetector(prize: prizes![i]);
       final tile2 = i + 1 < prizes!.length
-          ? DialogGestureDetector(prizeTile: PrizeTile(prize: prizes![i + 1]))
+          ? DialogGestureDetector(prize: prizes![i + 1])
           : SizedBox(
               height: 200,
               width: 200,
@@ -160,6 +153,17 @@ class _PrizeListState extends ConsumerState<PrizeList> {
         child: ListView(
       children: rows,
     ));
+  }
+
+  void sortPrizes(List<Prize> prizes) {
+    prizes.sort((a, b) {
+      if (a.isObtained) {
+        return -1;
+      } else if (b.isObtained) {
+        return 1;
+      }
+      return 0;
+    });
   }
 }
 
@@ -214,6 +218,20 @@ class _PrizeTileState extends ConsumerState<PrizeTile> {
                 ),
               ),
             ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Container(
+                height: 30,
+                width: 50,
+                decoration: const BoxDecoration(color: Colors.white),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: Text('${widget.prize.price}'),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),
@@ -222,23 +240,51 @@ class _PrizeTileState extends ConsumerState<PrizeTile> {
 }
 
 class DialogGestureDetector extends StatelessWidget {
-  Widget prizeTile;
-  DialogGestureDetector({Key? key, required this.prizeTile}) : super(key: key);
+  Prize prize;
+  DialogGestureDetector({Key? key, required this.prize}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    PrizeTile prizeTile = PrizeTile(prize: prize);
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(
           PageRouteBuilder(
             opaque: false,
             barrierDismissible: true,
+            barrierColor: Colors.black.withOpacity(0.5),
             pageBuilder: (BuildContext context, _, __) {
-              return Container(
-                child: Hero(
-                  tag: "prize${prizeTile.hashCode}",
-                  child: prizeTile,
-                ),
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 500,
+                    width: 300,
+                    child: Hero(
+                      tag: "prize${prizeTile.hashCode}",
+                      child: prizeTile,
+                    ),
+                  ),
+                  prize.isObtained
+                      ? RedeemSlider(prize: prize)
+                      : PurchaseButton(prize: prize),
+                ],
+              );
+            },
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              return FadeTransition(
+                opacity: TweenSequence(
+                  <TweenSequenceItem<double>>[
+                    TweenSequenceItem<double>(
+                      tween: Tween<double>(begin: 0.0, end: 1.0),
+                      weight: 1,
+                    ),
+                  ],
+                ).animate(animation),
+                child: child,
               );
             },
           ),
@@ -250,4 +296,41 @@ class DialogGestureDetector extends StatelessWidget {
       ),
     );
   }
+}
+
+class PurchaseButton extends StatelessWidget {
+  Prize prize;
+  PurchaseButton({Key? key, required this.prize}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {},
+      child: Text('Kup tę nagrodę'),
+    );
+  }
+}
+
+class RedeemSlider extends StatelessWidget {
+  Prize prize;
+  RedeemSlider({Key? key, required this.prize}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ConfirmationSlider(
+      height: 50,
+      width: 250,
+      backgroundColor: secondaryColor,
+      backgroundColorEnd: tertiaryColor,
+      foregroundColor: primaryColor,
+      stickToEnd: true,
+      text: "Przesuń aby odebrać",
+      textStyle: sliderTextStyle,
+      onConfirmation: () => confirm(),
+    );
+  }
+}
+
+void confirm() async {
+  await Future.delayed(Duration(seconds: 3));
 }

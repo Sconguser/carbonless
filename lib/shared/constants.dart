@@ -31,6 +31,13 @@ TextStyle labelTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   color: secondaryColor,
 );
+TextStyle sliderTextStyle = TextStyle(
+  fontFamily: defaultFontFamily,
+  fontSize: sliderFontSize,
+  fontWeight: FontWeight.bold,
+  color: primaryColor,
+  decoration: TextDecoration.none,
+);
 ButtonStyle selectedButtonStyle = ButtonStyle(
   textStyle: MaterialStateProperty.all(labelTextStyle),
   foregroundColor: MaterialStateProperty.all(Colors.white),
@@ -58,6 +65,7 @@ ButtonStyle unselectedButtonStyle = ButtonStyle(
 const double logoFontSize = 25;
 const double labelFontSize = 20;
 const double warningFontSize = 15;
+const double sliderFontSize = 15;
 Color highlightedTextColor = secondaryColor;
 ThemeData appTheme = ThemeData(
   colorScheme: ColorScheme.fromSwatch().copyWith(
