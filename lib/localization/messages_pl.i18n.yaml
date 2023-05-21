@@ -2,6 +2,8 @@ button:
   log_in: logowanie
   sign_up: rejestracja
   cont: dalej
+  obtain: kup nagrodę
+  redeem: odbierz nagrodę
 
 text:
   log_in: logowanie

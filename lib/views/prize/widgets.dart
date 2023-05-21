@@ -12,6 +12,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:slide_to_confirm/slide_to_confirm.dart';
 
 import '../../localization/messages.i18n.dart';
+import '../../providers/controllers/prize_list/prize_controller_provider.dart';
 
 class PointsPlate extends ConsumerWidget {
   const PointsPlate({Key? key}) : super(key: key);
@@ -120,8 +121,8 @@ class _PrizeListState extends ConsumerState<PrizeList> {
   @override
   Widget build(BuildContext context) {
     Messages _locale = ref.watch(messagesProvider);
-    List<Prize>? prizes = filter(ref.watch(prizeRepositoryProvider).prizes,
-        ref.read(prizeListFilterControllerProvider));
+    List<Prize>? prizes = filter(
+        ref.watch(prizesProvider), ref.read(prizeListFilterControllerProvider));
     sortPrizes(prizes);
     ref.watch(prizeListFilterControllerProvider.notifier).addListener((state) {
       prizes = filter(prizes, state);
@@ -157,9 +158,9 @@ class _PrizeListState extends ConsumerState<PrizeList> {
 
   void sortPrizes(List<Prize> prizes) {
     prizes.sort((a, b) {
-      if (a.isObtained) {
+      if (a.isObtained()) {
         return -1;
-      } else if (b.isObtained) {
+      } else if (b.isObtained()) {
         return 1;
       }
       return 0;
@@ -186,7 +187,7 @@ class _PrizeTileState extends ConsumerState<PrizeTile> {
       width: 200,
       height: 200,
       child: Card(
-        color: widget.prize.isObtained ? secondaryColor : inactiveColor,
+        color: getPrizeColor(widget.prize),
         child: Stack(
           children: [
             if (widget.prize.id != null)
@@ -265,7 +266,7 @@ class DialogGestureDetector extends StatelessWidget {
                       child: prizeTile,
                     ),
                   ),
-                  prize.isObtained
+                  prize.isObtained()
                       ? RedeemSlider(prize: prize)
                       : PurchaseButton(prize: prize),
                 ],
@@ -298,25 +299,27 @@ class DialogGestureDetector extends StatelessWidget {
   }
 }
 
-class PurchaseButton extends StatelessWidget {
+class PurchaseButton extends ConsumerWidget {
   Prize prize;
   PurchaseButton({Key? key, required this.prize}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        ref.read(prizesProvider.notifier).obtainPrize(prize.id);
+      },
       child: Text('Kup tę nagrodę'),
     );
   }
 }
 
-class RedeemSlider extends StatelessWidget {
+class RedeemSlider extends ConsumerWidget {
   Prize prize;
   RedeemSlider({Key? key, required this.prize}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ConfirmationSlider(
       height: 50,
       width: 250,
@@ -326,11 +329,9 @@ class RedeemSlider extends StatelessWidget {
       stickToEnd: true,
       text: "Przesuń aby odebrać",
       textStyle: sliderTextStyle,
-      onConfirmation: () => confirm(),
+      onConfirmation: () {
+        ref.read(prizesProvider.notifier).redeemPrize(prize.id);
+      },
     );
   }
-}
-
-void confirm() async {
-  await Future.delayed(Duration(seconds: 3));
 }
