@@ -55,3 +55,8 @@ prizes:
 languages:
   english: english
   polish: polski
+
+theme:
+  dark: ciemny
+  light: jasny
+  system: systemowy

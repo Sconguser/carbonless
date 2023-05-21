@@ -14,6 +14,8 @@ Color secondaryColor = const Color(0xFFC9E8D7);
 Color primaryColor = const Color(0xFF516E5E);
 Color tertiaryColor = const Color(0xFFAAA5F2);
 Color inactiveColor = const Color(0xFFB7B8B7);
+Color darkSecondaryColor = primaryColor;
+Color darkPrimaryColor = secondaryColor;
 String defaultFontFamily = 'Baloo Da 2';
 TextStyle warningTextStyle = TextStyle(
   fontFamily: defaultFontFamily,
@@ -95,6 +97,51 @@ ThemeData appTheme = ThemeData(
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: primaryColor,
+    selectedItemColor: tertiaryColor,
+    unselectedItemColor: Colors.white,
+    selectedLabelStyle: TextStyle(
+      color: tertiaryColor,
+    ),
+    unselectedLabelStyle: TextStyle(
+      color: Colors.white,
+    ),
+    selectedIconTheme: IconThemeData(
+      color: tertiaryColor,
+    ),
+    unselectedIconTheme: IconThemeData(
+      color: Colors.white,
+    ),
+  ),
+);
+
+ThemeData darkTheme = ThemeData(
+  colorScheme: ColorScheme.fromSwatch().copyWith(
+    primary: darkPrimaryColor,
+    secondary: tertiaryColor,
+  ),
+  inputDecorationTheme: InputDecorationTheme(
+    fillColor: textInputFillColor,
+  ),
+  textButtonTheme: TextButtonThemeData(
+    style: ButtonStyle(
+      foregroundColor: MaterialStateProperty.all(darkPrimaryColor),
+    ),
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ButtonStyle(
+      foregroundColor: MaterialStateProperty.all(darkPrimaryColor),
+      backgroundColor: MaterialStateProperty.all(darkSecondaryColor),
+      elevation: MaterialStateProperty.all(0),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+          // side: BorderSide(color: Colors.red),
+        ),
+      ),
+    ),
+  ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    backgroundColor: darkPrimaryColor,
     selectedItemColor: tertiaryColor,
     unselectedItemColor: Colors.white,
     selectedLabelStyle: TextStyle(

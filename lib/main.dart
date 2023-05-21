@@ -9,7 +9,7 @@ import 'localization/messages_pl.i18n.dart';
 final messagesProvider = StateProvider((ref) => const Messages());
 final languageProvider =
     StateProvider((ref) => const Locale.fromSubtags(languageCode: 'en'));
-
+final themeProvider = StateProvider((ref) => ThemeMode.light);
 void main() {
   runApp(ProviderScope(child: const MyApp()));
 }
@@ -31,6 +31,8 @@ class MyApp extends ConsumerWidget {
       title: 'Carbonless',
       locale: ref.watch(languageProvider),
       theme: appTheme,
+      darkTheme: darkTheme,
+      themeMode: ref.watch(themeProvider),
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
       routeInformationProvider: router.routeInformationProvider,

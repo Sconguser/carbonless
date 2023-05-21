@@ -9,7 +9,12 @@ class SettingsView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       child: Center(
-        child: LanguageSwitch(),
+        child: Column(
+          children: [
+            ThemeSwitch(),
+            LanguageSwitch(),
+          ],
+        ),
       ),
     );
   }
