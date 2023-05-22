@@ -4,6 +4,7 @@ button:
   cont: continue
   obtain: obtain prize
   redeem: reedem prize
+
 text:
   log_in: log in
   sign_up: sign up

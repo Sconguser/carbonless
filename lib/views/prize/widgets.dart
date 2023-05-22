@@ -206,9 +206,6 @@ class _PrizeTileState extends ConsumerState<PrizeTile> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    // borderRadius: BorderRadius.vertical(
-                    //   bottom: Radius.circular(4),
-                    // ),
                   ),
                   child: Center(
                     child: Padding(
@@ -305,11 +302,12 @@ class PurchaseButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Messages _locale = ref.watch(messagesProvider);
     return ElevatedButton(
       onPressed: () {
         ref.read(prizesProvider.notifier).obtainPrize(prize.id);
       },
-      child: Text('Kup tę nagrodę'),
+      child: Text(_locale.button.obtain),
     );
   }
 }
@@ -320,6 +318,7 @@ class RedeemSlider extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Messages _locale = ref.watch(messagesProvider);
     return ConfirmationSlider(
       height: 50,
       width: 250,
@@ -327,7 +326,7 @@ class RedeemSlider extends ConsumerWidget {
       backgroundColorEnd: tertiaryColor,
       foregroundColor: primaryColor,
       stickToEnd: true,
-      text: "Przesuń aby odebrać",
+      text: _locale.button.redeem,
       textStyle: sliderTextStyle,
       onConfirmation: () {
         ref.read(prizesProvider.notifier).redeemPrize(prize.id);
