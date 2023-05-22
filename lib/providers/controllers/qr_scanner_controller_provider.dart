@@ -14,6 +14,7 @@ class QrScannerController extends StateNotifier<QrScannerState> {
     state = const QrScannerStateBusy();
     Messages _locale = ref.watch(messagesProvider);
     try {
+      await Future.delayed(Duration(seconds: 3));
       await ref.read(qrService).sendQr(qrdto);
     } catch (e) {
       state = const QrScannerStateError();

@@ -18,7 +18,7 @@ class QrService {
         },
         body: qrdto.toJson(),
       );
-      print('LOGIN USER: ${response.statusCode}');
+      print('SEND QR CODE: ${response.statusCode}');
       if (response.statusCode == 200 || response.statusCode == 201) {
         return response;
       } else {

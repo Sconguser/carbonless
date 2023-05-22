@@ -1,9 +1,13 @@
 import 'dart:io';
 
+import 'package:carbonless/models/qr_model.dart';
+import 'package:carbonless/providers/controllers/qr_scanner_controller_provider.dart';
+import 'package:carbonless/providers/states/qr_scanner_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
-class BarcodeScannerWithScanWindow extends StatefulWidget {
+class BarcodeScannerWithScanWindow extends ConsumerStatefulWidget {
   const BarcodeScannerWithScanWindow({Key? key}) : super(key: key);
 
   @override
@@ -12,15 +16,18 @@ class BarcodeScannerWithScanWindow extends StatefulWidget {
 }
 
 class _BarcodeScannerWithScanWindowState
-    extends State<BarcodeScannerWithScanWindow> {
+    extends ConsumerState<BarcodeScannerWithScanWindow> {
   late MobileScannerController controller = MobileScannerController();
   Barcode? barcode;
   BarcodeCapture? capture;
 
-  Future<void> onDetect(BarcodeCapture barcode) async {
+  Future<void> onDetect(BarcodeCapture barcode, WidgetRef ref) async {
     capture = barcode;
     setState(() => this.barcode = barcode.barcodes.first);
     print(this.barcode);
+    ref
+        .read(qrScannerControllerProvider.notifier)
+        .sendQr(QRDTO(uid: '', expiration: 'nigdy'));
   }
 
   MobileScannerArguments? arguments;
@@ -48,7 +55,7 @@ class _BarcodeScannerWithScanWindowState
                     this.arguments = arguments;
                   });
                 },
-                onDetect: onDetect,
+                onDetect: (barcode) => onDetect(barcode, ref),
               ),
               if (barcode != null &&
                   barcode?.corners != null &&
