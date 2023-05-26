@@ -9,6 +9,8 @@ text:
   log_in: log in
   sign_up: sign up
   appName: carbonless
+  theme: theme
+  language: language
 
 forms:
   email: email

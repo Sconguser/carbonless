@@ -1,3 +1,6 @@
+import 'package:carbonless/localization/messages.i18n.dart';
+import 'package:carbonless/main.dart';
+import 'package:carbonless/shared/constants.dart';
 import 'package:carbonless/views/settings/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,14 +10,31 @@ class SettingsView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Messages _locale = ref.watch(messagesProvider);
     return Container(
-      child: Center(
-        child: Column(
-          children: [
-            ThemeSwitch(),
-            LanguageSwitch(),
-          ],
-        ),
+      padding: EdgeInsets.all(10),
+      child: Column(
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // crossAxisAlignment: CrossAxisAlignment.,
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              _locale.text.theme,
+              style: logoTextStyle,
+            ),
+          ),
+          ThemeSwitch(),
+          SizedBox(height: 10),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              _locale.text.language,
+              style: logoTextStyle,
+            ),
+          ),
+          LanguageSwitch(),
+        ],
       ),
     );
   }
