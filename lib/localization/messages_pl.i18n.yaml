@@ -4,6 +4,8 @@ button:
   cont: dalej
   obtain: kup nagrodę
   redeem: odbierz nagrodę
+  save_changes: zapisz zmiany
+  change_password: zmień hasło
 
 text:
   log_in: logowanie
