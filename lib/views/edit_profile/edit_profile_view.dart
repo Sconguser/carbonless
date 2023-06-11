@@ -28,64 +28,66 @@ class EditProfileView extends ConsumerWidget {
     String lastname = ref.watch(lastnameStateProvider);
     Messages _locale = ref.watch(messagesProvider);
     return Container(
-        padding: EdgeInsets.all(10),
+        padding: standardOuterPadding,
         child: FormBuilder(
           key: _formKey,
           child: Container(
             // width: width / 4 * 3,
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(
-                _locale.drawer.edit_data,
-                style: logoTextStyle,
-              ),
-              Container(
-                padding: EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    buildTextFormField(
-                      name,
-                      ref,
-                      nameStateProvider,
-                      false,
-                      _locale.forms.name,
-                      'name',
-                      FormBuilderValidators.required(
-                        errorText: _locale.validators.errors.cannot_be_empty,
-                      ),
-                    ),
-                    buildSizedBoxBetweenTextInputs(),
-                    buildTextFormField(
-                      lastname,
-                      ref,
-                      lastnameStateProvider,
-                      false,
-                      _locale.forms.lastname,
-                      'lastname',
-                      FormBuilderValidators.required(
-                        errorText: _locale.validators.errors.cannot_be_empty,
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ElevatedButton(
-                          child: Text(_locale.button.save_changes),
-                          onPressed: () {},
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        ElevatedButton(
-                          child: Text(_locale.button.change_password),
-                          onPressed: () {},
-                        )
-                      ],
-                    )
-                  ],
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  _locale.drawer.edit_data,
+                  style: logoTextStyle,
                 ),
-              ),
-            ]),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    children: [
+                      buildTextFormField(
+                        name,
+                        ref,
+                        nameStateProvider,
+                        false,
+                        _locale.forms.name,
+                        'name',
+                        FormBuilderValidators.required(
+                          errorText: _locale.validators.errors.cannot_be_empty,
+                        ),
+                      ),
+                      buildSizedBoxBetweenTextInputs(),
+                      buildTextFormField(
+                        lastname,
+                        ref,
+                        lastnameStateProvider,
+                        false,
+                        _locale.forms.lastname,
+                        'lastname',
+                        FormBuilderValidators.required(
+                          errorText: _locale.validators.errors.cannot_be_empty,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          ElevatedButton(
+                            child: Text(_locale.button.save_changes),
+                            onPressed: () {},
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          ElevatedButton(
+                            child: Text(_locale.button.change_password),
+                            onPressed: () {},
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ));
   }

@@ -66,3 +66,6 @@ theme:
   dark: dark
   light: light
   system: system
+
+history:
+  trees_saved(int trees): you saved as much carbon as $trees trees save in a year

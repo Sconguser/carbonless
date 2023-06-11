@@ -14,9 +14,11 @@ Color secondaryColor = const Color(0xFFC9E8D7);
 Color primaryColor = const Color(0xFF516E5E);
 Color tertiaryColor = const Color(0xFFAAA5F2);
 Color inactiveColor = const Color(0xFFB7B8B7);
+Color cardBackgroundColor = const Color(0xFFF7F7F2);
 Color darkSecondaryColor = primaryColor;
 Color darkPrimaryColor = secondaryColor;
 String defaultFontFamily = 'Baloo Da 2';
+EdgeInsetsGeometry standardOuterPadding = const EdgeInsets.all(10);
 TextStyle warningTextStyle = TextStyle(
   fontFamily: defaultFontFamily,
   fontSize: warningFontSize,
