@@ -74,7 +74,7 @@ class SignIn extends ConsumerWidget {
                     ),
                   ),
                   loginState is LoginStateLoading
-                      ? spinner
+                      ? Center(child: spinner)
                       : Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -94,22 +94,5 @@ class SignIn extends ConsumerWidget {
         ),
       ),
     );
-  }
-
-  Widget buildIconButton(
-      LoginState loginState, WidgetRef ref, String email, String password) {
-    return loginState is LoginStateLoading
-        ? spinner
-        : IconButton(
-            icon: Icon(Icons.arrow_forward_outlined),
-            onPressed: () {
-              if (loginState is LoginStateInitial ||
-                  loginState is LoginStateError) {
-                ref
-                    .read(loginControllerProvider.notifier)
-                    .login(email, password);
-              }
-            },
-          );
   }
 }

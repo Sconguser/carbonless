@@ -57,9 +57,11 @@ class LogoText extends ConsumerWidget {
   }
 }
 
-Widget spinner = SpinKitDualRing(
-  color: textInputFillColor,
-  size: 20,
+Widget spinner = SpinKitWaveSpinner(
+  color: primaryColor,
+  trackColor: secondaryColor,
+  waveColor: primaryColor,
+  size: 50,
 );
 Widget warningIcon = Icon(
   Icons.error_outline,

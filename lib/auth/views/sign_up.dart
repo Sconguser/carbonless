@@ -156,7 +156,7 @@ class SignUp extends ConsumerWidget {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                   ),
                   signUpState is SignUpStateLoading
-                      ? spinner
+                      ? Center(child: spinner)
                       : Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
