@@ -1,3 +1,5 @@
+import 'package:carbonless/shared/constants.dart';
+import 'package:carbonless/views/partners/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -7,9 +9,8 @@ class PartnersView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      child: Center(
-        child: Text('Partners'),
-      ),
+      padding: standardOuterPadding,
+      child: PartnersList(),
     );
   }
 }

@@ -1,5 +1,9 @@
 import 'package:carbonless/main.dart';
+import 'package:carbonless/models/location_model.dart';
+import 'package:carbonless/models/partner_model.dart';
 import 'package:carbonless/providers/controllers/geolocation/geolocation_controller_provider.dart';
+import 'package:carbonless/providers/controllers/partners/partners_controller_provider.dart';
+import 'package:carbonless/views/carbonless_map/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -21,6 +25,7 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
   var location = [];
   @override
   Widget build(BuildContext context) {
+    List<Partner> partners = ref.watch(partnersNotifier);
     return Container(
       child: Stack(
         children: [
@@ -52,17 +57,12 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
               ),
               MarkerLayerOptions(
                 markers: [
-                  Marker(
-                    width: 80.0,
-                    height: 80.0,
-                    point: point,
-                    builder: (ctx) => Container(
-                      child: Icon(
-                        Icons.location_on,
-                        color: Colors.red,
+                  for (Partner partner in partners)
+                    for (Location location in partner.locations)
+                      partnerMarker(
+                        partner,
+                        LatLng(location.latitude, location.longitude),
                       ),
-                    ),
-                  )
                 ],
               ),
             ],

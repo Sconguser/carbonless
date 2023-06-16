@@ -184,6 +184,7 @@ class _PrizeTileState extends ConsumerState<PrizeTile> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      //TODO make this relative to screen size
       width: 200,
       height: 200,
       child: Card(
@@ -219,6 +220,7 @@ class _PrizeTileState extends ConsumerState<PrizeTile> {
             Align(
               alignment: Alignment.bottomRight,
               child: Container(
+                //TODO: make this relative to screen size
                 height: 30,
                 width: 50,
                 decoration: const BoxDecoration(color: Colors.white),
@@ -256,6 +258,7 @@ class DialogGestureDetector extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
+                    ///TODO: make this relative to the screen size
                     height: 500,
                     width: 300,
                     child: Hero(
