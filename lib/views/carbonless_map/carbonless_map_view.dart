@@ -2,12 +2,16 @@ import 'package:carbonless/main.dart';
 import 'package:carbonless/models/location_model.dart';
 import 'package:carbonless/models/partner_model.dart';
 import 'package:carbonless/providers/controllers/partners/partners_controller_provider.dart';
+import 'package:carbonless/providers/controllers/partners/partners_filter_provider.dart';
 import 'package:carbonless/views/carbonless_map/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
+
+import '../../providers/states/partner/partners_filter_state.dart';
+import '../../utils/partners_utils.dart';
 
 class CarbonlessMapView extends ConsumerStatefulWidget {
   const CarbonlessMapView({Key? key}) : super(key: key);
@@ -25,15 +29,6 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
 
   @override
   Widget build(BuildContext context) {
-    List<Partner> partners = ref.watch(partnersNotifier);
-    List<PartnerMarker> markers = [
-      for (Partner partner in partners)
-        for (Location location in partner.locations)
-          PartnerMarker(
-            partner: partner,
-            location: LatLng(location.latitude, location.longitude),
-          ),
-    ];
     return Container(
       child: Stack(
         children: [
@@ -67,21 +62,38 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
                     : darkModeTileBuilder,
                 // backgroundColor: Colors.black54,
               )),
-              PopupMarkerLayerWidget(
-                options: PopupMarkerLayerOptions(
-                  markerRotate: false,
-                  markers: markers,
-                  popupController: _popupLayerController,
-                  markerTapBehavior: MarkerTapBehavior.togglePopupAndHideRest(),
-                  popupSnap: PopupSnap.markerTop,
-                  popupBuilder: (BuildContext context, Marker marker) {
-                    return MarkerPopup(marker: marker as PartnerMarker);
-                  },
-                  onPopupEvent: (dynamic popupEvent, List<Marker> marker) {
-                    print('popupevent');
-                  },
-                ),
-              ),
+              Consumer(builder: (context, ref, child) {
+                List<Partner> partners = ref.watch(partnersNotifier);
+                PartnersFilterState partnersFilterState =
+                    ref.watch(partnersFilterControllerProvider);
+                List<Partner> filteredPartners =
+                    PartnersUtils.filter(partners, partnersFilterState);
+                List<PartnerMarker> markers = [
+                  for (Partner partner in filteredPartners)
+                    for (Location location in partner.locations)
+                      PartnerMarker(
+                        partner: partner,
+                        location: LatLng(location.latitude, location.longitude),
+                      ),
+                ];
+
+                return PopupMarkerLayerWidget(
+                  options: PopupMarkerLayerOptions(
+                    markerRotate: false,
+                    markers: markers,
+                    popupController: _popupLayerController,
+                    markerTapBehavior:
+                        MarkerTapBehavior.togglePopupAndHideRest(),
+                    popupSnap: PopupSnap.markerTop,
+                    popupBuilder: (BuildContext context, Marker marker) {
+                      return MarkerPopup(marker: marker as PartnerMarker);
+                    },
+                    onPopupEvent: (dynamic popupEvent, List<Marker> marker) {
+                      print('popupevent');
+                    },
+                  ),
+                );
+              }),
             ],
           ),
           Padding(

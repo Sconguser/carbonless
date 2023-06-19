@@ -1,5 +1,8 @@
 import 'package:carbonless/models/partner_model.dart';
+import 'package:carbonless/providers/controllers/app_navigation_controller_provider.dart';
 import 'package:carbonless/providers/controllers/partners/partners_controller_provider.dart';
+import 'package:carbonless/providers/controllers/partners/partners_filter_provider.dart';
+import 'package:carbonless/shared/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -42,8 +45,16 @@ class _PartnerTileState extends ConsumerState<PartnerTile> {
             Row(
               children: [
                 ElevatedButton(
-                  onPressed: () {},
-                  child: Text('Go to'),
+                  onPressed: () {
+                    ref
+                        .read(partnersFilterControllerProvider.notifier)
+                        .filterByPartner(widget.partner);
+                    ref
+                        .read(appNavigationControllerProvider.notifier)
+                        .showMain();
+                    ref.read(bottomNavIndexProvider.notifier).state = 2;
+                  },
+                  child: Text('Show on map'),
                 )
               ],
             )
