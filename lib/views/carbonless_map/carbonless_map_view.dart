@@ -96,10 +96,10 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
               }),
             ],
           ),
-          Padding(
+          Container(
+            ///TODO: zamienic na relatywne
             padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 34.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Card(
                   child: TextField(
@@ -110,6 +110,20 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
                     ),
                   ),
                 ),
+                Consumer(builder: (context, ref, child) {
+                  PartnersFilterState partnersFilterState =
+                      ref.watch(partnersFilterControllerProvider);
+                  return partnersFilterState is PartnersFilterAll
+                      ? const SizedBox.shrink()
+                      : ElevatedButton(
+                          child: Text('Reset filter'),
+                          onPressed: () {
+                            ref
+                                .read(partnersFilterControllerProvider.notifier)
+                                .showAll();
+                          },
+                        );
+                })
               ],
             ),
           ),
