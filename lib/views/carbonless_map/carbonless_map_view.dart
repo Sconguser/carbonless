@@ -25,7 +25,14 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
   double lat = -0.09;
   LatLng point = LatLng(49.5, -0.09);
   var location = [];
+  final TextEditingController _searchController = TextEditingController();
   final PopupController _popupLayerController = PopupController();
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +110,7 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
               children: [
                 Card(
                   child: TextField(
+                    controller: _searchController,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.all(16.0),
                       //TODO: add translation
@@ -110,6 +118,7 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
                       prefixIcon: Icon(Icons.location_on_outlined),
                     ),
                     onChanged: (value) {
+                      print(value);
                       ref
                           .read(partnersFilterControllerProvider.notifier)
                           .filterByName(value);
@@ -128,6 +137,7 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
                             ref
                                 .read(partnersFilterControllerProvider.notifier)
                                 .showAll();
+                            _searchController.clear();
                           },
                         );
                 })
