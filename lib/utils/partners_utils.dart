@@ -27,6 +27,9 @@ class PartnersUtils {
   }
 
   static List<Partner> _filterByName(List<Partner> partners, String name) {
-    return partners.where((listPartner) => listPartner.name == name).toList();
+    return partners
+        .where((partner) =>
+            partner.name.toLowerCase().contains(name.toLowerCase()))
+        .toList();
   }
 }

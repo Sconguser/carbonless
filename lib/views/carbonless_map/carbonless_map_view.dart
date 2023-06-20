@@ -105,9 +105,15 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
                   child: TextField(
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.all(16.0),
+                      //TODO: add translation
                       hintText: "Search for your localisation",
                       prefixIcon: Icon(Icons.location_on_outlined),
                     ),
+                    onChanged: (value) {
+                      ref
+                          .read(partnersFilterControllerProvider.notifier)
+                          .filterByName(value);
+                    },
                   ),
                 ),
                 Consumer(builder: (context, ref, child) {
@@ -116,6 +122,7 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
                   return partnersFilterState is PartnersFilterAll
                       ? const SizedBox.shrink()
                       : ElevatedButton(
+                          ///TODO: add translation
                           child: Text('Reset filter'),
                           onPressed: () {
                             ref

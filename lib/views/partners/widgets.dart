@@ -52,8 +52,11 @@ class _PartnerTileState extends ConsumerState<PartnerTile> {
                     ref
                         .read(appNavigationControllerProvider.notifier)
                         .showMain();
-                    ref.read(bottomNavIndexProvider.notifier).state = 2;
+                    ref.read(bottomNavIndexProvider.notifier).state =
+                        bottomNavViewIndex.MAP.index;
                   },
+
+                  ///TODO: add localisation
                   child: Text('Show on map'),
                 )
               ],
