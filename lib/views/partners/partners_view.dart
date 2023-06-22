@@ -10,7 +10,12 @@ class PartnersView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       padding: standardOuterPadding,
-      child: PartnersList(),
+      child: Column(
+        children: [
+          PartnersSearch(),
+          PartnersList(),
+        ],
+      ),
     );
   }
 }
