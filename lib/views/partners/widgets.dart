@@ -31,7 +31,7 @@ class _PartnersListState extends ConsumerState<PartnersList> {
           child: ListView(
             children: [
               for (Partner partner in filteredPartners)
-                PartnerTile(partner: partner),
+                PartnerDialogGesture(partner: partner),
             ],
           ),
         );
@@ -42,6 +42,7 @@ class _PartnersListState extends ConsumerState<PartnersList> {
 
 class PartnerTile extends ConsumerStatefulWidget {
   Partner partner;
+
   PartnerTile({Key? key, required this.partner}) : super(key: key);
 
   @override
@@ -92,6 +93,7 @@ class _PartnerTileState extends ConsumerState<PartnerTile> {
 
 class ShowOnMapButton extends ConsumerWidget {
   Partner partner;
+
   ShowOnMapButton({Key? key, required this.partner}) : super(key: key);
 
   @override
@@ -141,6 +143,86 @@ class _PartnersSearchState extends ConsumerState<PartnersSearch> {
       onChanged: (value) {
         ref.read(partnersFilterControllerProvider.notifier).filterByName(value);
       },
+    );
+  }
+}
+
+class PartnerDialogGesture extends StatelessWidget {
+  Partner partner;
+
+  PartnerDialogGesture({Key? key, required this.partner}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    PartnerTile partnerTile = PartnerTile(
+      partner: partner,
+    );
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          PageRouteBuilder(
+            opaque: false,
+            barrierDismissible: true,
+            barrierColor: Colors.black.withOpacity(0.5),
+            pageBuilder: (BuildContext context, _, __) {
+              return Center(
+                child: Card(
+                  child: Container(
+                    ///TODO: make this relative to the screen size
+                    height: 344,
+                    width: 320,
+                    child: Column(
+                      children: [
+                        Hero(
+                          tag: "partner${partnerTile.hashCode}",
+                          child: partnerTile,
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                //TODO: dodać tłumaczenie
+                                Text(
+                                    'Za co zdobędziesz nagrody w ${partner.name}?'),
+                                Text(
+                                    '${partner.name} to sieć kawiarni w Łodzi oferująca kawę i ciasta. Jest członkiem od 2023 roku'),
+                                ShowOnMapButton(partner: partner),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              return FadeTransition(
+                opacity: TweenSequence(
+                  <TweenSequenceItem<double>>[
+                    TweenSequenceItem<double>(
+                      tween: Tween<double>(begin: 0.0, end: 1.0),
+                      weight: 1,
+                    ),
+                  ],
+                ).animate(animation),
+                child: child,
+              );
+            },
+          ),
+        );
+      },
+      child: Hero(
+        tag: "partner${partnerTile.hashCode}",
+        child: partnerTile,
+      ),
     );
   }
 }
