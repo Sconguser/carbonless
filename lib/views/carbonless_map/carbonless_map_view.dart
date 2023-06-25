@@ -10,6 +10,7 @@ import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 
+import '../../localization/messages.i18n.dart';
 import '../../providers/states/partner/partners_filter_state.dart';
 import '../../utils/partners_utils.dart';
 
@@ -36,6 +37,7 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
 
   @override
   Widget build(BuildContext context) {
+    Messages _locale = ref.watch(messagesProvider);
     return Container(
       child: Stack(
         children: [
@@ -113,8 +115,7 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
                     controller: _searchController,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.all(16.0),
-                      //TODO: add translation
-                      hintText: "Search for your localisation",
+                      hintText: _locale.map.search_bar_hint,
                       prefixIcon: Icon(Icons.location_on_outlined),
                     ),
                     onChanged: (value) {
@@ -131,8 +132,7 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
                   return partnersFilterState is PartnersFilterAll
                       ? const SizedBox.shrink()
                       : ElevatedButton(
-                          ///TODO: add translation
-                          child: Text('Reset filter'),
+                          child: Text(_locale.map.reset_filter),
                           onPressed: () {
                             ref
                                 .read(partnersFilterControllerProvider.notifier)

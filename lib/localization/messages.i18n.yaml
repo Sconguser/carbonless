@@ -69,3 +69,12 @@ theme:
 
 history:
   trees_saved(int trees): you saved as much carbon as $trees trees save in a year
+
+map:
+  search_bar_hint: Search for localisation
+  reset_filter: Reset filter
+
+partners:
+  search_bar_hint: Search for partner
+  show_on_map: Show on map
+  what_activities_earn: What activities can earn you points in

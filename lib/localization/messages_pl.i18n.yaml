@@ -69,3 +69,12 @@ theme:
 
 history:
   trees_saved(int trees): zaoszczędziłeś tyle węgla co $trees drzew przerabia w rok
+
+map:
+  search_bar_hint: Szukaj lokacji
+  reset_filter: Zresetuj filtr
+
+partners:
+  search_bar_hint: Szukaj partnera
+  show_on_map: Pokaż na mapie
+  what_activities_earn: Za co zdobędziesz punkty w

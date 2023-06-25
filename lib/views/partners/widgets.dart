@@ -1,3 +1,4 @@
+import 'package:carbonless/localization/messages.i18n.dart';
 import 'package:carbonless/models/partner_model.dart';
 import 'package:carbonless/providers/controllers/app_navigation_controller_provider.dart';
 import 'package:carbonless/providers/controllers/partners/partners_controller_provider.dart';
@@ -7,6 +8,7 @@ import 'package:carbonless/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../main.dart';
 import '../../providers/states/partner/partners_filter_state.dart';
 import '../../utils/partners_utils.dart';
 
@@ -98,6 +100,7 @@ class ShowOnMapButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Messages _locale = ref.watch(messagesProvider);
     return ElevatedButton(
       onPressed: () {
         ref
@@ -107,9 +110,7 @@ class ShowOnMapButton extends ConsumerWidget {
         ref.read(bottomNavIndexProvider.notifier).state =
             bottomNavViewIndex.MAP.index;
       },
-
-      ///TODO: add localisation
-      child: Text('Show on map'),
+      child: Text(_locale.partners.show_on_map),
     );
   }
 }
@@ -130,7 +131,6 @@ class _PartnersSearchState extends ConsumerState<PartnersSearch> {
       controller: _searchController,
       decoration: InputDecoration(
           contentPadding: EdgeInsets.all(16.0),
-          //TODO: add translation
           hintText: "Search for your localisation",
           prefixIcon: Icon(Icons.location_on_outlined),
           suffixIcon: IconButton(
@@ -147,13 +147,14 @@ class _PartnersSearchState extends ConsumerState<PartnersSearch> {
   }
 }
 
-class PartnerDialogGesture extends StatelessWidget {
+class PartnerDialogGesture extends ConsumerWidget {
   Partner partner;
 
   PartnerDialogGesture({Key? key, required this.partner}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    Messages _locale = ref.watch(messagesProvider);
     PartnerTile partnerTile = PartnerTile(
       partner: partner,
     );
@@ -184,9 +185,8 @@ class PartnerDialogGesture extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                //TODO: dodać tłumaczenie
                                 Text(
-                                    'Za co zdobędziesz nagrody w ${partner.name}?'),
+                                    '${_locale.partners.what_activities_earn}${partner.name}?'),
                                 Text(
                                     '${partner.name} to sieć kawiarni w Łodzi oferująca kawę i ciasta. Jest członkiem od 2023 roku'),
                                 ShowOnMapButton(partner: partner),
