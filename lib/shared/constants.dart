@@ -8,6 +8,8 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 int maxCharactersInForm = 20;
 int minPasswordCharacters = 6;
 Color textInputFillColor = const Color(0xFFFD9D9D9);
+Color firstPositionColor = const Color(0xFF9BBD95);
+Color secondPositionColor = const Color(0xFFCFE7CB);
 Color warningTextColor = Colors.red;
 Color warningIconColor = Colors.red;
 Color secondaryColor = const Color(0xFFC9E8D7);

@@ -78,3 +78,11 @@ partners:
   search_bar_hint: Search for partner
   show_on_map: Show on map
   what_activities_earn: What activities can earn you points in
+
+highscores:
+  your_position: Your position
+  in_your: In your
+  points: points
+  city: city
+  neighbourhood: neighbourhood
+  country: country

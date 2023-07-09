@@ -5,6 +5,8 @@ import 'package:carbonless/views/highscores/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../models/highscores_entry_model.dart';
+
 class HighscoresView extends ConsumerWidget {
   const HighscoresView({Key? key}) : super(key: key);
 
@@ -22,12 +24,14 @@ class HighscoresView extends ConsumerWidget {
           ),
           Text('Twoja pozycja:', style: logoTextStyle),
           HighscoreTile(
-            nickname: 'Milosz T.',
-            points: 350,
-            position: 1,
-            color: tertiaryColor,
+            entry: HighscoresEntry(
+              nickname: 'Milosz T.',
+              points: 350,
+              position: 25,
+            ),
           ),
           FilterChooser(),
+          HighscoresList(),
         ],
       ),
     );
