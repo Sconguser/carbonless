@@ -12,7 +12,8 @@ Color warningTextColor = Colors.red;
 Color warningIconColor = Colors.red;
 Color secondaryColor = const Color(0xFFC9E8D7);
 Color primaryColor = const Color(0xFF516E5E);
-Color tertiaryColor = const Color(0xFFAAA5F2);
+Color tertiaryColor = const Color(0xFFE0EDE1);
+Color activeColor = const Color(0xFFAAA5F2);
 Color inactiveColor = const Color(0xFFB7B8B7);
 Color cardBackgroundColor = const Color(0xFFF7F7F2);
 Color darkSecondaryColor = primaryColor;
@@ -35,6 +36,12 @@ TextStyle labelTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   color: secondaryColor,
 );
+TextStyle highscoresTileTextStyle = TextStyle(
+  fontFamily: defaultFontFamily,
+  fontSize: labelFontSize,
+  fontWeight: FontWeight.bold,
+  color: primaryColor,
+);
 TextStyle sliderTextStyle = TextStyle(
   fontFamily: defaultFontFamily,
   fontSize: sliderFontSize,
@@ -45,7 +52,7 @@ TextStyle sliderTextStyle = TextStyle(
 ButtonStyle selectedButtonStyle = ButtonStyle(
   textStyle: MaterialStateProperty.all(labelTextStyle),
   foregroundColor: MaterialStateProperty.all(Colors.white),
-  backgroundColor: MaterialStateProperty.all(tertiaryColor),
+  backgroundColor: MaterialStateProperty.all(activeColor),
   elevation: MaterialStateProperty.all(0),
   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
     RoundedRectangleBorder(
@@ -74,7 +81,7 @@ Color highlightedTextColor = secondaryColor;
 ThemeData appTheme = ThemeData(
   colorScheme: ColorScheme.fromSwatch().copyWith(
     primary: primaryColor,
-    secondary: tertiaryColor,
+    secondary: activeColor,
   ),
   inputDecorationTheme: InputDecorationTheme(
     fillColor: textInputFillColor,
@@ -99,16 +106,16 @@ ThemeData appTheme = ThemeData(
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: primaryColor,
-    selectedItemColor: tertiaryColor,
+    selectedItemColor: activeColor,
     unselectedItemColor: Colors.white,
     selectedLabelStyle: TextStyle(
-      color: tertiaryColor,
+      color: activeColor,
     ),
     unselectedLabelStyle: TextStyle(
       color: Colors.white,
     ),
     selectedIconTheme: IconThemeData(
-      color: tertiaryColor,
+      color: activeColor,
     ),
     unselectedIconTheme: IconThemeData(
       color: Colors.white,
@@ -119,7 +126,7 @@ ThemeData appTheme = ThemeData(
 ThemeData darkTheme = ThemeData(
   colorScheme: ColorScheme.fromSwatch().copyWith(
     primary: darkPrimaryColor,
-    secondary: tertiaryColor,
+    secondary: activeColor,
   ),
   inputDecorationTheme: InputDecorationTheme(
     fillColor: textInputFillColor,
@@ -144,16 +151,16 @@ ThemeData darkTheme = ThemeData(
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: darkPrimaryColor,
-    selectedItemColor: tertiaryColor,
+    selectedItemColor: activeColor,
     unselectedItemColor: Colors.white,
     selectedLabelStyle: TextStyle(
-      color: tertiaryColor,
+      color: activeColor,
     ),
     unselectedLabelStyle: TextStyle(
       color: Colors.white,
     ),
     selectedIconTheme: IconThemeData(
-      color: tertiaryColor,
+      color: activeColor,
     ),
     unselectedIconTheme: IconThemeData(
       color: Colors.white,

@@ -23,7 +23,7 @@ Color getPrizeColor(Prize prize) {
     return secondaryColor;
   }
   if (prize.state == PRIZE_STATE.REDEEMED) {
-    return tertiaryColor;
+    return activeColor;
   }
   return inactiveColor;
 }

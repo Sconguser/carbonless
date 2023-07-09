@@ -326,7 +326,7 @@ class RedeemSlider extends ConsumerWidget {
       height: 50,
       width: 250,
       backgroundColor: secondaryColor,
-      backgroundColorEnd: tertiaryColor,
+      backgroundColorEnd: activeColor,
       foregroundColor: primaryColor,
       stickToEnd: true,
       text: _locale.button.redeem,
