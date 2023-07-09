@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../models/location_model.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:latlong2/latlong.dart';
 
 class GeolocationNotifier extends StateNotifier<Location> {
   GeolocationNotifier(Location state) : super(state);
@@ -10,11 +11,17 @@ class GeolocationNotifier extends StateNotifier<Location> {
     state = location;
   }
 
-  Future<void> _getCurrentPosition() async {
+  LatLng getLatLng() {
+    return LatLng(state.latitude, state.longitude);
+  }
+
+  Future<void> getCurrentPosition() async {
     final hasPermission = await _handleLocationPermission();
     if (hasPermission != null) return;
     await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
         .then((Position position) {
+      print(
+          '${position.longitude} +  ${position.latitude} <<--- OBECNA LOKALIZACJA');
       state = Location(
         latitude: position.latitude,
         longitude: position.longitude,

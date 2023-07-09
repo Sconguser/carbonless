@@ -1,8 +1,10 @@
 import 'package:carbonless/main.dart';
 import 'package:carbonless/models/location_model.dart';
 import 'package:carbonless/models/partner_model.dart';
+import 'package:carbonless/providers/controllers/geolocation/geolocation_controller_provider.dart';
 import 'package:carbonless/providers/controllers/partners/partners_controller_provider.dart';
 import 'package:carbonless/providers/controllers/partners/partners_filter_provider.dart';
+import 'package:carbonless/shared/constants.dart';
 import 'package:carbonless/views/carbonless_map/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -28,10 +30,18 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
   var location = [];
   final TextEditingController _searchController = TextEditingController();
   final PopupController _popupLayerController = PopupController();
+  late MapController _mapController;
+
+  @override
+  void initState() {
+    super.initState();
+    _mapController = MapController();
+  }
 
   @override
   void dispose() {
     _searchController.dispose();
+    _mapController.dispose();
     super.dispose();
   }
 
@@ -43,21 +53,29 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
         children: [
           FlutterMap(
             options: MapOptions(
+              controller: _mapController,
               // onTap: (latlng, p) async {
-              //   location = await Geocoder.local.findAddressesFromCoordinates(
-              //       new Coordinates(p.latitude, p.longitude));
+              //   LatLng p = LatLng(60, 60);
               //   setState(() {
               //     point = p;
               //     print(p);
               //   });
-
+              // },
               // print(
               //     "${location.first.countryName} - ${location.first.featureName}");
+              // },
+              // onPositionChanged: (MapPosition position, bool hasGesture) {
+              //   if (hasGesture) {
+              //     setState(
+              //       () =>
+              //           _centerOnLocationUpdate = CenterOnLocationUpdate.never,
+              //     );
+              //   }
               // },
               onTap: (_, __) {
                 _popupLayerController.hideAllPopups();
               },
-              center: LatLng(49.5, -0.09),
+              center: ref.watch(centerPointProvider),
               zoom: 5.0,
             ),
             children: [
@@ -144,8 +162,41 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
               ],
             ),
           ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  color: Colors.white,
+                  child: ClipRRect(
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.gps_fixed_outlined,
+                        color: primaryColor,
+                      ),
+                      onPressed: () async {
+                        // await ref
+                        //     .read(geolocationProvider.notifier)
+                        //     .getCurrentPosition();
+                        // LatLng newPoint =
+                        //     ref.read(geolocationProvider.notifier).getLatLng();
+                        // ref.read(centerPointProvider.notifier).state = newPoint;
+                        _mapController.move(LatLng(60, 60), 20);
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
   }
 }
+
+final centerPointProvider = StateProvider((ref) => LatLng(0, 0));
