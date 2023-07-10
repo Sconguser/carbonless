@@ -72,6 +72,7 @@ class DrawerMenuItems extends ConsumerWidget {
             text: _locale.drawer.edit_data,
             onPressed: () {
               ref.read(drawerControllerProvider.notifier).showEditDataView();
+              Navigator.pop(context);
             },
           ),
           DrawerButton(
@@ -79,6 +80,7 @@ class DrawerMenuItems extends ConsumerWidget {
             text: _locale.drawer.highscores,
             onPressed: () {
               ref.read(drawerControllerProvider.notifier).showHighscores();
+              Navigator.pop(context);
             },
           ),
           DrawerButton(
@@ -86,6 +88,7 @@ class DrawerMenuItems extends ConsumerWidget {
             text: _locale.drawer.history,
             onPressed: () {
               ref.read(drawerControllerProvider.notifier).showHistory();
+              Navigator.pop(context);
             },
           ),
           DrawerButton(
@@ -93,6 +96,7 @@ class DrawerMenuItems extends ConsumerWidget {
             text: _locale.drawer.partners,
             onPressed: () {
               ref.read(drawerControllerProvider.notifier).showPartners();
+              Navigator.pop(context);
             },
           ),
           DrawerButton(
@@ -100,6 +104,7 @@ class DrawerMenuItems extends ConsumerWidget {
             text: _locale.drawer.settings,
             onPressed: () {
               ref.read(drawerControllerProvider.notifier).showSettings();
+              Navigator.pop(context);
             },
           ),
           DrawerButton(
@@ -107,6 +112,7 @@ class DrawerMenuItems extends ConsumerWidget {
             text: _locale.drawer.log_out,
             onPressed: () {
               ref.read(drawerControllerProvider.notifier).logout();
+              Navigator.pop(context);
             },
           ),
         ],
