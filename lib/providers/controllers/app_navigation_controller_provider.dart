@@ -2,6 +2,8 @@ import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
 import 'package:carbonless/providers/states/app_navigation_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../shared/bottom_nav_bar.dart';
+
 class AppNavigationController extends StateNotifier<AppNavigationState> {
   AppNavigationController(this.ref) : super(const AppNavigationMain());
   final Ref ref;
@@ -15,6 +17,7 @@ class AppNavigationController extends StateNotifier<AppNavigationState> {
 
   void reset() {
     state = const AppNavigationMain();
+    ref.read(bottomNavIndexProvider.notifier).state = 0;
   }
 }
 
