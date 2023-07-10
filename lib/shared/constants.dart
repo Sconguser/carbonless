@@ -10,6 +10,8 @@ int minPasswordCharacters = 6;
 Color textInputFillColor = const Color(0xFFFD9D9D9);
 Color firstPositionColor = const Color(0xFF9BBD95);
 Color secondPositionColor = const Color(0xFFCFE7CB);
+Color selectedIndexColor = const Color(0xFF9BBD95);
+Color unselectedIndexColor = Colors.white;
 Color warningTextColor = Colors.red;
 Color warningIconColor = Colors.red;
 Color secondaryColor = const Color(0xFFC9E8D7);
@@ -108,20 +110,20 @@ ThemeData appTheme = ThemeData(
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: primaryColor,
-    selectedItemColor: activeColor,
-    unselectedItemColor: Colors.white,
-    selectedLabelStyle: TextStyle(
-      color: activeColor,
-    ),
-    unselectedLabelStyle: TextStyle(
-      color: Colors.white,
-    ),
-    selectedIconTheme: IconThemeData(
-      color: activeColor,
-    ),
-    unselectedIconTheme: IconThemeData(
-      color: Colors.white,
-    ),
+    // selectedItemColor: activeColor,
+    // unselectedItemColor: Colors.white,
+    // selectedLabelStyle: TextStyle(
+    //   color: activeColor,
+    // ),
+    // unselectedLabelStyle: TextStyle(
+    //   color: Colors.white,
+    // ),
+    // selectedIconTheme: IconThemeData(
+    //   color: activeColor,
+    // ),
+    // unselectedIconTheme: IconThemeData(
+    //   color: Colors.white,
+    // ),
   ),
 );
 

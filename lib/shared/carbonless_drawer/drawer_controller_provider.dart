@@ -2,6 +2,7 @@ import 'package:carbonless/providers/controllers/app_navigation_controller_provi
 import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../bottom_nav_bar.dart';
 import 'drawer_state.dart';
 
 class DrawerController extends StateNotifier<DrawerState> {
@@ -40,6 +41,7 @@ class DrawerController extends StateNotifier<DrawerState> {
 
   void _setAppNavigationToAuxiliary() {
     ref.read(appNavigationControllerProvider.notifier).showAuxiliary();
+    ref.read(bottomNavIndexProvider.notifier).state = -1;
   }
 }
 

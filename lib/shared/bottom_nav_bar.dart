@@ -1,6 +1,7 @@
 import 'package:carbonless/providers/controllers/app_navigation_controller_provider.dart';
 import 'package:carbonless/shared/carbonless_appbar.dart';
 import 'package:carbonless/shared/carbonless_drawer/carbonless_drawer.dart';
+import 'package:carbonless/shared/constants.dart';
 import 'package:carbonless/shared/widgets.dart';
 import 'package:carbonless/views/carbonless_map/carbonless_map_view.dart';
 import 'package:carbonless/views/scanner/scanner_view.dart';
@@ -45,13 +46,19 @@ class BottomNavigationBarView extends ConsumerWidget {
           ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        currentIndex: ref.watch(bottomNavIndexProvider),
+        currentIndex: ref.watch(bottomNavIndexProvider) == -1
+            ? 0
+            : ref.read(bottomNavIndexProvider),
         onTap: (index) {
           ref.read(appNavigationControllerProvider.notifier).showMain();
           ref.read(bottomNavIndexProvider.notifier).state = index;
         },
         // showSelectedLabels: false,
         // showUnselectedLabels: false,
+        selectedItemColor: ref.read(bottomNavIndexProvider) == -1
+            ? unselectedIndexColor
+            : selectedIndexColor,
+        unselectedItemColor: unselectedIndexColor,
         items: [
           BottomNavigationBarItem(
             icon: const Icon(
