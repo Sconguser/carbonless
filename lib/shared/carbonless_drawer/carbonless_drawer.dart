@@ -112,7 +112,6 @@ class DrawerMenuItems extends ConsumerWidget {
             text: _locale.drawer.log_out,
             onPressed: () {
               ref.read(drawerControllerProvider.notifier).logout();
-              Navigator.pop(context);
             },
           ),
         ],

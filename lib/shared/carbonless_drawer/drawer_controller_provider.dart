@@ -37,6 +37,7 @@ class DrawerController extends StateNotifier<DrawerState> {
 
   void logout() {
     ref.read(authControllerProvider.notifier).logout();
+    ref.read(appNavigationControllerProvider.notifier).reset();
   }
 
   void _setAppNavigationToAuxiliary() {
