@@ -15,6 +15,8 @@ final nameStateProvider = StateProvider<String>((ref) {
 final lastnameStateProvider = StateProvider<String>((ref) {
   return ref.read(authRepositoryProvider).user!.lastname;
 });
+final passwordStateProvider = StateProvider<String>((ref) => '');
+final passwordConfirmationStateProvider = StateProvider<String>((ref) => '');
 
 class EditProfileView extends ConsumerWidget {
   EditProfileView({Key? key}) : super(key: key);
@@ -26,6 +28,8 @@ class EditProfileView extends ConsumerWidget {
     double width = MediaQuery.of(context).size.width;
     String name = ref.watch(nameStateProvider);
     String lastname = ref.watch(lastnameStateProvider);
+    String password = ref.watch(passwordStateProvider);
+    String passwordConfirmation = ref.watch(passwordConfirmationStateProvider);
     Messages _locale = ref.watch(messagesProvider);
     return Container(
         padding: standardOuterPadding,
@@ -42,47 +46,50 @@ class EditProfileView extends ConsumerWidget {
                 ),
                 Container(
                   padding: EdgeInsets.all(10),
-                  child: Column(
+                  child: ExpansionPanelList(
+                    elevation: 0,
+                    expansionCallback: (int index, bool isOpen) {
+                      if (index == 0) {
+                        ref
+                            .read(editDataExpansionStateProvider.notifier)
+                            .state = !isOpen;
+                      } else if (index == 1) {
+                        ref
+                            .read(changePasswordExpansionStateProvider.notifier)
+                            .state = !isOpen;
+                      }
+                    },
                     children: [
-                      buildTextFormField(
-                        name,
-                        ref,
-                        nameStateProvider,
-                        false,
-                        _locale.forms.name,
-                        'name',
-                        FormBuilderValidators.required(
-                          errorText: _locale.validators.errors.cannot_be_empty,
-                        ),
+                      ExpansionPanel(
+                        headerBuilder: (BuildContext context, bool isExpanded) {
+                          return Center(
+                            child: Text(
+                              _locale.editData.personal_data,
+                              style: logoTextStyle,
+                            ),
+                          );
+                        },
+                        body: buildEditDataColumn(name, ref, _locale, lastname),
+                        isExpanded: ref.watch(editDataExpansionStateProvider),
+                        backgroundColor: tertiaryColor,
+                        canTapOnHeader: true,
                       ),
-                      buildSizedBoxBetweenTextInputs(),
-                      buildTextFormField(
-                        lastname,
-                        ref,
-                        lastnameStateProvider,
-                        false,
-                        _locale.forms.lastname,
-                        'lastname',
-                        FormBuilderValidators.required(
-                          errorText: _locale.validators.errors.cannot_be_empty,
-                        ),
+                      ExpansionPanel(
+                        headerBuilder: (BuildContext context, bool isExpanded) {
+                          return Center(
+                            child: Text(
+                              _locale.editData.change_password,
+                              style: logoTextStyle,
+                            ),
+                          );
+                        },
+                        body: buildChangePasswordColumn(
+                            password, ref, _locale, passwordConfirmation),
+                        isExpanded:
+                            ref.watch(changePasswordExpansionStateProvider),
+                        backgroundColor: tertiaryColor,
+                        canTapOnHeader: true,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          ElevatedButton(
-                            child: Text(_locale.button.save_changes),
-                            onPressed: () {},
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          ElevatedButton(
-                            child: Text(_locale.button.change_password),
-                            onPressed: () {},
-                          )
-                        ],
-                      )
                     ],
                   ),
                 ),
@@ -91,4 +98,98 @@ class EditProfileView extends ConsumerWidget {
           ),
         ));
   }
+
+  Column buildEditDataColumn(
+      String name, WidgetRef ref, Messages _locale, String lastname) {
+    return Column(
+      children: [
+        buildTextFormField(
+          name,
+          ref,
+          nameStateProvider,
+          false,
+          _locale.forms.name,
+          'name',
+          FormBuilderValidators.required(
+            errorText: _locale.validators.errors.cannot_be_empty,
+          ),
+        ),
+        buildSizedBoxBetweenTextInputs(),
+        buildTextFormField(
+          lastname,
+          ref,
+          lastnameStateProvider,
+          false,
+          _locale.forms.lastname,
+          'lastname',
+          FormBuilderValidators.required(
+            errorText: _locale.validators.errors.cannot_be_empty,
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ElevatedButton(
+              child: Text(_locale.button.save_changes),
+              onPressed: () {},
+            ),
+          ],
+        )
+      ],
+    );
+  }
 }
+
+Column buildChangePasswordColumn(String password, WidgetRef ref,
+    Messages _locale, String passwordConfirmation) {
+  return Column(
+    children: [
+      buildTextFormField(
+        password,
+        ref,
+        passwordStateProvider,
+        true,
+        _locale.forms.password,
+        'password',
+        FormBuilderValidators.required(
+          errorText: _locale.validators.errors.cannot_be_empty,
+        ),
+      ),
+      buildSizedBoxBetweenTextInputs(),
+      buildTextFormField(
+        passwordConfirmation,
+        ref,
+        passwordConfirmationStateProvider,
+        true,
+        _locale.forms.password_confirmation,
+        'password_confirmation',
+        FormBuilderValidators.compose(
+          [
+            FormBuilderValidators.required(
+                errorText: _locale.validators.errors.cannot_be_empty),
+            FormBuilderValidators.max(
+              maxCharactersInForm,
+              errorText: _locale.validators.errors.password_max_20_characters,
+            ),
+            FormBuilderValidators.min(
+              minPasswordCharacters,
+              errorText: _locale.validators.errors.password_min_6_characters,
+            )
+          ],
+        ),
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          ElevatedButton(
+            child: Text(_locale.button.save_changes),
+            onPressed: () {},
+          ),
+        ],
+      )
+    ],
+  );
+}
+
+final editDataExpansionStateProvider = StateProvider((ref) => false);
+final changePasswordExpansionStateProvider = StateProvider((ref) => false);

@@ -86,3 +86,7 @@ highscores:
   city: mieście
   neighbourhood: osiedlu
   country: kraju
+
+editData:
+  personal_data: Dane osobowe
+  change_password: Zmień hasło
