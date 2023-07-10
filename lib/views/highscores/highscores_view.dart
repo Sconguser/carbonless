@@ -22,7 +22,7 @@ class HighscoresView extends ConsumerWidget {
             _locale.drawer.highscores,
             style: logoTextStyle,
           ),
-          Text('Twoja pozycja:', style: logoTextStyle),
+          Text('${_locale.highscores.your_position}', style: logoTextStyle),
           HighscoreTile(
             entry: HighscoresEntry(
               nickname: 'Milosz T.',
