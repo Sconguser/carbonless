@@ -11,6 +11,7 @@ class Partner extends Equatable with _$Partner {
   const Partner._();
   const factory Partner({
     required String name,
+    String? description,
     required List<Location> locations,
   }) = _Partner;
   factory Partner.fromJson(Map<String, dynamic> json) =>

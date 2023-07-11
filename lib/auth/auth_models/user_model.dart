@@ -7,8 +7,7 @@ part 'user_model.g.dart';
 class User with _$User {
   const factory User({
     required int id,
-    required String name,
-    required String lastname,
+    required String username,
     required String email,
     required int points,
     required String total_carbon_saved,

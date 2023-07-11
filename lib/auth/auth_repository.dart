@@ -35,8 +35,7 @@ class AuthRepository {
     await Future.delayed(Duration(seconds: 3));
     _user = new User(
       id: 1,
-      name: "Mioszek",
-      lastname: "Paproszek",
+      username: "Mioszek",
       email: "miosz@miosz.com",
       points: 30,
       total_carbon_saved: '100',

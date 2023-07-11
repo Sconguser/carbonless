@@ -103,7 +103,8 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
                     for (Location location in partner.locations)
                       PartnerMarker(
                         partner: partner,
-                        location: LatLng(location.latitude, location.longitude),
+                        location: LatLng(double.parse(location.latitude),
+                            double.parse(location.longitude)),
                       ),
                 ];
 
@@ -182,13 +183,21 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
                         color: primaryColor,
                       ),
                       onPressed: () async {
-                        // await ref
-                        //     .read(geolocationProvider.notifier)
-                        //     .getCurrentPosition();
+                        await ref
+                            .read(geolocationProvider.notifier)
+                            .getCurrentPosition();
+                        Location currentLocation =
+                            ref.read(geolocationProvider);
+                        await ref
+                            .read(geolocationProvider.notifier)
+                            .getPartnersWithRange(
+                                double.parse(currentLocation.latitude),
+                                double.parse(currentLocation.longitude),
+                                20);
                         // LatLng newPoint =
                         //     ref.read(geolocationProvider.notifier).getLatLng();
                         // ref.read(centerPointProvider.notifier).state = newPoint;
-                        _mapController.move(LatLng(60, 60), 20);
+                        // _mapController.move(LatLng(60, 60), 20);
                       },
                     ),
                   ),

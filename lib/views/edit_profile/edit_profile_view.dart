@@ -10,11 +10,11 @@ import '../../localization/messages.i18n.dart';
 import '../../shared/constants.dart';
 
 final nameStateProvider = StateProvider<String>((ref) {
-  return ref.read(authRepositoryProvider).user!.name;
+  return ref.read(authRepositoryProvider).user!.username;
 });
-final lastnameStateProvider = StateProvider<String>((ref) {
-  return ref.read(authRepositoryProvider).user!.lastname;
-});
+// final lastnameStateProvider = StateProvider<String>((ref) {
+//   return ref.read(authRepositoryProvider).user!.lastname;
+// });
 final passwordStateProvider = StateProvider<String>((ref) => '');
 final passwordConfirmationStateProvider = StateProvider<String>((ref) => '');
 
@@ -27,7 +27,7 @@ class EditProfileView extends ConsumerWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     String name = ref.watch(nameStateProvider);
-    String lastname = ref.watch(lastnameStateProvider);
+    String lastname = 'ref.watch(lastnameStateProvider);';
     String password = ref.watch(passwordStateProvider);
     String passwordConfirmation = ref.watch(passwordConfirmationStateProvider);
     Messages _locale = ref.watch(messagesProvider);
@@ -118,7 +118,8 @@ class EditProfileView extends ConsumerWidget {
         buildTextFormField(
           lastname,
           ref,
-          lastnameStateProvider,
+          //TODO: do poprawy
+          nameStateProvider,
           false,
           _locale.forms.lastname,
           'lastname',

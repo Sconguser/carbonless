@@ -1,18 +1,26 @@
+import 'dart:convert';
+
+import 'package:carbonless/auth/auth_repository.dart';
+import 'package:carbonless/auth/auth_service.dart';
+import 'package:carbonless/providers/controllers/partners/partners_controller_provider.dart';
+import 'package:carbonless/services/partners_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../models/location_model.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:http/http.dart' as http;
 
 class GeolocationNotifier extends StateNotifier<Location> {
-  GeolocationNotifier(Location state) : super(state);
+  Ref ref;
+  GeolocationNotifier({required state, required this.ref}) : super(state);
 
   Future<void> updateLocation(Location location) async {
     state = location;
   }
 
   LatLng getLatLng() {
-    return LatLng(state.latitude, state.longitude);
+    return LatLng(double.parse(state.latitude), double.parse(state.longitude));
   }
 
   Future<void> getCurrentPosition() async {
@@ -23,12 +31,28 @@ class GeolocationNotifier extends StateNotifier<Location> {
       print(
           '${position.longitude} +  ${position.latitude} <<--- OBECNA LOKALIZACJA');
       state = Location(
-        latitude: position.latitude,
-        longitude: position.longitude,
+        latitude: position.latitude.toString(),
+        longitude: position.longitude.toString(),
       );
     }).catchError((e) {
       print(e);
     });
+  }
+
+  Future<void> getPartnersWithRange(
+      double lat, double long, double range) async {
+    String? bearerToken = ref.read(authRepositoryProvider).bearerToken;
+    if (bearerToken == null) {
+      return Future.error('Bearer token is null');
+    }
+    http.Response response = await ref
+        .read(partnersServiceProvider)
+        .getPartnersWithRange(lat, long, range, bearerToken);
+
+    ///TODO: decode and
+    List<dynamic> decodedList = jsonDecode(response.body);
+    ref.read(partnersNotifier.notifier).setListOfPartners(decodedList);
+    return Future.delayed(Duration(seconds: 5));
   }
 
   Future<String?> _handleLocationPermission() async {
@@ -54,5 +78,6 @@ class GeolocationNotifier extends StateNotifier<Location> {
 }
 
 final geolocationProvider =
-    StateNotifierProvider<GeolocationNotifier, Location>(
-        (ref) => GeolocationNotifier(Location(latitude: 0, longitude: 0)));
+    StateNotifierProvider<GeolocationNotifier, Location>((ref) =>
+        GeolocationNotifier(
+            state: const Location(latitude: '0', longitude: '0'), ref: ref));
