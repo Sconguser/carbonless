@@ -1,6 +1,8 @@
 import 'package:carbonless/main.dart';
 import 'package:carbonless/models/location_model.dart';
 import 'package:carbonless/models/partner_model.dart';
+import 'package:carbonless/providers/controllers/app_settings/app_settings.dart';
+import 'package:carbonless/providers/controllers/app_settings/app_settings_controller_provider.dart';
 import 'package:carbonless/providers/controllers/geolocation/geolocation_controller_provider.dart';
 import 'package:carbonless/providers/controllers/partners/partners_controller_provider.dart';
 import 'package:carbonless/providers/controllers/partners/partners_filter_provider.dart';
@@ -48,6 +50,7 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
   @override
   Widget build(BuildContext context) {
     Messages _locale = ref.watch(messagesProvider);
+    AppSettings appSettings = ref.watch(appSettingsProvider);
     return Container(
       child: Stack(
         children: [
@@ -84,7 +87,7 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
                 urlTemplate:
                     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 subdomains: ['a', 'b', 'c'],
-                tileBuilder: ref.watch(themeProvider) == ThemeMode.light
+                tileBuilder: appSettings.theme == ThemeMode.light
                     ? null
                     : darkModeTileBuilder,
                 // backgroundColor: Colors.black54,

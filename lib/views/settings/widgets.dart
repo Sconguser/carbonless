@@ -1,8 +1,10 @@
+import 'package:carbonless/providers/controllers/app_settings/app_settings_controller_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../localization/messages.i18n.dart';
 import '../../main.dart';
+import '../../providers/controllers/app_settings/app_settings.dart';
 import '../../shared/constants.dart';
 
 class LanguageSwitch extends ConsumerWidget {
@@ -13,6 +15,7 @@ class LanguageSwitch extends ConsumerWidget {
     Messages _locale = ref.watch(messagesProvider);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    AppSettings appSettings = ref.watch(appSettingsProvider);
     return Container(
       width: double.infinity,
       child: Row(
@@ -27,8 +30,7 @@ class LanguageSwitch extends ConsumerWidget {
                   : unselectedButtonStyle,
               onPressed: () {
                 if (_locale.languageCode != 'en') {
-                  ref.read(languageProvider.notifier).state =
-                      Locale.fromSubtags(languageCode: 'en');
+                  ref.read(appSettingsProvider.notifier).setEnglishLanguage();
                 }
               },
               child: Text(
@@ -46,8 +48,7 @@ class LanguageSwitch extends ConsumerWidget {
                   : unselectedButtonStyle,
               onPressed: () {
                 if (_locale.languageCode != 'pl') {
-                  ref.read(languageProvider.notifier).state =
-                      Locale.fromSubtags(languageCode: 'pl');
+                  ref.read(appSettingsProvider.notifier).setPolishLanguage();
                 }
               },
               child: Text(
@@ -70,7 +71,8 @@ class ThemeSwitch extends ConsumerWidget {
     Messages _locale = ref.watch(messagesProvider);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    ThemeMode _themeMode = ref.watch(themeProvider);
+    AppSettings appSettings = ref.watch(appSettingsProvider);
+    ThemeMode _themeMode = appSettings.theme;
     return Container(
       width: double.infinity,
       child: Row(
@@ -85,7 +87,7 @@ class ThemeSwitch extends ConsumerWidget {
                   : unselectedButtonStyle,
               onPressed: () {
                 if (_themeMode.name != 'light') {
-                  ref.read(themeProvider.notifier).state = ThemeMode.light;
+                  ref.read(appSettingsProvider.notifier).setLightTheme();
                 }
               },
               child: Text(
@@ -103,7 +105,7 @@ class ThemeSwitch extends ConsumerWidget {
                   : unselectedButtonStyle,
               onPressed: () {
                 if (_themeMode.name != 'dark') {
-                  ref.read(themeProvider.notifier).state = ThemeMode.dark;
+                  ref.read(appSettingsProvider.notifier).setDarkTheme();
                 }
               },
               child: Text(

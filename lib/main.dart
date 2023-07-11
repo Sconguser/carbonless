@@ -1,3 +1,4 @@
+import 'package:carbonless/providers/controllers/app_settings/app_settings_controller_provider.dart';
 import 'package:carbonless/providers/router_provider.dart';
 import 'package:carbonless/shared/constants.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +8,7 @@ import 'localization/messages.i18n.dart';
 import 'localization/messages_pl.i18n.dart';
 
 final messagesProvider = StateProvider((ref) => const Messages());
-final languageProvider =
-    StateProvider((ref) => const Locale.fromSubtags(languageCode: 'en'));
-final themeProvider = StateProvider((ref) => ThemeMode.light);
+
 void main() {
   runApp(ProviderScope(child: const MyApp()));
 }
@@ -20,19 +19,24 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
-    ref.read(languageProvider.notifier).addListener((state) {
-      if (state.languageCode == 'en') {
+    final appSettings = ref.watch(appSettingsProvider);
+
+    // ref.useEffect(() {
+    //   appSettings.readAll(); // Call the readAll method on app start
+    // }, []);
+    ref.read(appSettingsProvider.notifier).addListener((state) {
+      if (state.language == 'en') {
         ref.read(messagesProvider.notifier).state = const Messages();
-      } else if (state.languageCode == 'pl') {
+      } else if (state.language == 'pl') {
         ref.read(messagesProvider.notifier).state = const MessagesPl();
       }
     });
     return MaterialApp.router(
       title: 'Carbonless',
-      locale: ref.watch(languageProvider),
+      locale: Locale.fromSubtags(languageCode: appSettings.language),
       theme: appTheme,
       darkTheme: darkTheme,
-      themeMode: ref.watch(themeProvider),
+      themeMode: appSettings.theme,
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
       routeInformationProvider: router.routeInformationProvider,
