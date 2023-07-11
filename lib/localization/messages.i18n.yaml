@@ -87,6 +87,6 @@ highscores:
   neighbourhood: neighbourhood
   country: country
 
-editData:
+editdata:
   personal_data: Personal data
   change_password: Change password

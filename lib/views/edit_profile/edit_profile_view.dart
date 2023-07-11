@@ -64,7 +64,7 @@ class EditProfileView extends ConsumerWidget {
                         headerBuilder: (BuildContext context, bool isExpanded) {
                           return Center(
                             child: Text(
-                              _locale.editData.personal_data,
+                              _locale.editdata.personal_data,
                               style: logoTextStyle,
                             ),
                           );
@@ -78,7 +78,7 @@ class EditProfileView extends ConsumerWidget {
                         headerBuilder: (BuildContext context, bool isExpanded) {
                           return Center(
                             child: Text(
-                              _locale.editData.change_password,
+                              _locale.editdata.change_password,
                               style: logoTextStyle,
                             ),
                           );
