@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:carbonless/models/qr_model.dart';
@@ -22,12 +23,16 @@ class _BarcodeScannerWithScanWindowState
   BarcodeCapture? capture;
 
   Future<void> onDetect(BarcodeCapture barcode, WidgetRef ref) async {
+    if (ref.read(qrScannerControllerProvider) is QrScannerStateBusy) {
+      return Future.error('Scanner is currently busy');
+    }
     capture = barcode;
     setState(() => this.barcode = barcode.barcodes.first);
-    print(this.barcode);
+    print(this.barcode?.rawValue);
+    Map<String, dynamic> decodedRawValue = jsonDecode(this.barcode!.rawValue!);
     ref
         .read(qrScannerControllerProvider.notifier)
-        .sendQr(QRDTO(uid: '', expiration: 'nigdy'));
+        .sendQr(decodedRawValue['uuid'], decodedRawValue['expires']);
   }
 
   MobileScannerArguments? arguments;
