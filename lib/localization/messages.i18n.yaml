@@ -90,3 +90,6 @@ highscores:
 editdata:
   personal_data: Personal data
   change_password: Change password
+
+checkbox:
+  auto_login: log in automatically

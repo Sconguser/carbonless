@@ -13,6 +13,7 @@ class AuthService {
   // final String _url = 'stark-harbor-12710.herokuapp.com';
   final String _urlSignIn = '/users/sign_in.json';
   final String _urlSignUp = '/users.json';
+  final String _urlVerify = '/users/me.json';
 
   Future<http.Response> login(String email, String password) async {
     try {
@@ -33,6 +34,29 @@ class AuthService {
         return response;
       } else {
         throw Exception('Login failed');
+      }
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
+
+  Future<http.Response> autoLogin(String bearerToken) async {
+    try {
+      final response = await http.get(
+        Uri.https(url, _urlVerify),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': bearerToken,
+        },
+      );
+      print('AUTO LOGIN USER: ${response.statusCode}');
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // User user = User.fromJson(jsonDecode(response.body));
+        // return user;
+        return response;
+      } else {
+        throw Exception('Auto Login failed');
       }
     } catch (e) {
       print(e);

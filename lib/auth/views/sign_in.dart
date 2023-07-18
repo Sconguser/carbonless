@@ -19,6 +19,9 @@ final emailStateProvider = StateProvider<String>((ref) {
 final passwordStateProvider = StateProvider<String>((ref) {
   return '';
 });
+final autoLoginCheckboxStateProvider = StateProvider<bool>((ref) {
+  return false;
+});
 
 class SignIn extends ConsumerWidget {
   SignIn({Key? key}) : super(key: key);
@@ -31,6 +34,7 @@ class SignIn extends ConsumerWidget {
     double width = MediaQuery.of(context).size.width;
     String email = ref.watch(emailStateProvider);
     String password = ref.watch(passwordStateProvider);
+    bool autoLogin = ref.watch(autoLoginCheckboxStateProvider);
     return Scaffold(
       body: SafeArea(
         child: FormBuilder(
@@ -73,6 +77,22 @@ class SignIn extends ConsumerWidget {
                       errorText: _locale.validators.errors.cannot_be_empty,
                     ),
                   ),
+                  Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceEve,
+                    children: [
+                      Checkbox(
+                        value: ref.watch(autoLoginCheckboxStateProvider),
+                        onChanged: (value) {
+                          if (value != null) {
+                            ref
+                                .read(autoLoginCheckboxStateProvider.notifier)
+                                .state = value;
+                          }
+                        },
+                      ),
+                      Text(_locale.checkbox.auto_login),
+                    ],
+                  ),
                   loginState is LoginStateLoading
                       ? Center(child: spinner)
                       : Row(
@@ -83,8 +103,9 @@ class SignIn extends ConsumerWidget {
                               email: email,
                               password: password,
                               formKey: _formKey,
+                              autoLogin: autoLogin,
                             ),
-                            SignInDebug(),
+                            // SignInDebug(),
                           ],
                         ),
                 ],

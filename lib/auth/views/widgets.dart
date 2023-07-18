@@ -17,12 +17,14 @@ import '../../shared/widgets.dart';
 class SignInButton extends ConsumerWidget {
   String email;
   String password;
+  bool autoLogin;
   GlobalKey<FormBuilderState> formKey;
   SignInButton({
     Key? key,
     required this.email,
     required this.password,
     required this.formKey,
+    this.autoLogin = false,
   }) : super(key: key);
 
   @override
@@ -35,7 +37,9 @@ class SignInButton extends ConsumerWidget {
         if (formKey.currentState!.validate() &&
             (loginState is LoginStateInitial ||
                 loginState is LoginStateError)) {
-          ref.read(loginControllerProvider.notifier).login(email, password);
+          ref
+              .read(loginControllerProvider.notifier)
+              .login(email, password, autoLogin);
         }
       },
     );

@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-enum KEYS { language, theme }
+enum KEYS { language, theme, bearerToken }
 
 class SecureStorage {
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
