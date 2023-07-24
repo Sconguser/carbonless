@@ -34,7 +34,7 @@ class AuthRepository {
   Future<String?> autoLogin(String bearerToken) async {
     http.Response response = await authService.autoLogin(bearerToken);
     _user = User.fromJson(jsonDecode(response.body));
-    bearerToken = bearerToken;
+    this.bearerToken = bearerToken;
     return bearerToken;
   }
 
