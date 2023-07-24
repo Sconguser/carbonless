@@ -7,12 +7,12 @@ class LocalNotificationState extends Equatable {
 }
 
 class LocalNotificationOpen extends LocalNotificationState {
-  int hours;
+  int minutes;
   int seconds;
-  LocalNotificationOpen({required this.hours, required this.seconds});
+  LocalNotificationOpen({required this.minutes, required this.seconds});
   @override
   toString() {
-    String formattedHours = hours.toString().padLeft(2, '0');
+    String formattedHours = minutes.toString().padLeft(2, '0');
     String formattedSeconds = seconds.toString().padLeft(2, '0');
     return '$formattedHours:$formattedSeconds';
   }

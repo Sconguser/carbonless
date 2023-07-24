@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:carbonless/localization/messages.i18n.dart';
+import 'package:carbonless/main.dart';
 import 'package:carbonless/providers/states/notifications/local_notification_state.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,7 +18,7 @@ class LocalNotificationController
 
   Future<void> initializeNotifications() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('app_icon');
+        AndroidInitializationSettings('carbon');
     // final IOSInitializationSettings initializationSettingsIOS =
     //     IOSInitializationSettings(
     //         onDidReceiveLocalNotification: onDidReceiveLocalNotification);
@@ -27,14 +29,14 @@ class LocalNotificationController
 
   void startSession() async {
     // Set showNotification to true and update the notification
-    state = LocalNotificationOpen(hours: 0, seconds: 0);
+    state = LocalNotificationOpen(minutes: 0, seconds: 0);
     // notifyListeners();
 
     // Start the timer
     Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       LocalNotificationOpen tempState = state as LocalNotificationOpen;
       if (tempState.seconds == 60) {
-        tempState.hours++;
+        tempState.minutes++;
         tempState.seconds = 0;
       } else {
         (tempState).seconds++;
@@ -46,6 +48,7 @@ class LocalNotificationController
   }
 
   void updateNotification(LocalNotificationOpen localNotificationState) async {
+    Messages _locale = ref.read(messagesProvider);
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(
       'carbonless_channel',
@@ -56,14 +59,18 @@ class LocalNotificationController
       priority: Priority.high,
       ongoing: true,
       autoCancel: false,
+      icon: 'carbon',
     );
     const NotificationDetails platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
+    String notificationMessage =
+        '${_locale.notifications.elapsed_time}: ${localNotificationState.minutes} ${_locale.notifications.minutes} ${localNotificationState.seconds} ${_locale.notifications.seconds}';
 
+    // Use the same notification ID to update the existing notification
     await _flutterLocalNotificationsPlugin.show(
       0,
-      'Session Timer',
-      'Elapsed time: $localNotificationState seconds',
+      _locale.notifications.session_time,
+      notificationMessage,
       platformChannelSpecifics,
     );
   }

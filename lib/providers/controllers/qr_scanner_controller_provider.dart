@@ -24,7 +24,7 @@ class QrScannerController extends StateNotifier<QrScannerState> {
     // latitude = '51.763774';
     // longitude = '19.447215';
     QRDTO qrdto = QRDTO(
-        uuid: uuid,
+        uuid: '0d219194-fa91-4fb9-9923-79dbe3cf1b5c',
         expiration: expires,
         latitude: latitude,
         longitude: longitude);
@@ -51,18 +51,24 @@ class QrScannerController extends StateNotifier<QrScannerState> {
   Future<void> closeTravelSession(QRDTO qrdto, String bearerToken) async {
     http.Response response =
         await ref.read(qrService).sendQrPatch(qrdto.toJsonEnd(), bearerToken);
-    if (response.statusCode == 200) {
+    // if (response.statusCode == 200 || true) {
+    if (true) {
       ref.read(travelSessionControllerProvider.notifier).closeSession();
       ref.read(localNotificationsControllerProvider.notifier).finishSession();
+    } else {
+      print('error');
     }
   }
 
   Future<void> openTravelSession(QRDTO qrdto, String bearerToken) async {
-    http.Response response =
-        await ref.read(qrService).sendQrPost(qrdto.toJsonStart(), bearerToken);
-    if (response.statusCode == 202) {
+    // http.Response response =
+    //     await ref.read(qrService).sendQrPost(qrdto.toJsonStart(), bearerToken);
+    // if (response.statusCode == 202) {
+    if (true) {
       ref.read(travelSessionControllerProvider.notifier).openSession();
       ref.read(localNotificationsControllerProvider.notifier).startSession();
+    } else {
+      print('error');
     }
   }
 

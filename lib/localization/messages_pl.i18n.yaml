@@ -93,3 +93,9 @@ editdata:
 
 checkbox:
   auto_login: loguj automatycznie
+
+notifications:
+  elapsed_time: Czas od rozpoczęcia sesji
+  minutes: minut
+  seconds: sekund
+  session_time: Minutnik sesji

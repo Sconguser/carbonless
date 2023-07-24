@@ -93,3 +93,9 @@ editdata:
 
 checkbox:
   auto_login: log in automatically
+
+notifications:
+  elapsed_time: Elapsed time
+  minutes: minutes
+  seconds: seconds
+  session_time: Session timer
