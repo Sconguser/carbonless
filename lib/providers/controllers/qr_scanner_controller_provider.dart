@@ -49,8 +49,8 @@ class QrScannerController extends StateNotifier<QrScannerState> {
   }
 
   Future<void> closeTravelSession(QRDTO qrdto, String bearerToken) async {
-    http.Response response =
-        await ref.read(qrService).sendQrPatch(qrdto.toJsonEnd(), bearerToken);
+    // http.Response response =
+    //     await ref.read(qrService).sendQrPatch(qrdto.toJsonEnd(), bearerToken);
     // if (response.statusCode == 200 || true) {
     if (true) {
       ref.read(travelSessionControllerProvider.notifier).closeSession();
