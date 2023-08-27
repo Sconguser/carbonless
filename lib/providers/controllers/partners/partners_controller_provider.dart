@@ -59,21 +59,6 @@ class PartnersNotifier extends StateNotifier<List<Partner>> {
 
 final partnersNotifier =
     StateNotifierProvider<PartnersNotifier, List<Partner>>((ref) {
-  List<Partner>? partners = [
-    Partner(
-      name: "Star shop",
-      locations: [
-        Location(longitude: '30.5', latitude: '20'),
-      ],
-    ),
-    Partner(
-      name: "Coffee Star",
-      locations: [
-        Location(longitude: '49.5', latitude: '-0.09'),
-        Location(longitude: '23.5', latitude: '-0.09'),
-        Location(longitude: '32.5', latitude: '-0.08'),
-      ],
-    ),
-  ];
+  List<Partner>? partners = [];
   return PartnersNotifier(partners, ref);
 });

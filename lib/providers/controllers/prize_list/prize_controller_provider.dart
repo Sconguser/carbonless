@@ -127,6 +127,5 @@ class PrizesNotifier extends StateNotifier<List<Prize>> {
 final prizesProvider =
     StateNotifierProvider<PrizesNotifier, List<Prize>>((ref) {
   List<Prize>? prizes = [];
-
   return PrizesNotifier(prizes, ref);
 });
