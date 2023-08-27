@@ -188,42 +188,39 @@ class _PrizeTileState extends ConsumerState<PrizeTile> {
       width: 200,
       height: 200,
       child: Card(
-        color: getPrizeColor(widget.prize),
         child: Stack(
           children: [
             if (widget.prize.id != null)
               Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Icon(Icons.ice_skating_outlined),
+                child: Container(
+                  color: primaryColor,
+                  child: Image.network(
+                    'https://www.zooplus.pt/magazine/wp-content/uploads/2021/04/border-collie-im-grass-1024x683-1.jpg',
+                    height: 200,
+                  ),
                 ),
               ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  height: 40,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                  ),
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: Text(widget.prize.title),
-                    ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                color: getPrizeColor(widget.prize),
+                height: 40,
+                width: double.infinity,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: Text(widget.prize.title),
                   ),
                 ),
               ),
             ),
             Align(
-              alignment: Alignment.bottomRight,
+              alignment: Alignment.topLeft,
               child: Container(
                 //TODO: make this relative to screen size
                 height: 30,
                 width: 50,
-                decoration: const BoxDecoration(color: Colors.white),
+                // decoration: const BoxDecoration(color: Colors.blue),
                 child: Center(
                   child: Padding(
                     padding: const EdgeInsets.all(5),
