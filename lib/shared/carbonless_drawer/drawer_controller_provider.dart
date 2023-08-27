@@ -1,5 +1,6 @@
 import 'package:carbonless/providers/controllers/app_navigation_controller_provider.dart';
 import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
+import 'package:carbonless/providers/controllers/partners/partners_controller_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../bottom_nav_bar.dart';
@@ -27,6 +28,7 @@ class DrawerController extends StateNotifier<DrawerState> {
 
   void showPartners() {
     state = Partners();
+    ref.read(partnersNotifier.notifier).initialize();
     _setAppNavigationToAuxiliary();
   }
 

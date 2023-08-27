@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:carbonless/auth/auth_repository.dart';
 import 'package:carbonless/auth/auth_service.dart';
 import 'package:carbonless/providers/controllers/partners/partners_controller_provider.dart';
+import 'package:carbonless/services/http_utils/http_service.dart';
+import 'package:carbonless/services/http_utils/request_provider.dart';
 import 'package:carbonless/services/partners_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -37,22 +39,6 @@ class GeolocationNotifier extends StateNotifier<Location> {
     }).catchError((e) {
       print(e);
     });
-  }
-
-  Future<void> getPartnersWithRange(
-      double lat, double long, double range) async {
-    String? bearerToken = ref.read(authRepositoryProvider).bearerToken;
-    if (bearerToken == null) {
-      return Future.error('Bearer token is null');
-    }
-    http.Response response = await ref
-        .read(partnersServiceProvider)
-        .getPartnersWithRange(lat, long, range, bearerToken);
-
-    ///TODO: decode and
-    List<dynamic> decodedList = jsonDecode(response.body);
-    ref.read(partnersNotifier.notifier).setListOfPartners(decodedList);
-    return Future.delayed(Duration(seconds: 5));
   }
 
   Future<String?> _handleLocationPermission() async {

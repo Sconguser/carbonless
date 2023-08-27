@@ -183,17 +183,17 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
                         color: primaryColor,
                       ),
                       onPressed: () async {
-                        await ref
-                            .read(geolocationProvider.notifier)
-                            .getCurrentPosition();
-                        Location currentLocation =
-                            ref.read(geolocationProvider);
-                        await ref
-                            .read(geolocationProvider.notifier)
-                            .getPartnersWithRange(
-                                double.parse(currentLocation.latitude),
-                                double.parse(currentLocation.longitude),
-                                20);
+                        // await ref
+                        //     .read(geolocationProvider.notifier)
+                        //     .getCurrentPosition();
+                        // Location currentLocation =
+                        //     ref.read(geolocationProvider);
+                        // await ref
+                        //     .read(geolocationProvider.notifier)
+                        //     .getPartnersWithRange(
+                        //         double.parse(currentLocation.latitude),
+                        //         double.parse(currentLocation.longitude),
+                        //         20);
                         // LatLng newPoint =
                         //     ref.read(geolocationProvider.notifier).getLatLng();
                         // ref.read(centerPointProvider.notifier).state = newPoint;

@@ -1,24 +1,24 @@
+import 'package:carbonless/services/http_utils/url_provider.dart';
+
 enum Endpoint {
   ALL_PRIZES,
   USER_PRIZES,
+  PARTNERS,
 }
 
 extension ParseToString on Endpoint {
   String toEndpoint() {
     switch (this) {
       case Endpoint.ALL_PRIZES:
-        return '/prizes';
+        return prizes;
       case Endpoint.USER_PRIZES:
-        return '/users_prizes';
+        return userPrizes;
+      case Endpoint.PARTNERS:
+        return partners;
     }
   }
 
   String toError() {
-    switch (this) {
-      case Endpoint.ALL_PRIZES:
-        return 'All prizes failed';
-      case Endpoint.USER_PRIZES:
-        return 'User prizes failed';
-    }
+    return "$name request failed";
   }
 }
