@@ -22,6 +22,7 @@ Color inactiveColor = const Color(0xFFB7B8B7);
 Color cardBackgroundColor = const Color(0xFFF7F7F2);
 Color darkSecondaryColor = primaryColor;
 Color darkPrimaryColor = secondaryColor;
+Color darkBackground = const Color(0xFF2A2A2A);
 String defaultFontFamily = 'Baloo Da 2';
 EdgeInsetsGeometry standardOuterPadding = const EdgeInsets.all(10);
 TextStyle warningTextStyle = TextStyle(
@@ -83,6 +84,7 @@ const double warningFontSize = 15;
 const double sliderFontSize = 15;
 Color highlightedTextColor = secondaryColor;
 ThemeData appTheme = ThemeData(
+  scaffoldBackgroundColor: tertiaryColor,
   colorScheme: ColorScheme.fromSwatch().copyWith(
     primary: primaryColor,
     secondary: activeColor,
@@ -128,8 +130,9 @@ ThemeData appTheme = ThemeData(
 );
 
 ThemeData darkTheme = ThemeData(
+  scaffoldBackgroundColor: darkBackground,
   colorScheme: ColorScheme.fromSwatch().copyWith(
-    primary: darkPrimaryColor,
+    primary: primaryColor,
     secondary: activeColor,
   ),
   inputDecorationTheme: InputDecorationTheme(
@@ -137,13 +140,13 @@ ThemeData darkTheme = ThemeData(
   ),
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
-      foregroundColor: MaterialStateProperty.all(darkPrimaryColor),
+      foregroundColor: MaterialStateProperty.all(primaryColor),
     ),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
-      foregroundColor: MaterialStateProperty.all(darkPrimaryColor),
-      backgroundColor: MaterialStateProperty.all(darkSecondaryColor),
+      foregroundColor: MaterialStateProperty.all(primaryColor),
+      backgroundColor: MaterialStateProperty.all(secondaryColor),
       elevation: MaterialStateProperty.all(0),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
@@ -154,20 +157,20 @@ ThemeData darkTheme = ThemeData(
     ),
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    backgroundColor: darkPrimaryColor,
-    selectedItemColor: activeColor,
-    unselectedItemColor: Colors.white,
-    selectedLabelStyle: TextStyle(
-      color: activeColor,
-    ),
-    unselectedLabelStyle: TextStyle(
-      color: Colors.white,
-    ),
-    selectedIconTheme: IconThemeData(
-      color: activeColor,
-    ),
-    unselectedIconTheme: IconThemeData(
-      color: Colors.white,
-    ),
+    backgroundColor: primaryColor,
+    // selectedItemColor: activeColor,
+    // unselectedItemColor: Colors.white,
+    // selectedLabelStyle: TextStyle(
+    //   color: activeColor,
+    // ),
+    // unselectedLabelStyle: TextStyle(
+    //   color: Colors.white,
+    // ),
+    // selectedIconTheme: IconThemeData(
+    //   color: activeColor,
+    // ),
+    // unselectedIconTheme: IconThemeData(
+    //   color: Colors.white,
+    // ),
   ),
 );
