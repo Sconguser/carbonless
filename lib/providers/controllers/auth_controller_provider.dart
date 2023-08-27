@@ -1,6 +1,7 @@
 import 'package:carbonless/providers/controllers/app_navigation_controller_provider.dart';
 import 'package:carbonless/providers/controllers/error_message_controller_provider.dart';
 import 'package:carbonless/providers/controllers/local_storage/secure_storage.dart';
+import 'package:carbonless/providers/controllers/prize_list/prize_controller_provider.dart';
 import 'package:carbonless/providers/controllers/qr_scanner_controller_provider.dart';
 import 'package:carbonless/providers/controllers/signup_controller_provider.dart';
 import 'package:carbonless/providers/states/auth_state.dart';
@@ -27,6 +28,11 @@ class AuthController extends StateNotifier<AuthState> {
 
   void showApp() {
     state = AuthStateSuccess();
+    initializeMain();
+  }
+
+  void initializeMain() {
+    ref.read(prizesProvider.notifier).initialize();
   }
 
   void logout() {

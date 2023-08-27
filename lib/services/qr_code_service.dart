@@ -4,7 +4,7 @@ import 'package:carbonless/models/qr_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-import '../shared/url_provider.dart';
+import 'http_utils/url_provider.dart';
 
 final qrService = Provider<QrService>((ref) => QrService());
 

@@ -8,9 +8,12 @@ enum PRIZE_STATE { NOT_OBTAINED, OBTAINED, REDEEMED }
 @freezed
 class Prize with _$Prize {
   const factory Prize({
-    required String id,
-    required String text,
+    required int id,
+    required String title,
     required int price,
+    required int duration,
+    required String uuid,
+    required int partner_id,
     @Default(PRIZE_STATE.NOT_OBTAINED) PRIZE_STATE state,
   }) = _Prize;
   factory Prize.fromJson(Map<String, dynamic> json) => _$PrizeFromJson(json);

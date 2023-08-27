@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../shared/url_provider.dart';
+import '../services/http_utils/url_provider.dart';
 import 'auth_models/user_model.dart';
 import 'package:http/http.dart' as http;
 

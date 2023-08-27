@@ -211,7 +211,7 @@ class _PrizeTileState extends ConsumerState<PrizeTile> {
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.all(5),
-                      child: Text(widget.prize.text),
+                      child: Text(widget.prize.title),
                     ),
                   ),
                 ),
@@ -308,7 +308,7 @@ class PurchaseButton extends ConsumerWidget {
     Messages _locale = ref.watch(messagesProvider);
     return ElevatedButton(
       onPressed: () {
-        ref.read(prizesProvider.notifier).obtainPrize(prize.id);
+        // ref.read(prizesProvider.notifier).obtainPrize(prize.id);
       },
       child: Text(_locale.button.obtain),
     );
@@ -332,7 +332,7 @@ class RedeemSlider extends ConsumerWidget {
       text: _locale.button.redeem,
       textStyle: sliderTextStyle,
       onConfirmation: () {
-        ref.read(prizesProvider.notifier).redeemPrize(prize.id);
+        // ref.read(prizesProvider.notifier).redeemPrize(prize.id);
       },
     );
   }

@@ -4,7 +4,7 @@ import 'package:carbonless/auth/auth_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-import '../shared/url_provider.dart';
+import 'http_utils/url_provider.dart';
 
 class PartnersService {
   final String _urlPartners = '/partners';

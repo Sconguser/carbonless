@@ -1,9 +1,12 @@
 import 'package:carbonless/providers/controllers/app_navigation_controller_provider.dart';
+import 'package:carbonless/providers/controllers/loaders/view_loading_controller_provider.dart';
+import 'package:carbonless/providers/states/loading_state.dart';
 import 'package:carbonless/shared/carbonless_appbar.dart';
 import 'package:carbonless/shared/carbonless_drawer/carbonless_drawer.dart';
 import 'package:carbonless/shared/constants.dart';
 import 'package:carbonless/shared/widgets.dart';
 import 'package:carbonless/views/carbonless_map/carbonless_map_view.dart';
+import 'package:carbonless/views/loading_view.dart';
 import 'package:carbonless/views/scanner/scanner_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,6 +28,10 @@ class BottomNavigationBarView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     _locale = ref.watch(messagesProvider);
+    LoadingState viewLoadingState = ref.watch(viewLoadingControllerProvider);
+    if (viewLoadingState == const LoadingOn()) {
+      return const LoadingView();
+    }
     return DefaultScaffold(
       appBar: CarbonLessAppBar(
         context: context,
@@ -33,12 +40,12 @@ class BottomNavigationBarView extends ConsumerWidget {
         ),
         showLeading: false,
       ),
-      drawer: CarbonlessDrawer(),
+      drawer: const CarbonlessDrawer(),
       context: context,
       body: scaffoldChild ??
           IndexedStack(
             index: ref.watch(bottomNavIndexProvider),
-            children: [
+            children: const [
               PrizeView(),
               ScannerView(),
               CarbonlessMapView(),
@@ -53,8 +60,6 @@ class BottomNavigationBarView extends ConsumerWidget {
           ref.read(appNavigationControllerProvider.notifier).showMain();
           ref.read(bottomNavIndexProvider.notifier).state = index;
         },
-        // showSelectedLabels: false,
-        // showUnselectedLabels: false,
         selectedItemColor: ref.read(bottomNavIndexProvider) == -1
             ? unselectedIndexColor
             : selectedIndexColor,
