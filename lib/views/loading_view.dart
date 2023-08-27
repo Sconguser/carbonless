@@ -8,7 +8,13 @@ class LoadingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: spinner,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            LogoText(),
+            spinner,
+          ],
+        ),
       ),
     );
   }

@@ -35,3 +35,9 @@ class LoginStateError extends LoginState {
   @override
   List<Object?> get props => [];
 }
+
+class AutoLoginState extends LoginState {
+  const AutoLoginState();
+  @override
+  List<Object?> get props => [];
+}

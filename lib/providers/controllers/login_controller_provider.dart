@@ -2,6 +2,7 @@ import 'package:carbonless/auth/auth_repository.dart';
 import 'package:carbonless/main.dart';
 import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
 import 'package:carbonless/providers/controllers/error_message_controller_provider.dart';
+import 'package:carbonless/providers/controllers/loaders/view_loading_controller_provider.dart';
 import 'package:carbonless/providers/controllers/local_storage/secure_storage.dart';
 import 'package:carbonless/providers/states/login_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -44,7 +45,7 @@ class LoginController extends StateNotifier<LoginState> {
   }
 
   void autoLogin() async {
-    state = const LoginStateLoading();
+    state = const AutoLoginState();
     Messages _locale = ref.watch(messagesProvider);
     String? bearerToken =
         await ref.read(secureStorageProvider).read(KEYS.bearerToken.name);
