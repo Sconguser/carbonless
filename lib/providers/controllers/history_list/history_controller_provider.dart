@@ -1,35 +1,48 @@
+import 'dart:convert';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../models/history_model.dart';
+import '../../../services/http_utils/http_service.dart';
+import '../../../services/http_utils/request_provider.dart';
+import '../loaders/view_loading_controller_provider.dart';
+import 'package:http/http.dart' as http;
 
 class HistoryNotifier extends StateNotifier<List<History>> {
-  HistoryNotifier(List<History> state) : super(state);
+  HistoryNotifier(List<History> state, this.ref) : super(state);
+  final Ref ref;
+
+  bool _initialized = false;
+
+  void initialize() async {
+    if (!_initialized) {
+      ref.read(viewLoadingControllerProvider.notifier).viewLoadingOn();
+      await _getHistories();
+      _initialized = true;
+      ref.read(viewLoadingControllerProvider.notifier).viewLoadingOff();
+    }
+  }
+
+  Future<void> _getHistories() async {
+    http.Response response = await ref
+        .read(httpServiceProvider)
+        .executeHttp(RequestType.GET, null, null, Endpoint.HISTORY);
+
+    List<dynamic> decodedList = jsonDecode(response.body);
+    ref.read(historyNotifier.notifier).setListOfHistoriesFromJson(decodedList);
+  }
+
+  void setListOfHistoriesFromJson(List<dynamic> histories) {
+    List<History> historyList = [];
+    for (dynamic history in histories) {
+      historyList.add(History.fromJson(history));
+    }
+    state = historyList;
+  }
 }
 
 final historyNotifier =
     StateNotifierProvider<HistoryNotifier, List<History>>((ref) {
-  List<History>? histories = [
-    History(
-        text: "Zdobyto 10 punktów za zakup kawy w ekologicznym kubku",
-        dateTime: DateTime.now()),
-    History(
-        text: "Wydano 1000 punktów w sklepie",
-        dateTime: DateTime(2021, 10, 10)),
-    History(
-        text: "Zdobyto 2137 punktów za przejazd metrm",
-        dateTime: DateTime(2023, 12, 11)),
-    History(
-        text: "Zdobyto 2222 punktów za przejazd tramwajem",
-        dateTime: DateTime(2021, 2, 3)),
-    History(
-        text: "Zdobyto 321 punktów za zakupy w slkepie ekologicznym",
-        dateTime: DateTime(2022, 10, 10)),
-    History(
-        text: "Zdobyto 10 punktów za zakup kawy w ekologicznym kubku",
-        dateTime: DateTime(2021, 11, 3)),
-    History(
-        text: "Zdobyto 10 punktów za zakup kawy w ekologicznym kubku",
-        dateTime: DateTime(2022, 1, 1)),
-  ];
-  return HistoryNotifier(histories);
+  List<History>? histories = [];
+  return HistoryNotifier(histories, ref);
 });

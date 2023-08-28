@@ -25,7 +25,7 @@ class TreesPlate extends ConsumerWidget {
           child: Column(
             children: [
               Text(
-                _locale.history.trees_saved(10),
+                _locale.history.carbon_saved(user?.total_carbon_saved ?? '0'),
                 style: labelTextStyle,
               ),
             ],
@@ -56,20 +56,20 @@ class HistoryCard extends ConsumerWidget {
                 Align(
                   alignment: Alignment.topRight,
                   child: Text(
-                    DateFormat.yMd().format(history.dateTime),
+                    DateFormat.yMd().format(history.created_at),
                     style: logoTextStyle.copyWith(fontSize: 14),
                   ),
                 ),
                 Row(
                   children: [
                     Icon(
-                      Icons.coffee,
+                      getIconForType(history),
                       size: 100,
                       color: primaryColor,
                     ),
                     Expanded(
                       child: Text(
-                        history.text,
+                        getMessageForType(_locale, history),
                         style: logoTextStyle.copyWith(fontSize: 15),
                       ),
                     ),
@@ -79,6 +79,33 @@ class HistoryCard extends ConsumerWidget {
             ),
           )),
     );
+  }
+
+  String getMessageForType(Messages messages, History history) {
+    switch (history.history_type) {
+      case "travel":
+        return messages.history.travel(history.points, history.partner_name);
+      case "purchase":
+        return messages.history.purchase(history.points, history.partner_name);
+      case "prize":
+        return messages.history
+            .prize(history.points, history.prize_title!, history.partner_name);
+      default:
+        return "Undefined";
+    }
+  }
+
+  IconData getIconForType(History history) {
+    switch (history.history_type) {
+      case "travel":
+        return Icons.train;
+      case "purchase":
+        return Icons.local_grocery_store;
+      case "prize":
+        return Icons.star;
+      default:
+        return Icons.energy_savings_leaf;
+    }
   }
 }
 
@@ -111,7 +138,7 @@ class _HistoryListState extends ConsumerState<HistoryList> {
   void sortHistories(List<History>? histories) {
     if (histories == null || histories.isEmpty) return;
     histories.sort((a, b) {
-      if (a.dateTime.compareTo(b.dateTime) < 0) {
+      if (a.created_at.compareTo(b.created_at) < 0) {
         return 1;
       } else {
         return -1;

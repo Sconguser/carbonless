@@ -4,6 +4,7 @@ enum Endpoint {
   ALL_PRIZES,
   USER_PRIZES,
   PARTNERS,
+  HISTORY,
 }
 
 extension ParseToString on Endpoint {
@@ -15,6 +16,8 @@ extension ParseToString on Endpoint {
         return userPrizes;
       case Endpoint.PARTNERS:
         return partners;
+      case Endpoint.HISTORY:
+        return history;
     }
   }
 

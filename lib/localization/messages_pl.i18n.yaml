@@ -68,7 +68,10 @@ theme:
   system: systemowy
 
 history:
-  trees_saved(int trees): zaoszczędziłeś tyle węgla co $trees drzew przerabia w rok
+  carbon_saved(String carbon): zaoszczędziłeś $carbon kilogramów węgla z Carbonless
+  purchase(int points, String partner_name): Zdobyłeś $points punktów za zakupy w $partner_name
+  travel(int points, String partner_name): Zdobyłeś $points punktów za podróż z $partner_name
+  prize(int points, String prize_name, String partner_name): Wydałeś $points puntków na $prize_name w $partner_name
 
 map:
   search_bar_hint: Szukaj lokacji

@@ -6,8 +6,12 @@ part 'history_model.g.dart';
 @freezed
 class History with _$History {
   const factory History({
-    required String text,
-    required DateTime dateTime,
+    required String partner_name,
+    required int points,
+    required int user_id,
+    required String history_type,
+    String? prize_title,
+    required DateTime created_at,
   }) = _History;
   factory History.fromJson(Map<String, dynamic> json) =>
       _$HistoryFromJson(json);

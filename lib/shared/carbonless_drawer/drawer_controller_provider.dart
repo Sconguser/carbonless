@@ -1,5 +1,6 @@
 import 'package:carbonless/providers/controllers/app_navigation_controller_provider.dart';
 import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
+import 'package:carbonless/providers/controllers/history_list/history_controller_provider.dart';
 import 'package:carbonless/providers/controllers/partners/partners_controller_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,6 +24,7 @@ class DrawerController extends StateNotifier<DrawerState> {
 
   void showHistory() {
     state = History();
+    ref.read(historyNotifier.notifier).initialize();
     _setAppNavigationToAuxiliary();
   }
 
