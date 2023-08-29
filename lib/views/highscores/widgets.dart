@@ -3,6 +3,7 @@ import 'package:carbonless/main.dart';
 import 'package:carbonless/models/highscores_entry_model.dart';
 import 'package:carbonless/providers/controllers/highscores/highscores_entry_controller_provider.dart';
 import 'package:carbonless/providers/controllers/highscores/highscores_filter_controller_provider.dart';
+import 'package:carbonless/providers/controllers/highscores/leaderboard_model.dart';
 import 'package:carbonless/providers/states/highscores/highscores_filter_state.dart';
 import 'package:carbonless/shared/constants.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class HighscoreTile extends ConsumerWidget {
     Messages _locale = ref.watch(messagesProvider);
     return Container(
       height: 100,
-      color: resolveColor(entry.position),
+      // color: resolveColor(entry.position),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
@@ -41,17 +42,17 @@ class HighscoreTile extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  entry.nickname,
+                  entry.username,
                   style: highscoresTileTextStyle,
                 ),
                 Text(
-                  '${entry.points.toString()} ${_locale.highscores.points}',
+                  '${entry.score.toString()} ${_locale.highscores.points}',
                   style: highscoresTileTextStyle.copyWith(
                       fontWeight: FontWeight.normal),
                 ),
               ],
             ),
-            resolvePosition(entry.position),
+            // resolvePosition(entry.position),
           ],
         ),
       ),
@@ -135,11 +136,14 @@ class FilterChooser extends ConsumerWidget {
 }
 
 class HighscoresList extends ConsumerWidget {
-  const HighscoresList({Key? key}) : super(key: key);
+  List<HighscoresEntry> entries;
+  HighscoresList({Key? key, required this.entries}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<HighscoresEntry> entries = ref.watch(highscoresEntryNotifier);
+    // Leaderboard leaderboard = ref.watch(leaderboardNotifier);
+    // List<HighscoresEntry>? entries = leaderboard.leader_board;
+    // entries ??= [];
     return Expanded(
       child: ListView(
         children: [

@@ -1,5 +1,6 @@
 import 'package:carbonless/providers/controllers/app_navigation_controller_provider.dart';
 import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
+import 'package:carbonless/providers/controllers/highscores/highscores_entry_controller_provider.dart';
 import 'package:carbonless/providers/controllers/history_list/history_controller_provider.dart';
 import 'package:carbonless/providers/controllers/partners/partners_controller_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,24 +19,25 @@ class DrawerController extends StateNotifier<DrawerState> {
   }
 
   void showHighscores() {
-    state = Highscores();
+    state = const Highscores();
+    ref.read(leaderboardNotifier.notifier).initialize();
     _setAppNavigationToAuxiliary();
   }
 
   void showHistory() {
-    state = History();
+    state = const History();
     ref.read(historyNotifier.notifier).initialize();
     _setAppNavigationToAuxiliary();
   }
 
   void showPartners() {
-    state = Partners();
+    state = const Partners();
     ref.read(partnersNotifier.notifier).initialize();
     _setAppNavigationToAuxiliary();
   }
 
   void showSettings() {
-    state = Settings();
+    state = const Settings();
     _setAppNavigationToAuxiliary();
   }
 

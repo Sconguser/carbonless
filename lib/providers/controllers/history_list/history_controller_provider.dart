@@ -29,7 +29,8 @@ class HistoryNotifier extends StateNotifier<List<History>> {
         .executeHttp(RequestType.GET, null, null, Endpoint.HISTORY);
 
     List<dynamic> decodedList = jsonDecode(response.body);
-    ref.read(historyNotifier.notifier).setListOfHistoriesFromJson(decodedList);
+    // ref.read(historyNotifier.notifier).setListOfHistoriesFromJson(decodedList);
+    setListOfHistoriesFromJson(decodedList);
   }
 
   void setListOfHistoriesFromJson(List<dynamic> histories) {
