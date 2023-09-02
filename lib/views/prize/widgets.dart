@@ -369,7 +369,7 @@ class HideButton extends ConsumerWidget {
       onPressed: () {
         ref.read(prizeTileProvider.notifier).showPrize(prize.id);
       },
-      child: Text("Hide"),
+      child: Text(_locale.prizes.hide),
     );
   }
 }

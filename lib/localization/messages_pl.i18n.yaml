@@ -57,6 +57,7 @@ prizes:
   locked_prizes: nagrody do odblokowania
   empty_prizes: w tym momencie nie ma żadnych nagród
   your_points: twoje punkty
+  hide: ukryj
 
 languages:
   english: english
