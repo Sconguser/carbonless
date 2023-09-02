@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:carbonless/models/user_prize_model.dart';
 import 'package:carbonless/providers/controllers/loaders/view_loading_controller_provider.dart';
+import 'package:carbonless/providers/controllers/loaders/widget_loading_controller_provider.dart';
 import 'package:carbonless/services/http_utils/http_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,29 +16,28 @@ class PrizesNotifier extends StateNotifier<List<Prize>> {
   final Ref ref;
   bool _initialized = false;
 
+  final List<UserPrize> _userPrizeList = [];
+
   void initialize() async {
     if (!_initialized) {
       ref.read(viewLoadingControllerProvider.notifier).viewLoadingOn();
       await _fetchPrizesAndSetState();
+      _updateListOfActivePrizes();
       _initialized = true;
       ref.read(viewLoadingControllerProvider.notifier).viewLoadingOff();
     }
   }
 
-  Future<void> obtainPrize(int prizeId) async {
-    final updatedPrizes = state.map((prize) {
-      if (prize.id == prizeId && prize.state == PRIZE_STATE.NOT_OBTAINED) {
-        // return Prize(
-        //   id: prize.id,
-        //   state: PRIZE_STATE.OBTAINED,
-        //   text: prize.text,
-        //   price: prize.price,
-        // );
-      }
-      return prize;
-    }).toList();
+  void _resetState() {
+    state = [];
+    _initialized = false;
+    initialize();
+  }
 
-    state = updatedPrizes;
+  Future<void> obtainPrize(int prizeId) async {
+    ref.read(widgetLoadingControllerProvider.notifier).widgetLoadingOn();
+    bool purchaseSuccessful = await _purchasePrize(prizeId);
+    ref.read(widgetLoadingControllerProvider.notifier).widgetLoadingOff();
   }
 
   Future<void> redeemPrize(String prizeId) async {
@@ -56,7 +57,11 @@ class PrizesNotifier extends StateNotifier<List<Prize>> {
     state = updatedPrizes;
   }
 
-  void setListOfPrizes(List<Prize> prizes) {
+  void _setListOfUserPrizes(List<UserPrize> userPrizes) {
+    _userPrizeList.addAll(userPrizes);
+  }
+
+  void _setListOfPrizes(List<Prize> prizes) {
     state = prizes;
   }
 
@@ -73,13 +78,26 @@ class PrizesNotifier extends StateNotifier<List<Prize>> {
   }
 
   Future<void> _fetchPrizesAndSetState() async {
-    List<Prize>? userPrizes = await _fetchUserPrizes();
+    List<UserPrize>? userPrizes = await _fetchUserPrizes();
     if (userPrizes != null) {
-      setListOfPrizes(userPrizes);
+      _setListOfUserPrizes(userPrizes);
     }
     List<Prize>? prizes = await _fetchPrizes();
     if (prizes != null) {
-      addListNoDoubles(prizes);
+      _setListOfPrizes(prizes);
+    }
+  }
+
+  void _updateListOfActivePrizes() {
+    for (UserPrize userPrize in _userPrizeList) {
+      final index = state.indexWhere((x) => x.id == userPrize.prize_id);
+      if (index != -1) {
+        if (userPrize.active) {
+          state[index] = state[index].copyWith(state: PRIZE_STATE.OBTAINED);
+        } else {
+          state[index] = state[index].copyWith(state: PRIZE_STATE.REDEEMED);
+        }
+      }
     }
   }
 
@@ -100,27 +118,40 @@ class PrizesNotifier extends StateNotifier<List<Prize>> {
     return null;
   }
 
-  Future<List<Prize>?> _fetchUserPrizes() async {
+  Future<List<UserPrize>?> _fetchUserPrizes() async {
     try {
       http.Response response = await ref
           .read(httpServiceProvider)
           .executeHttp(RequestType.GET, null, null, Endpoint.USER_PRIZES);
-      List<Prize> prizeList = [];
+      List<UserPrize> userPrizeList = [];
       Map<String, dynamic> decodedList = jsonDecode(response.body);
-      for (dynamic prize in decodedList["records"]) {
-        Prize jsonPrize = Prize.fromJson(prize);
-        if (prize['active'] == true) {
-          jsonPrize.copyWith(state: PRIZE_STATE.OBTAINED);
-        } else {
-          jsonPrize.copyWith(state: PRIZE_STATE.REDEEMED);
-        }
-        prizeList.add(jsonPrize);
+      for (dynamic userPrize in decodedList["records"]) {
+        UserPrize jsonPrize = UserPrize.fromJson(userPrize);
+        userPrizeList.add(jsonPrize);
       }
-      return prizeList;
+      return userPrizeList;
     } catch (e) {
       print(e);
     }
     return null;
+  }
+
+  Future<bool> _purchasePrize(int id) async {
+    try {
+      Map<String, dynamic> body = {
+        "user_prize": {
+          "prize_id": id,
+        }
+      };
+      http.Response response = await ref
+          .read(httpServiceProvider)
+          .executeHttp(RequestType.POST, body, null, Endpoint.PRIZE_PURCHASE);
+      _resetState();
+      return true;
+    } catch (e) {
+      print(e);
+    }
+    return false;
   }
 }
 

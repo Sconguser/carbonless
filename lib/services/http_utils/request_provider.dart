@@ -1,6 +1,13 @@
 import 'package:carbonless/services/http_utils/url_provider.dart';
 
-enum Endpoint { ALL_PRIZES, USER_PRIZES, PARTNERS, HISTORY, HIGHSCORE }
+enum Endpoint {
+  ALL_PRIZES,
+  USER_PRIZES,
+  PARTNERS,
+  HISTORY,
+  HIGHSCORE,
+  PRIZE_PURCHASE,
+}
 
 extension ParseToString on Endpoint {
   String toEndpoint() {
@@ -15,6 +22,8 @@ extension ParseToString on Endpoint {
         return history;
       case Endpoint.HIGHSCORE:
         return highscores;
+      case Endpoint.PRIZE_PURCHASE:
+        return prizePurchase;
     }
   }
 

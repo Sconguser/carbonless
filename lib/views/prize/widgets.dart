@@ -12,7 +12,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:slide_to_confirm/slide_to_confirm.dart';
 
 import '../../localization/messages.i18n.dart';
+import '../../providers/controllers/loaders/widget_loading_controller_provider.dart';
 import '../../providers/controllers/prize_list/prize_controller_provider.dart';
+import '../../providers/states/loading_state.dart';
+import '../../shared/widgets.dart';
 
 class PointsPlate extends ConsumerWidget {
   const PointsPlate({Key? key}) : super(key: key);
@@ -303,12 +306,16 @@ class PurchaseButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Messages _locale = ref.watch(messagesProvider);
-    return ElevatedButton(
-      onPressed: () {
-        // ref.read(prizesProvider.notifier).obtainPrize(prize.id);
-      },
-      child: Text(_locale.button.obtain),
-    );
+    LoadingState widgetLoadingState =
+        ref.watch(widgetLoadingControllerProvider);
+    return widgetLoadingState == const LoadingOn()
+        ? spinner
+        : ElevatedButton(
+            onPressed: () {
+              ref.read(prizesProvider.notifier).obtainPrize(prize.id);
+            },
+            child: Text(_locale.button.obtain),
+          );
   }
 }
 
