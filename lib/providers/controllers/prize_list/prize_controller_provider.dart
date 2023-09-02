@@ -40,21 +40,10 @@ class PrizesNotifier extends StateNotifier<List<Prize>> {
     ref.read(widgetLoadingControllerProvider.notifier).widgetLoadingOff();
   }
 
-  Future<void> redeemPrize(String prizeId) async {
-    final updatedPrizes = state.map((prize) {
-      if (prize.id == prizeId && prize.state == PRIZE_STATE.OBTAINED) {
-        // prize.copyWith(state: PRIZE_STATE.REDEEMED);
-        // return Prize(
-        //   id: prize.id,
-        //   state: PRIZE_STATE.REDEEMED,
-        //   text: prize.text,
-        //   price: prize.price,
-        // );
-      }
-      return prize;
-    }).toList();
-
-    state = updatedPrizes;
+  String redeemPrize(int prizeId) {
+    UserPrize userPrize =
+        _userPrizeList.firstWhere((prize) => prize.prize_id == prizeId);
+    return userPrize.id;
   }
 
   void _setListOfUserPrizes(List<UserPrize> userPrizes) {

@@ -3,7 +3,9 @@ import 'package:carbonless/auth/auth_repository.dart';
 import 'package:carbonless/main.dart';
 import 'package:carbonless/models/prize_model.dart';
 import 'package:carbonless/providers/controllers/prize_list/prize_list_filter_controller_provider.dart';
+import 'package:carbonless/providers/controllers/prize_list/prize_tile_controller_provider.dart';
 import 'package:carbonless/providers/states/prize_list/prize_filter_state.dart';
+import 'package:carbonless/providers/states/prize_list/prize_tile_state.dart';
 import 'package:carbonless/repositories/prize_repository.dart';
 import 'package:carbonless/shared/constants.dart';
 import 'package:carbonless/views/prize/utils.dart';
@@ -16,6 +18,7 @@ import '../../providers/controllers/loaders/widget_loading_controller_provider.d
 import '../../providers/controllers/prize_list/prize_controller_provider.dart';
 import '../../providers/states/loading_state.dart';
 import '../../shared/widgets.dart';
+import '../qr_code_view.dart';
 
 class PointsPlate extends ConsumerWidget {
   const PointsPlate({Key? key}) : super(key: key);
@@ -186,6 +189,7 @@ class PrizeTile extends ConsumerStatefulWidget {
 class _PrizeTileState extends ConsumerState<PrizeTile> {
   @override
   Widget build(BuildContext context) {
+    PrizeTileState prizeTileState = ref.watch(prizeTileProvider);
     return Container(
       //TODO make this relative to screen size
       width: 200,
@@ -195,13 +199,18 @@ class _PrizeTileState extends ConsumerState<PrizeTile> {
           children: [
             if (widget.prize.id != null)
               Center(
-                child: Container(
-                  color: primaryColor,
-                  child: Image.network(
-                    'https://www.zooplus.pt/magazine/wp-content/uploads/2021/04/border-collie-im-grass-1024x683-1.jpg',
-                    height: 200,
-                  ),
-                ),
+                child: prizeTileState is PrizeTileShowCode &&
+                        (prizeTileState).prizeId == widget.prize.id
+                    ? QrCodeView(
+                        value: prizeTileState.data,
+                      )
+                    : Container(
+                        color: primaryColor,
+                        child: Image.network(
+                          'https://www.zooplus.pt/magazine/wp-content/uploads/2021/04/border-collie-im-grass-1024x683-1.jpg',
+                          height: 200,
+                        ),
+                      ),
               ),
             Align(
               alignment: Alignment.bottomCenter,
@@ -326,18 +335,41 @@ class RedeemSlider extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Messages _locale = ref.watch(messagesProvider);
-    return ConfirmationSlider(
-      height: 50,
-      width: 250,
-      backgroundColor: secondaryColor,
-      backgroundColorEnd: activeColor,
-      foregroundColor: primaryColor,
-      stickToEnd: true,
-      text: _locale.button.redeem,
-      textStyle: sliderTextStyle,
-      onConfirmation: () {
-        // ref.read(prizesProvider.notifier).redeemPrize(prize.id);
+    PrizeTileState prizeTileState = ref.watch(prizeTileProvider);
+    return prizeTileState is PrizeTileShowPrize
+        ? ConfirmationSlider(
+            height: 50,
+            width: 250,
+            backgroundColor: secondaryColor,
+            backgroundColorEnd: activeColor,
+            foregroundColor: primaryColor,
+            stickToEnd: true,
+            text: _locale.button.redeem,
+            textStyle: sliderTextStyle,
+            onConfirmation: () {
+              String prizeId =
+                  ref.read(prizesProvider.notifier).redeemPrize(prize.id);
+              ref
+                  .read(prizeTileProvider.notifier)
+                  .showQrCode(prizeId, prize.id);
+            },
+          )
+        : HideButton(prize: prize);
+  }
+}
+
+class HideButton extends ConsumerWidget {
+  Prize prize;
+  HideButton({Key? key, required this.prize}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    Messages _locale = ref.watch(messagesProvider);
+    return ElevatedButton(
+      onPressed: () {
+        ref.read(prizeTileProvider.notifier).showPrize(prize.id);
       },
+      child: Text("Hide"),
     );
   }
 }
