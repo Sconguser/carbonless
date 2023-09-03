@@ -46,6 +46,7 @@ drawer:
   settings: settings
   log_out: log out
   history: history
+  about: about
 
 bottomNavBar:
   prizes: prizes
@@ -103,3 +104,7 @@ notifications:
   minutes: minutes
   seconds: seconds
   session_time: Session timer
+
+about:
+  what: Carbonless is an application created and developed by Carbonless Team - Maciej Ciepłuch and Miłosz Taranowicz.
+  show_licenses: show licenses

@@ -1,3 +1,4 @@
+import 'package:carbonless/views/about/about_view.dart';
 import 'package:carbonless/views/edit_profile/edit_profile_view.dart';
 import 'package:carbonless/views/highscores/highscores_view.dart';
 import 'package:carbonless/views/history/history_view.dart';
@@ -9,23 +10,26 @@ import '../error/error_view.dart';
 import '../settings/settings_view.dart';
 
 Widget getDrawerView(DrawerState drawerState) {
-  if (drawerState == DrawerInitialState()) {
-    return ErrorView();
+  if (drawerState == const DrawerInitialState()) {
+    return const ErrorView();
   }
-  if (drawerState == EditData()) {
+  if (drawerState == const EditData()) {
     return EditProfileView();
   }
-  if (drawerState == Highscores()) {
-    return HighscoresView();
+  if (drawerState == const Highscores()) {
+    return const HighscoresView();
   }
-  if (drawerState == History()) {
-    return HistoryView();
+  if (drawerState == const History()) {
+    return const HistoryView();
   }
-  if (drawerState == Partners()) {
-    return PartnersView();
+  if (drawerState == const Partners()) {
+    return const PartnersView();
   }
-  if (drawerState == Settings()) {
-    return SettingsView();
+  if (drawerState == const Settings()) {
+    return const SettingsView();
   }
-  return ErrorView();
+  if (drawerState == const About()) {
+    return const AboutView();
+  }
+  return const ErrorView();
 }

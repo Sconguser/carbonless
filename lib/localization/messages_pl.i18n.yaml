@@ -46,6 +46,7 @@ drawer:
   settings: ustawienia
   log_out: wyloguj się
   history: historia
+  about: o aplikacji
 
 bottomNavBar:
   prizes: nagrody
@@ -103,3 +104,7 @@ notifications:
   minutes: minut
   seconds: sekund
   session_time: Minutnik sesji
+
+about:
+  what: Carbonless to aplikacja stworzona i rozwijana przez zespół Carbonless - Macieja Ciepłucha i Miłosz Taranowicza
+  show_licenses: pokaż listę licencji

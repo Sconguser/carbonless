@@ -48,3 +48,9 @@ class Logout extends DrawerState {
   @override
   List<Object?> get props => [];
 }
+
+class About extends DrawerState {
+  const About();
+  @override
+  List<Object?> get props => [];
+}

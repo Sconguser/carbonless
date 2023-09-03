@@ -63,12 +63,12 @@ class DrawerMenuItems extends ConsumerWidget {
     Messages _locale = ref.read(messagesProvider);
     return Container(
       color: Colors.transparent,
-      padding: EdgeInsets.all(24),
+      padding: const EdgeInsets.all(24),
       child: Wrap(
         runSpacing: 16,
         children: [
           DrawerButton(
-            icon: Icon(Icons.person),
+            icon: const Icon(Icons.person),
             text: _locale.drawer.edit_data,
             onPressed: () {
               ref.read(drawerControllerProvider.notifier).showEditDataView();
@@ -76,7 +76,7 @@ class DrawerMenuItems extends ConsumerWidget {
             },
           ),
           DrawerButton(
-            icon: Icon(Icons.people),
+            icon: const Icon(Icons.people),
             text: _locale.drawer.highscores,
             onPressed: () {
               ref.read(drawerControllerProvider.notifier).showHighscores();
@@ -84,7 +84,7 @@ class DrawerMenuItems extends ConsumerWidget {
             },
           ),
           DrawerButton(
-            icon: Icon(Icons.watch_later),
+            icon: const Icon(Icons.watch_later),
             text: _locale.drawer.history,
             onPressed: () {
               ref.read(drawerControllerProvider.notifier).showHistory();
@@ -92,7 +92,7 @@ class DrawerMenuItems extends ConsumerWidget {
             },
           ),
           DrawerButton(
-            icon: Icon(Icons.sports_handball),
+            icon: const Icon(Icons.sports_handball),
             text: _locale.drawer.partners,
             onPressed: () {
               ref.read(drawerControllerProvider.notifier).showPartners();
@@ -100,7 +100,7 @@ class DrawerMenuItems extends ConsumerWidget {
             },
           ),
           DrawerButton(
-            icon: Icon(Icons.settings),
+            icon: const Icon(Icons.settings),
             text: _locale.drawer.settings,
             onPressed: () {
               ref.read(drawerControllerProvider.notifier).showSettings();
@@ -108,7 +108,15 @@ class DrawerMenuItems extends ConsumerWidget {
             },
           ),
           DrawerButton(
-            icon: Icon(Icons.logout),
+            icon: const Icon(Icons.info),
+            text: _locale.drawer.about,
+            onPressed: () {
+              ref.read(drawerControllerProvider.notifier).showAbout();
+              Navigator.pop(context);
+            },
+          ),
+          DrawerButton(
+            icon: const Icon(Icons.logout),
             text: _locale.drawer.log_out,
             onPressed: () {
               ref.read(drawerControllerProvider.notifier).logout();
