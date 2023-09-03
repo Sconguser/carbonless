@@ -5,6 +5,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../localization/messages.i18n.dart';
 
+enum DRAWER_TILES {
+  EDIT_DATA,
+  HIGHSCORES,
+  HISTORY,
+  PARTNERS,
+  SETTINGS,
+  ABOUT,
+  LOGOUT,
+}
+
 class CarbonlessDrawer extends StatelessWidget {
   const CarbonlessDrawer({Key? key}) : super(key: key);
 
@@ -71,61 +81,82 @@ class DrawerMenuItems extends ConsumerWidget {
             icon: const Icon(Icons.person),
             text: _locale.drawer.edit_data,
             onPressed: () {
-              ref.read(drawerControllerProvider.notifier).showEditDataView();
-              Navigator.pop(context);
+              handleButtonPress(ref, DRAWER_TILES.EDIT_DATA, context);
             },
           ),
           DrawerButton(
             icon: const Icon(Icons.people),
             text: _locale.drawer.highscores,
             onPressed: () {
-              ref.read(drawerControllerProvider.notifier).showHighscores();
-              Navigator.pop(context);
+              handleButtonPress(ref, DRAWER_TILES.HIGHSCORES, context);
             },
           ),
           DrawerButton(
             icon: const Icon(Icons.watch_later),
             text: _locale.drawer.history,
             onPressed: () {
-              ref.read(drawerControllerProvider.notifier).showHistory();
-              Navigator.pop(context);
+              handleButtonPress(ref, DRAWER_TILES.HISTORY, context);
             },
           ),
           DrawerButton(
             icon: const Icon(Icons.sports_handball),
             text: _locale.drawer.partners,
             onPressed: () {
-              ref.read(drawerControllerProvider.notifier).showPartners();
-              Navigator.pop(context);
+              handleButtonPress(ref, DRAWER_TILES.PARTNERS, context);
             },
           ),
           DrawerButton(
             icon: const Icon(Icons.settings),
             text: _locale.drawer.settings,
             onPressed: () {
-              ref.read(drawerControllerProvider.notifier).showSettings();
-              Navigator.pop(context);
+              handleButtonPress(ref, DRAWER_TILES.SETTINGS, context);
             },
           ),
           DrawerButton(
             icon: const Icon(Icons.info),
             text: _locale.drawer.about,
             onPressed: () {
-              ref.read(drawerControllerProvider.notifier).showAbout();
-              Navigator.pop(context);
+              handleButtonPress(ref, DRAWER_TILES.ABOUT, context);
             },
           ),
           DrawerButton(
             icon: const Icon(Icons.logout),
             text: _locale.drawer.log_out,
             onPressed: () {
-              ref.read(drawerControllerProvider.notifier).logout();
+              handleButtonPress(ref, DRAWER_TILES.LOGOUT, context);
             },
           ),
         ],
       ),
     );
   }
+}
+
+void handleButtonPress(WidgetRef ref, DRAWER_TILES tile, BuildContext context) {
+  switch (tile) {
+    case DRAWER_TILES.EDIT_DATA:
+      ref.read(drawerControllerProvider.notifier).showEditDataView();
+      break;
+    case DRAWER_TILES.HIGHSCORES:
+      ref.read(drawerControllerProvider.notifier).showHighscores();
+      break;
+    case DRAWER_TILES.HISTORY:
+      ref.read(drawerControllerProvider.notifier).showHistory();
+      break;
+    case DRAWER_TILES.PARTNERS:
+      ref.read(drawerControllerProvider.notifier).showPartners();
+      break;
+    case DRAWER_TILES.SETTINGS:
+      ref.read(drawerControllerProvider.notifier).showSettings();
+      break;
+    case DRAWER_TILES.ABOUT:
+      ref.read(drawerControllerProvider.notifier).showAbout();
+      break;
+    case DRAWER_TILES.LOGOUT:
+      ref.read(drawerControllerProvider.notifier).logout();
+      return;
+  }
+  Navigator.pop(context);
 }
 
 class DrawerButton extends StatelessWidget {
