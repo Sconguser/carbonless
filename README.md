@@ -1,6 +1,6 @@
-# carbonless
+# carbonless_business
 
-App encouraging users to make more ecologically-friendly choices
+App complimentary to Carbonless aimed to businesses associated with Carbonless
 
 ## Getting Started
 

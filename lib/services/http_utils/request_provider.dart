@@ -1,4 +1,4 @@
-import 'package:carbonless/services/http_utils/url_provider.dart';
+import 'url_provider.dart';
 
 enum Endpoint {
   ALL_PRIZES,

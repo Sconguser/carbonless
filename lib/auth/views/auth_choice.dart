@@ -1,15 +1,14 @@
-import 'package:carbonless/auth/views/stylesheet.dart';
-import 'package:carbonless/providers/controllers/login_controller_provider.dart';
-import 'package:carbonless/shared/constants.dart';
-import 'package:carbonless/views/loading_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../localization/messages.i18n.dart';
 import '../../main.dart';
 import '../../providers/controllers/auth_controller_provider.dart';
+import '../../providers/controllers/login_controller_provider.dart';
 import '../../providers/states/login_state.dart';
 import '../../shared/widgets.dart';
+import '../../views/loading_view.dart';
+import 'stylesheet.dart';
 
 class AuthChoice extends ConsumerStatefulWidget {
   const AuthChoice({Key? key}) : super(key: key);

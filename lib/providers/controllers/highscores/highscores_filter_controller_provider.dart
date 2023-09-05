@@ -1,6 +1,7 @@
-import 'package:carbonless/providers/controllers/highscores/highscores_entry_controller_provider.dart';
-import 'package:carbonless/providers/states/highscores/highscores_filter_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../states/highscores/highscores_filter_state.dart';
+import 'highscores_entry_controller_provider.dart';
 
 class HighscoresFilterController extends StateNotifier<HighscoresFilterState> {
   HighscoresFilterController(this.ref) : super(HighscoresFilterCity());

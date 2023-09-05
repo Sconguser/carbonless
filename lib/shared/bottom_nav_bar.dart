@@ -1,20 +1,20 @@
-import 'package:carbonless/providers/controllers/app_navigation_controller_provider.dart';
-import 'package:carbonless/providers/controllers/loaders/view_loading_controller_provider.dart';
-import 'package:carbonless/providers/states/loading_state.dart';
-import 'package:carbonless/shared/carbonless_appbar.dart';
-import 'package:carbonless/shared/carbonless_drawer/carbonless_drawer.dart';
-import 'package:carbonless/shared/constants.dart';
-import 'package:carbonless/shared/widgets.dart';
-import 'package:carbonless/views/carbonless_map/carbonless_map_view.dart';
-import 'package:carbonless/views/loading_view.dart';
-import 'package:carbonless/views/scanner/scanner_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../main.dart';
 import '../localization/messages.i18n.dart';
+import '../providers/controllers/app_navigation_controller_provider.dart';
+import '../providers/controllers/loaders/view_loading_controller_provider.dart';
+import '../providers/states/loading_state.dart';
+import '../views/carbonless_map/carbonless_map_view.dart';
+import '../views/loading_view.dart';
 import '../views/prize/prize_view.dart';
+import '../views/scanner/scanner_view.dart';
+import 'carbonless_appbar.dart';
+import 'carbonless_drawer/carbonless_drawer.dart';
 import 'carbonless_scaffold.dart';
+import 'constants.dart';
+import 'widgets.dart';
 
 Messages _locale = Messages();
 

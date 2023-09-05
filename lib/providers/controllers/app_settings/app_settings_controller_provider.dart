@@ -1,7 +1,7 @@
-import 'package:carbonless/providers/controllers/local_storage/secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../local_storage/secure_storage.dart';
 import 'app_settings.dart';
 
 class AppSettingsController extends StateNotifier<AppSettings> {

@@ -1,10 +1,9 @@
-import 'package:carbonless/models/partner_model.dart';
-import 'package:carbonless/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 
+import '../../models/partner_model.dart';
+import '../../shared/constants.dart';
 import 'map_utils.dart';
 
 class PartnerMarker extends Marker {

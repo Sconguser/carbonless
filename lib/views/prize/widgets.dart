@@ -1,24 +1,23 @@
-import 'package:carbonless/auth/auth_models/user_model.dart';
-import 'package:carbonless/auth/auth_repository.dart';
-import 'package:carbonless/main.dart';
-import 'package:carbonless/models/prize_model.dart';
-import 'package:carbonless/providers/controllers/prize_list/prize_list_filter_controller_provider.dart';
-import 'package:carbonless/providers/controllers/prize_list/prize_tile_controller_provider.dart';
-import 'package:carbonless/providers/states/prize_list/prize_filter_state.dart';
-import 'package:carbonless/providers/states/prize_list/prize_tile_state.dart';
-import 'package:carbonless/repositories/prize_repository.dart';
-import 'package:carbonless/shared/constants.dart';
-import 'package:carbonless/views/prize/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:slide_to_confirm/slide_to_confirm.dart';
 
+import '../../auth/auth_models/user_model.dart';
+import '../../auth/auth_repository.dart';
 import '../../localization/messages.i18n.dart';
+import '../../main.dart';
+import '../../models/prize_model.dart';
 import '../../providers/controllers/loaders/widget_loading_controller_provider.dart';
 import '../../providers/controllers/prize_list/prize_controller_provider.dart';
+import '../../providers/controllers/prize_list/prize_list_filter_controller_provider.dart';
+import '../../providers/controllers/prize_list/prize_tile_controller_provider.dart';
 import '../../providers/states/loading_state.dart';
+import '../../providers/states/prize_list/prize_filter_state.dart';
+import '../../providers/states/prize_list/prize_tile_state.dart';
+import '../../shared/constants.dart';
 import '../../shared/widgets.dart';
 import '../qr_code_view.dart';
+import 'utils.dart';
 
 class PointsPlate extends ConsumerWidget {
   const PointsPlate({Key? key}) : super(key: key);

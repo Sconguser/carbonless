@@ -1,10 +1,10 @@
-import 'package:carbonless/localization/messages.i18n.dart';
-import 'package:carbonless/main.dart';
-import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../auth/auth_repository.dart';
+import '../../localization/messages.i18n.dart';
+import '../../main.dart';
 import '../states/signup_state.dart';
+import 'auth_controller_provider.dart';
 import 'error_message_controller_provider.dart';
 
 class SignUpController extends StateNotifier<SignUpState> {
