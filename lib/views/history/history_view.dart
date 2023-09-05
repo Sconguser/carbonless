@@ -1,10 +1,10 @@
-import 'package:carbonless/main.dart';
-import 'package:carbonless/shared/constants.dart';
-import 'package:carbonless/views/history/widgets.dart';
+import 'widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../localization/messages.i18n.dart';
+import '../../main.dart';
+import '../../shared/constants.dart';
 
 class HistoryView extends ConsumerWidget {
   const HistoryView({Key? key}) : super(key: key);

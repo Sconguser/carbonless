@@ -1,13 +1,13 @@
-import 'package:carbonless/localization/messages.i18n.dart';
-import 'package:carbonless/main.dart';
-import 'package:carbonless/providers/controllers/highscores/highscores_entry_controller_provider.dart';
-import 'package:carbonless/shared/constants.dart';
-import 'package:carbonless/views/highscores/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../localization/messages.i18n.dart';
+import '../../main.dart';
 import '../../models/highscores_entry_model.dart';
+import '../../providers/controllers/highscores/highscores_entry_controller_provider.dart';
 import '../../providers/controllers/highscores/leaderboard_model.dart';
+import '../../shared/constants.dart';
+import 'widgets.dart';
 
 class HighscoresView extends ConsumerWidget {
   const HighscoresView({Key? key}) : super(key: key);

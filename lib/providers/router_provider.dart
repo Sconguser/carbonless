@@ -1,23 +1,21 @@
-import 'package:carbonless/auth/views/sign_up.dart';
-import 'package:carbonless/providers/controllers/app_navigation_controller_provider.dart';
-import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
-import 'package:carbonless/providers/controllers/error_message_controller_provider.dart';
-import 'package:carbonless/providers/controllers/signup_controller_provider.dart';
-import 'package:carbonless/providers/states/app_navigation_state.dart';
-import 'package:carbonless/providers/states/auth_state.dart';
-import 'package:carbonless/providers/states/login_state.dart';
-import 'package:carbonless/providers/states/signup_state.dart';
-import 'package:carbonless/shared/bottom_nav_bar.dart';
-import 'package:carbonless/shared/carbonless_drawer/drawer_controller_provider.dart';
-import 'package:carbonless/shared/carbonless_drawer/drawer_state.dart';
-import 'package:carbonless/views/auxiliary_view/auxiliary_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../auth/views/auth_choice.dart';
 import '../auth/views/sign_in.dart';
+import '../auth/views/sign_up.dart';
+import '../shared/bottom_nav_bar.dart';
+import '../views/auxiliary_view/auxiliary_view.dart';
+import 'controllers/app_navigation_controller_provider.dart';
+import 'controllers/auth_controller_provider.dart';
+import 'controllers/error_message_controller_provider.dart';
 import 'controllers/login_controller_provider.dart';
+import 'controllers/signup_controller_provider.dart';
+import 'states/app_navigation_state.dart';
+import 'states/auth_state.dart';
+import 'states/login_state.dart';
+import 'states/signup_state.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final router = RouterNotifier(ref);

@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:carbonless/providers/controllers/highscores/highscores_filter_controller_provider.dart';
-import 'package:carbonless/providers/controllers/highscores/leaderboard_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:core';
 import '../../../services/http_utils/http_service.dart';
@@ -9,6 +7,9 @@ import '../../../services/http_utils/request_provider.dart';
 import '../../states/highscores/highscores_filter_state.dart';
 import '../loaders/view_loading_controller_provider.dart';
 import 'package:http/http.dart' as http;
+
+import 'highscores_filter_controller_provider.dart';
+import 'leaderboard_model.dart';
 
 class LeaderboardNotifier extends StateNotifier<Leaderboard> {
   LeaderboardNotifier(Leaderboard state, this.ref) : super(state);

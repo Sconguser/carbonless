@@ -1,13 +1,13 @@
-import 'package:carbonless/providers/controllers/app_navigation_controller_provider.dart';
-import 'package:carbonless/providers/controllers/error_message_controller_provider.dart';
-import 'package:carbonless/providers/controllers/local_storage/secure_storage.dart';
-import 'package:carbonless/providers/controllers/prize_list/prize_controller_provider.dart';
-import 'package:carbonless/providers/controllers/qr_scanner_controller_provider.dart';
-import 'package:carbonless/providers/controllers/signup_controller_provider.dart';
-import 'package:carbonless/providers/states/auth_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../states/auth_state.dart';
+import 'app_navigation_controller_provider.dart';
+import 'error_message_controller_provider.dart';
+import 'local_storage/secure_storage.dart';
 import 'login_controller_provider.dart';
+import 'qr_scanner_controller_provider.dart';
+import 'signup_controller_provider.dart';
+import '../controllers/prize_list/prize_controller_provider.dart';
 
 class AuthController extends StateNotifier<AuthState> {
   AuthController(this.ref) : super(const AuthStateChoice());

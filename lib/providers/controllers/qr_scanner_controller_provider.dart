@@ -1,16 +1,16 @@
-import 'package:carbonless/auth/auth_repository.dart';
-import 'package:carbonless/localization/messages.i18n.dart';
-import 'package:carbonless/providers/controllers/geolocation/geolocation_controller_provider.dart';
-import 'package:carbonless/providers/controllers/notifications/local_notifications/local_notifications_controller_provider.dart';
-import 'package:carbonless/providers/controllers/travel_session_controller_provider/travel_session_controller_provider.dart';
-import 'package:carbonless/providers/states/qr_scanner_state.dart';
-import 'package:carbonless/providers/states/travel_session_state.dart';
-import 'package:carbonless/services/qr_code_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../auth/auth_repository.dart';
+import '../../localization/messages.i18n.dart';
 import '../../main.dart';
 import '../../models/qr_model.dart';
 import 'package:http/http.dart' as http;
+
+import '../states/qr_scanner_state.dart';
+import '../states/travel_session_state.dart';
+import 'geolocation/geolocation_controller_provider.dart';
+import 'notifications/local_notifications/local_notifications_controller_provider.dart';
+import 'travel_session_controller_provider/travel_session_controller_provider.dart';
 
 class QrScannerController extends StateNotifier<QrScannerState> {
   QrScannerController(this.ref) : super(const QrScannerStateInitial());

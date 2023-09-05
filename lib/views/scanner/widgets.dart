@@ -1,10 +1,10 @@
-import 'package:carbonless/providers/controllers/qr_scanner_controller_provider.dart';
-import 'package:carbonless/providers/controllers/travel_session_controller_provider/travel_session_controller_provider.dart';
-import 'package:carbonless/providers/states/travel_session_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../providers/controllers/qr_scanner_controller_provider.dart';
+import '../../providers/controllers/travel_session_controller_provider/travel_session_controller_provider.dart';
 import '../../providers/states/qr_scanner_state.dart';
+import '../../providers/states/travel_session_state.dart';
 
 class QrSendConfirmationWindow extends ConsumerWidget {
   const QrSendConfirmationWindow({Key? key}) : super(key: key);

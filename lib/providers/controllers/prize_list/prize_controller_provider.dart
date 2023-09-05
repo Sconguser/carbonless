@@ -1,14 +1,15 @@
 import 'dart:convert';
 
-import 'package:carbonless/models/user_prize_model.dart';
-import 'package:carbonless/providers/controllers/loaders/view_loading_controller_provider.dart';
-import 'package:carbonless/providers/controllers/loaders/widget_loading_controller_provider.dart';
-import 'package:carbonless/services/http_utils/http_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../models/prize_model.dart';
+import '../../../models/user_prize_model.dart';
+import '../../../services/http_utils/http_service.dart';
 import '../../../services/http_utils/request_provider.dart';
 import 'package:http/http.dart' as http;
+
+import '../loaders/view_loading_controller_provider.dart';
+import '../loaders/widget_loading_controller_provider.dart';
 
 class PrizesNotifier extends StateNotifier<List<Prize>> {
   PrizesNotifier(List<Prize> state, this.ref) : super(state);

@@ -1,9 +1,9 @@
-import 'package:carbonless/main.dart';
-import 'package:carbonless/shared/carbonless_drawer/drawer_controller_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../localization/messages.i18n.dart';
+import '../../main.dart';
+import 'drawer_controller_provider.dart';
 
 enum DRAWER_TILES {
   EDIT_DATA,

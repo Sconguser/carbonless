@@ -1,17 +1,8 @@
-import 'dart:convert';
-
-import 'package:carbonless/auth/auth_repository.dart';
-import 'package:carbonless/auth/auth_service.dart';
-import 'package:carbonless/providers/controllers/partners/partners_controller_provider.dart';
-import 'package:carbonless/services/http_utils/http_service.dart';
-import 'package:carbonless/services/http_utils/request_provider.dart';
-import 'package:carbonless/services/partners_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../models/location_model.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:http/http.dart' as http;
 
 class GeolocationNotifier extends StateNotifier<Location> {
   Ref ref;

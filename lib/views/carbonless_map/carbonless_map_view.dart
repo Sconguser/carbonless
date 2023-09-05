@@ -1,22 +1,20 @@
-import 'package:carbonless/main.dart';
-import 'package:carbonless/models/location_model.dart';
-import 'package:carbonless/models/partner_model.dart';
-import 'package:carbonless/providers/controllers/app_settings/app_settings.dart';
-import 'package:carbonless/providers/controllers/app_settings/app_settings_controller_provider.dart';
-import 'package:carbonless/providers/controllers/geolocation/geolocation_controller_provider.dart';
-import 'package:carbonless/providers/controllers/partners/partners_controller_provider.dart';
-import 'package:carbonless/providers/controllers/partners/partners_filter_provider.dart';
-import 'package:carbonless/shared/constants.dart';
-import 'package:carbonless/views/carbonless_map/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-
+import '../../shared/constants.dart';
+import 'widgets.dart';
 import '../../localization/messages.i18n.dart';
+import '../../main.dart';
+import '../../models/partner_model.dart';
+import '../../providers/controllers/app_settings/app_settings.dart';
+import '../../providers/controllers/app_settings/app_settings_controller_provider.dart';
+import '../../providers/controllers/partners/partners_controller_provider.dart';
+import '../../providers/controllers/partners/partners_filter_provider.dart';
 import '../../providers/states/partner/partners_filter_state.dart';
 import '../../utils/partners_utils.dart';
+import '../../models/location_model.dart';
 
 class CarbonlessMapView extends ConsumerStatefulWidget {
   const CarbonlessMapView({Key? key}) : super(key: key);
