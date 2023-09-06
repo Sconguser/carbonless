@@ -6,7 +6,6 @@ import '../localization/messages.i18n.dart';
 import '../providers/controllers/app_navigation_controller_provider.dart';
 import '../providers/controllers/loaders/view_loading_controller_provider.dart';
 import '../providers/states/loading_state.dart';
-import '../views/carbonless_map/carbonless_map_view.dart';
 import '../views/loading_view.dart';
 import '../views/prize/prize_view.dart';
 import '../views/scanner/scanner_view.dart';
@@ -48,7 +47,6 @@ class BottomNavigationBarView extends ConsumerWidget {
             children: const [
               PrizeView(),
               ScannerView(),
-              CarbonlessMapView(),
             ],
           ),
       bottomNavigationBar: BottomNavigationBar(
@@ -74,7 +72,7 @@ class BottomNavigationBarView extends ConsumerWidget {
               Icons.star,
               size: 30,
             ),
-            label: _locale.bottomNavBar.prizes,
+            label: _locale.business.qr_generator,
           ),
           BottomNavigationBarItem(
             icon: const Icon(
@@ -87,17 +85,6 @@ class BottomNavigationBarView extends ConsumerWidget {
             ),
             label: _locale.bottomNavBar.scanner,
           ),
-          BottomNavigationBarItem(
-            icon: const Icon(
-              Icons.map_outlined,
-              size: 30,
-            ),
-            activeIcon: const Icon(
-              Icons.map,
-              size: 30,
-            ),
-            label: _locale.bottomNavBar.map,
-          ),
         ],
       ),
     );
@@ -109,5 +96,4 @@ final bottomNavIndexProvider = StateProvider((ref) => 0);
 enum bottomNavViewIndex {
   PRIZE,
   SCANNER,
-  MAP,
 }

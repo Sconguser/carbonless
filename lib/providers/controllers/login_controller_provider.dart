@@ -32,7 +32,7 @@ class LoginController extends StateNotifier<LoginState> {
     if (autoLogin && bearerToken != null) {
       await ref
           .read(secureStorageProvider)
-          .write(KEYS.bearerToken.name, bearerToken);
+          .write(KEYS.business_bearerToken.name, bearerToken);
 
       ///todo:autologin
       /// save to local storage  -- done
@@ -46,8 +46,9 @@ class LoginController extends StateNotifier<LoginState> {
   void autoLogin() async {
     state = const AutoLoginState();
     Messages _locale = ref.watch(messagesProvider);
-    String? bearerToken =
-        await ref.read(secureStorageProvider).read(KEYS.bearerToken.name);
+    String? bearerToken = await ref
+        .read(secureStorageProvider)
+        .read(KEYS.business_bearerToken.name);
     if (bearerToken == null) {
       reset();
       return;

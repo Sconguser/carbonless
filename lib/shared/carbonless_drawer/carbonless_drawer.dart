@@ -7,9 +7,6 @@ import 'drawer_controller_provider.dart';
 
 enum DRAWER_TILES {
   EDIT_DATA,
-  HIGHSCORES,
-  HISTORY,
-  PARTNERS,
   SETTINGS,
   ABOUT,
   LOGOUT,
@@ -85,27 +82,6 @@ class DrawerMenuItems extends ConsumerWidget {
             },
           ),
           DrawerButton(
-            icon: const Icon(Icons.people),
-            text: _locale.drawer.highscores,
-            onPressed: () {
-              handleButtonPress(ref, DRAWER_TILES.HIGHSCORES, context);
-            },
-          ),
-          DrawerButton(
-            icon: const Icon(Icons.watch_later),
-            text: _locale.drawer.history,
-            onPressed: () {
-              handleButtonPress(ref, DRAWER_TILES.HISTORY, context);
-            },
-          ),
-          DrawerButton(
-            icon: const Icon(Icons.sports_handball),
-            text: _locale.drawer.partners,
-            onPressed: () {
-              handleButtonPress(ref, DRAWER_TILES.PARTNERS, context);
-            },
-          ),
-          DrawerButton(
             icon: const Icon(Icons.settings),
             text: _locale.drawer.settings,
             onPressed: () {
@@ -136,15 +112,6 @@ void handleButtonPress(WidgetRef ref, DRAWER_TILES tile, BuildContext context) {
   switch (tile) {
     case DRAWER_TILES.EDIT_DATA:
       ref.read(drawerControllerProvider.notifier).showEditDataView();
-      break;
-    case DRAWER_TILES.HIGHSCORES:
-      ref.read(drawerControllerProvider.notifier).showHighscores();
-      break;
-    case DRAWER_TILES.HISTORY:
-      ref.read(drawerControllerProvider.notifier).showHistory();
-      break;
-    case DRAWER_TILES.PARTNERS:
-      ref.read(drawerControllerProvider.notifier).showPartners();
       break;
     case DRAWER_TILES.SETTINGS:
       ref.read(drawerControllerProvider.notifier).showSettings();

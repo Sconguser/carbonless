@@ -108,3 +108,6 @@ notifications:
 about:
   what: Carbonless is an application created and developed by Carbonless Team - Maciej Ciepłuch and Miłosz Taranowicz.
   show_licenses: show licenses
+
+business:
+  qr_generator: generate code
