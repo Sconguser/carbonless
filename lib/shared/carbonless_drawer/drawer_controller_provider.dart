@@ -2,9 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../providers/controllers/app_navigation_controller_provider.dart';
 import '../../providers/controllers/auth_controller_provider.dart';
-import '../../providers/controllers/highscores/highscores_entry_controller_provider.dart';
-import '../../providers/controllers/history_list/history_controller_provider.dart';
-import '../../providers/controllers/partners/partners_controller_provider.dart';
 import '../bottom_nav_bar.dart';
 import 'drawer_state.dart';
 
@@ -15,24 +12,6 @@ class DrawerController extends StateNotifier<DrawerState> {
 
   void showEditDataView() {
     state = const EditData();
-    _setAppNavigationToAuxiliary();
-  }
-
-  void showHighscores() {
-    state = const Highscores();
-    ref.read(leaderboardNotifier.notifier).initialize();
-    _setAppNavigationToAuxiliary();
-  }
-
-  void showHistory() {
-    state = const History();
-    ref.read(historyNotifier.notifier).initialize();
-    _setAppNavigationToAuxiliary();
-  }
-
-  void showPartners() {
-    state = const Partners();
-    ref.read(partnersNotifier.notifier).initialize();
     _setAppNavigationToAuxiliary();
   }
 

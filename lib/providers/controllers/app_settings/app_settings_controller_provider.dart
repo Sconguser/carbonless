@@ -17,9 +17,10 @@ class AppSettingsController extends StateNotifier<AppSettings> {
     // Read values from secure storage or any other source
     // final isDarkTheme = await secureStorage.read('isDarkTheme');
     // final language = await secureStorage.read('language');
-    String? theme = await ref.read(secureStorageProvider).read(KEYS.theme.name);
+    String? theme =
+        await ref.read(secureStorageProvider).read(KEYS.business_theme.name);
     String? language =
-        await ref.read(secureStorageProvider).read(KEYS.language.name);
+        await ref.read(secureStorageProvider).read(KEYS.business_language.name);
     // Update state notifiers
     state = state.copyWith(
       theme: getThemeModeFromString(theme),
@@ -44,7 +45,9 @@ class AppSettingsController extends StateNotifier<AppSettings> {
   }
 
   void _saveLanguage(String language) {
-    ref.read(secureStorageProvider).write(KEYS.language.name, language);
+    ref
+        .read(secureStorageProvider)
+        .write(KEYS.business_language.name, language);
   }
 
   void setDarkTheme() {
@@ -66,7 +69,7 @@ class AppSettingsController extends StateNotifier<AppSettings> {
   void _saveTheme(ThemeMode theme) {
     ref
         .read(secureStorageProvider)
-        .write(KEYS.theme.name, getStringFromThemeMode(theme));
+        .write(KEYS.business_theme.name, getStringFromThemeMode(theme));
   }
 
   ThemeMode getThemeModeFromString(String? theme) {

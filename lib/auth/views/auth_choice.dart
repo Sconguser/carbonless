@@ -60,21 +60,6 @@ class _AuthChoiceState extends ConsumerState<AuthChoice>
                                 .showLogin();
                           },
                         ),
-                        Text(
-                          '/',
-                          style: authChoiceTextStyle,
-                        ),
-                        TextButton(
-                          child: Text(
-                            _locale.button.sign_up,
-                            style: authChoiceTextStyle,
-                          ),
-                          onPressed: () {
-                            ref
-                                .read(authControllerProvider.notifier)
-                                .showSignUp();
-                          },
-                        ),
                       ],
                     ),
                   ),
