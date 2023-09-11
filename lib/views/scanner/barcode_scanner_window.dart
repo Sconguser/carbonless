@@ -29,7 +29,8 @@ class _BarcodeScannerWithScanWindowState
     capture = barcode;
     setState(() => this.barcode = barcode.barcodes.first);
     print(this.barcode?.rawValue);
-    Map<String, dynamic> decodedRawValue = jsonDecode(this.barcode!.rawValue!);
+    String value = this.barcode!.rawValue!;
+    ref.read(qrScannerControllerProvider.notifier).validatePrize(value);
   }
 
   MobileScannerArguments? arguments;

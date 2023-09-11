@@ -17,10 +17,27 @@ class QrScannerController extends StateNotifier<QrScannerState> {
   }
 
   Future<void> validatePrize(String qr_value) async {
-    http.Response response = await ref
-        .read(httpServiceProvider)
-        .executeHttp(RequestType.GET, null, null, Endpoint.USER_PRIZES);
-    Map<String, dynamic> decodedMap = jsonDecode(response.body);
+    state = const QrScannerStateBusy();
+    http.Response response = await ref.read(httpServiceProvider).executeHttp(
+        RequestType.GET, null, null, Endpoint.USER_PRIZES, [qr_value]);
+    bool isValid = jsonDecode(response.body);
+    if (isValid) {
+      state = const QrScannerStateSuccess();
+    } else {
+      state = const QrScannerStateError();
+    }
+  }
+
+  Future<void> usePrize(String prizeId) async {
+    state = const QrScannerStateBusy();
+    http.Response response = await ref.read(httpServiceProvider).executeHttp(
+        RequestType.PUT, null, null, Endpoint.USER_PRIZES, [prizeId]);
+    bool isValid = jsonDecode(response.body);
+    // if (isValid) {
+    //   state = const QrScannerStateSuccess();
+    // } else {
+    //   state = const QrScannerStateError();
+    // }
   }
 }
 
