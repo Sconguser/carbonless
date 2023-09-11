@@ -27,7 +27,7 @@ class EditProfileView extends ConsumerWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     String name = ref.watch(nameStateProvider);
-    String lastname = 'ref.watch(lastnameStateProvider);';
+    // String lastname = ref.watch(lastnameStateProvider);
     String password = ref.watch(passwordStateProvider);
     String passwordConfirmation = ref.watch(passwordConfirmationStateProvider);
     Messages _locale = ref.watch(messagesProvider);
@@ -69,7 +69,7 @@ class EditProfileView extends ConsumerWidget {
                             ),
                           );
                         },
-                        body: buildEditDataColumn(name, ref, _locale, lastname),
+                        body: buildEditDataColumn(name, ref, _locale),
                         isExpanded: ref.watch(editDataExpansionStateProvider),
                         backgroundColor: tertiaryColor,
                         canTapOnHeader: true,
@@ -99,8 +99,7 @@ class EditProfileView extends ConsumerWidget {
         ));
   }
 
-  Column buildEditDataColumn(
-      String name, WidgetRef ref, Messages _locale, String lastname) {
+  Column buildEditDataColumn(String name, WidgetRef ref, Messages _locale) {
     return Column(
       children: [
         buildTextFormField(
@@ -115,18 +114,18 @@ class EditProfileView extends ConsumerWidget {
           ),
         ),
         buildSizedBoxBetweenTextInputs(),
-        buildTextFormField(
-          lastname,
-          ref,
-          //TODO: do poprawy
-          nameStateProvider,
-          false,
-          _locale.forms.lastname,
-          'lastname',
-          FormBuilderValidators.required(
-            errorText: _locale.validators.errors.cannot_be_empty,
-          ),
-        ),
+        // buildTextFormField(
+        //   lastname,
+        //   ref,
+        //   //TODO: do poprawy
+        //   nameStateProvider,
+        //   false,
+        //   _locale.forms.lastname,
+        //   'lastname',
+        //   FormBuilderValidators.required(
+        //     errorText: _locale.validators.errors.cannot_be_empty,
+        //   ),
+        // ),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
