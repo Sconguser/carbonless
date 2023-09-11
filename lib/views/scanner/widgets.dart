@@ -1,6 +1,7 @@
 import 'package:carbonless/providers/controllers/qr_scanner_controller_provider.dart';
 import 'package:carbonless/providers/controllers/travel_session_controller_provider/travel_session_controller_provider.dart';
 import 'package:carbonless/providers/states/travel_session_state.dart';
+import 'package:carbonless/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -40,12 +41,15 @@ class PointsEarned extends ConsumerWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('You earned $points points!'),
+          Text(
+            'You earned $points points!',
+            style: logoTextStyle,
+          ),
           ElevatedButton(
             onPressed: () {
               ref.read(qrScannerControllerProvider.notifier).reset();
             },
-            child: Text('Cool'),
+            child: Text('Okay'),
           )
         ],
       ),
@@ -61,8 +65,12 @@ class SessionStarted extends ConsumerWidget {
     return Center(
       child: Container(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Session started!'),
+            Text(
+              'Session started!',
+              style: logoTextStyle,
+            ),
             ElevatedButton(
               onPressed: () {
                 ref.read(qrScannerControllerProvider.notifier).reset();
