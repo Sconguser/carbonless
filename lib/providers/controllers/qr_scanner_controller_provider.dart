@@ -39,13 +39,6 @@ class QrScannerController extends StateNotifier<QrScannerState> {
     //   state = const QrScannerStateError();
     // }
   }
-
-  Future<void> validatePrize(String qr_value) async {
-    http.Response response = await ref
-        .read(httpServiceProvider)
-        .executeHttp(RequestType.GET, null, null, Endpoint.USER_PRIZES);
-    Map<String, dynamic> decodedMap = jsonDecode(response.body);
-  }
 }
 
 final qrScannerControllerProvider =

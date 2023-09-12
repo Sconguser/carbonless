@@ -7,6 +7,7 @@ enum Endpoint {
   HISTORY,
   HIGHSCORE,
   PRIZE_PURCHASE,
+  GENERATE_QR_CODE,
 }
 
 extension ParseToString on Endpoint {
@@ -24,6 +25,8 @@ extension ParseToString on Endpoint {
         return highscores;
       case Endpoint.PRIZE_PURCHASE:
         return prizePurchase;
+      case Endpoint.GENERATE_QR_CODE:
+        return generateCode;
     }
   }
 
