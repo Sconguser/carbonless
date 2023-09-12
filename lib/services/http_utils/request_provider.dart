@@ -7,6 +7,7 @@ enum Endpoint {
   HISTORY,
   HIGHSCORE,
   PRIZE_PURCHASE,
+  POINTS_PURCHASE,
 }
 
 extension ParseToString on Endpoint {
@@ -24,6 +25,8 @@ extension ParseToString on Endpoint {
         return highscores;
       case Endpoint.PRIZE_PURCHASE:
         return prizePurchase;
+      case Endpoint.POINTS_PURCHASE:
+        return pointsPurchase;
     }
   }
 

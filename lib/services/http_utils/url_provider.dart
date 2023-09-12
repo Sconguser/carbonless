@@ -5,3 +5,4 @@ const String partners = '/partners';
 const String history = '/points_histories';
 const String highscores = '/high_scores.json';
 const String prizePurchase = '/users_prizes';
+const String pointsPurchase = '/machine_handlers';

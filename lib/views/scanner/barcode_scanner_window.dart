@@ -30,9 +30,18 @@ class _BarcodeScannerWithScanWindowState
     setState(() => this.barcode = barcode.barcodes.first);
     print(this.barcode?.rawValue);
     Map<String, dynamic> decodedRawValue = jsonDecode(this.barcode!.rawValue!);
-    ref
-        .read(qrScannerControllerProvider.notifier)
-        .sendQr(decodedRawValue['uuid'], decodedRawValue['expires']);
+    String type = decodedRawValue['type'];
+    switch (type) {
+      case "travel":
+        ref
+            .read(qrScannerControllerProvider.notifier)
+            .sendQrTravel(decodedRawValue['uuid'], decodedRawValue['expires']);
+        break;
+      case "purchase":
+        ref.read(qrScannerControllerProvider.notifier).sendQrPurchase(
+            decodedRawValue['uuid'], decodedRawValue['expiration_date']);
+        break;
+    }
   }
 
   MobileScannerArguments? arguments;

@@ -5,6 +5,7 @@ import 'package:carbonless/providers/controllers/notifications/local_notificatio
 import 'package:carbonless/providers/controllers/travel_session_controller_provider/travel_session_controller_provider.dart';
 import 'package:carbonless/providers/states/qr_scanner_state.dart';
 import 'package:carbonless/providers/states/travel_session_state.dart';
+import 'package:carbonless/services/http_utils/http_service.dart';
 import 'package:carbonless/services/qr_code_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,11 +13,13 @@ import '../../main.dart';
 import '../../models/qr_model.dart';
 import 'package:http/http.dart' as http;
 
+import '../../services/http_utils/request_provider.dart';
+
 class QrScannerController extends StateNotifier<QrScannerState> {
   QrScannerController(this.ref) : super(const QrScannerStateInitial());
   final Ref ref;
 
-  void sendQr(String uuid, String expires) async {
+  void sendQrTravel(String uuid, String expires) async {
     state = const QrScannerStateBusy();
     await ref.read(geolocationProvider.notifier).getCurrentPosition();
     String longitude = ref.read(geolocationProvider).longitude;
@@ -70,6 +73,24 @@ class QrScannerController extends StateNotifier<QrScannerState> {
     } else {
       print('error');
     }
+  }
+
+  void sendQrPurchase(String uuid, String expires) async {
+    state = const QrScannerStateBusy();
+    QRDTO qrdto = QRDTO(
+      uuid: '0d219194-fa91-4fb9-9923-79dbe3cf1b5c',
+      expiration: expires,
+    );
+    try {
+      http.Response response = await ref.read(httpServiceProvider).executeHttp(
+          RequestType.POST,
+          qrdto.toJsonPurchase(),
+          null,
+          Endpoint.POINTS_PURCHASE);
+    } catch (e) {
+      state = const QrScannerStateError();
+    }
+    state = const QrScannerStateSuccess();
   }
 
   void reset() {
