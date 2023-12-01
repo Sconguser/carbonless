@@ -1,6 +1,6 @@
-import 'package:carbonless/providers/controllers/app_settings/app_settings_controller_provider.dart';
-import 'package:carbonless/providers/router_provider.dart';
-import 'package:carbonless/shared/constants.dart';
+import '/providers/controllers/app_settings/app_settings_controller_provider.dart';
+import '/providers/router_provider.dart';
+import '/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

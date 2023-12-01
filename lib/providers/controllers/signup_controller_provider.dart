@@ -1,6 +1,6 @@
-import 'package:carbonless/localization/messages.i18n.dart';
-import 'package:carbonless/main.dart';
-import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
+import '/localization/messages.i18n.dart';
+import '/main.dart';
+import '/providers/controllers/auth_controller_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../auth/auth_repository.dart';

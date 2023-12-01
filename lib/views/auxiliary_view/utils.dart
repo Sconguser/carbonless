@@ -1,8 +1,8 @@
-import 'package:carbonless/views/about/about_view.dart';
-import 'package:carbonless/views/edit_profile/edit_profile_view.dart';
-import 'package:carbonless/views/highscores/highscores_view.dart';
-import 'package:carbonless/views/history/history_view.dart';
-import 'package:carbonless/views/partners/partners_view.dart';
+import '/views/about/about_view.dart';
+import '/views/edit_profile/edit_profile_view.dart';
+import '/views/highscores/highscores_view.dart';
+import '/views/history/history_view.dart';
+import '/views/partners/partners_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../shared/carbonless_drawer/drawer_state.dart';

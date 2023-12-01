@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:carbonless/providers/controllers/highscores/highscores_filter_controller_provider.dart';
-import 'package:carbonless/providers/controllers/highscores/leaderboard_model.dart';
+import '/providers/controllers/highscores/highscores_filter_controller_provider.dart';
+import '/providers/controllers/highscores/leaderboard_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:core';
 import '../../../services/http_utils/http_service.dart';

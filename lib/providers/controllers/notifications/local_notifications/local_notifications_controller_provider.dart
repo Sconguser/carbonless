@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:carbonless/localization/messages.i18n.dart';
-import 'package:carbonless/main.dart';
-import 'package:carbonless/providers/states/notifications/local_notification_state.dart';
+import '/localization/messages.i18n.dart';
+import '/main.dart';
+import '/providers/states/notifications/local_notification_state.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

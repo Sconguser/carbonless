@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:carbonless/auth/auth_repository.dart';
+import '/auth/auth_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 

@@ -1,8 +1,8 @@
-import 'package:carbonless/providers/controllers/app_navigation_controller_provider.dart';
-import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
-import 'package:carbonless/providers/controllers/highscores/highscores_entry_controller_provider.dart';
-import 'package:carbonless/providers/controllers/history_list/history_controller_provider.dart';
-import 'package:carbonless/providers/controllers/partners/partners_controller_provider.dart';
+import '/providers/controllers/app_navigation_controller_provider.dart';
+import '/providers/controllers/auth_controller_provider.dart';
+import '/providers/controllers/highscores/highscores_entry_controller_provider.dart';
+import '/providers/controllers/history_list/history_controller_provider.dart';
+import '/providers/controllers/partners/partners_controller_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../bottom_nav_bar.dart';

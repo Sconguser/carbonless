@@ -1,4 +1,4 @@
-import 'package:carbonless/shared/widgets.dart';
+import '/shared/widgets.dart';
 import 'package:flutter/material.dart';
 
 class LoadingView extends StatelessWidget {

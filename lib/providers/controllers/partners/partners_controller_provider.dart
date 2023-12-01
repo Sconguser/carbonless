@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:carbonless/models/location_model.dart';
-import 'package:carbonless/models/partner_model.dart';
+import '/models/location_model.dart';
+import '/models/partner_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import '../../../auth/auth_repository.dart';

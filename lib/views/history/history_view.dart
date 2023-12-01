@@ -1,6 +1,6 @@
-import 'package:carbonless/main.dart';
-import 'package:carbonless/shared/constants.dart';
-import 'package:carbonless/views/history/widgets.dart';
+import '/main.dart';
+import '/shared/constants.dart';
+import '/views/history/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

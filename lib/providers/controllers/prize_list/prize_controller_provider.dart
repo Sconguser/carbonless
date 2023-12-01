@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:carbonless/models/user_prize_model.dart';
-import 'package:carbonless/providers/controllers/loaders/view_loading_controller_provider.dart';
-import 'package:carbonless/providers/controllers/loaders/widget_loading_controller_provider.dart';
-import 'package:carbonless/services/http_utils/http_service.dart';
+import '/models/user_prize_model.dart';
+import '/providers/controllers/loaders/view_loading_controller_provider.dart';
+import '/providers/controllers/loaders/widget_loading_controller_provider.dart';
+import '/services/http_utils/http_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../models/prize_model.dart';

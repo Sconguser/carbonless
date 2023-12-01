@@ -1,13 +1,3 @@
-import 'package:carbonless/main.dart';
-import 'package:carbonless/models/location_model.dart';
-import 'package:carbonless/models/partner_model.dart';
-import 'package:carbonless/providers/controllers/app_settings/app_settings.dart';
-import 'package:carbonless/providers/controllers/app_settings/app_settings_controller_provider.dart';
-import 'package:carbonless/providers/controllers/geolocation/geolocation_controller_provider.dart';
-import 'package:carbonless/providers/controllers/partners/partners_controller_provider.dart';
-import 'package:carbonless/providers/controllers/partners/partners_filter_provider.dart';
-import 'package:carbonless/shared/constants.dart';
-import 'package:carbonless/views/carbonless_map/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
@@ -15,8 +5,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../localization/messages.i18n.dart';
+import '../../main.dart';
+import '../../models/location_model.dart';
+import '../../models/partner_model.dart';
+import '../../providers/controllers/app_settings/app_settings.dart';
+import '../../providers/controllers/app_settings/app_settings_controller_provider.dart';
+import '../../providers/controllers/partners/partners_controller_provider.dart';
+import '../../providers/controllers/partners/partners_filter_provider.dart';
 import '../../providers/states/partner/partners_filter_state.dart';
+import '../../shared/constants.dart';
 import '../../utils/partners_utils.dart';
+import '/views/carbonless_map/widgets.dart';
 
 class CarbonlessMapView extends ConsumerStatefulWidget {
   const CarbonlessMapView({Key? key}) : super(key: key);
@@ -55,8 +54,8 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
       child: Stack(
         children: [
           FlutterMap(
+            mapController: _mapController,
             options: MapOptions(
-              controller: _mapController,
               // onTap: (latlng, p) async {
               //   LatLng p = LatLng(60, 60);
               //   setState(() {
@@ -78,12 +77,11 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
               onTap: (_, __) {
                 _popupLayerController.hideAllPopups();
               },
-              center: ref.watch(centerPointProvider),
-              zoom: 5.0,
+              initialCenter: ref.watch(centerPointProvider),
+              initialZoom: 5.0,
             ),
             children: [
-              TileLayerWidget(
-                  options: TileLayerOptions(
+              TileLayer(
                 urlTemplate:
                     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 subdomains: ['a', 'b', 'c'],
@@ -91,7 +89,7 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
                     ? null
                     : darkModeTileBuilder,
                 // backgroundColor: Colors.black54,
-              )),
+              ),
               Consumer(builder: (context, ref, child) {
                 List<Partner> partners = ref.watch(partnersNotifier);
                 PartnersFilterState partnersFilterState =
@@ -108,17 +106,17 @@ class _CarbonlessMapViewState extends ConsumerState<CarbonlessMapView> {
                       ),
                 ];
 
-                return PopupMarkerLayerWidget(
+                return PopupMarkerLayer(
                   options: PopupMarkerLayerOptions(
-                    markerRotate: false,
                     markers: markers,
                     popupController: _popupLayerController,
                     markerTapBehavior:
                         MarkerTapBehavior.togglePopupAndHideRest(),
-                    popupSnap: PopupSnap.markerTop,
-                    popupBuilder: (BuildContext context, Marker marker) {
-                      return MarkerPopup(marker: marker as PartnerMarker);
-                    },
+                    popupDisplayOptions: PopupDisplayOptions(
+                      builder: (BuildContext context, Marker marker) {
+                        return MarkerPopup(marker: marker as PartnerMarker);
+                      },
+                    ),
                     onPopupEvent: (dynamic popupEvent, List<Marker> marker) {
                       print('popupevent');
                     },

@@ -1,10 +1,9 @@
-import 'package:carbonless/auth/auth_repository.dart';
-import 'package:carbonless/main.dart';
-import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
-import 'package:carbonless/providers/controllers/error_message_controller_provider.dart';
-import 'package:carbonless/providers/controllers/loaders/view_loading_controller_provider.dart';
-import 'package:carbonless/providers/controllers/local_storage/secure_storage.dart';
-import 'package:carbonless/providers/states/login_state.dart';
+import '/auth/auth_repository.dart';
+import '/main.dart';
+import '/providers/controllers/auth_controller_provider.dart';
+import '/providers/controllers/error_message_controller_provider.dart';
+import '/providers/controllers/local_storage/secure_storage.dart';
+import '/providers/states/login_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../localization/messages.i18n.dart';

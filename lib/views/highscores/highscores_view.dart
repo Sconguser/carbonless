@@ -1,8 +1,8 @@
-import 'package:carbonless/localization/messages.i18n.dart';
-import 'package:carbonless/main.dart';
-import 'package:carbonless/providers/controllers/highscores/highscores_entry_controller_provider.dart';
-import 'package:carbonless/shared/constants.dart';
-import 'package:carbonless/views/highscores/widgets.dart';
+import '/localization/messages.i18n.dart';
+import '/main.dart';
+import '/providers/controllers/highscores/highscores_entry_controller_provider.dart';
+import '/shared/constants.dart';
+import '/views/highscores/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

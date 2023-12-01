@@ -1,4 +1,4 @@
-import 'package:carbonless/providers/states/loading_state.dart';
+import '/providers/states/loading_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ViewLoadingController extends StateNotifier<LoadingState> {

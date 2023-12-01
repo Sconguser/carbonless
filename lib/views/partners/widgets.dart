@@ -1,10 +1,10 @@
-import 'package:carbonless/localization/messages.i18n.dart';
-import 'package:carbonless/models/partner_model.dart';
-import 'package:carbonless/providers/controllers/app_navigation_controller_provider.dart';
-import 'package:carbonless/providers/controllers/partners/partners_controller_provider.dart';
-import 'package:carbonless/providers/controllers/partners/partners_filter_provider.dart';
-import 'package:carbonless/shared/bottom_nav_bar.dart';
-import 'package:carbonless/shared/constants.dart';
+import '/localization/messages.i18n.dart';
+import '/models/partner_model.dart';
+import '/providers/controllers/app_navigation_controller_provider.dart';
+import '/providers/controllers/partners/partners_controller_provider.dart';
+import '/providers/controllers/partners/partners_filter_provider.dart';
+import '/shared/bottom_nav_bar.dart';
+import '/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

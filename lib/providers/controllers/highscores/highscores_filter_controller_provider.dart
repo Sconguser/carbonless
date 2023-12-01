@@ -1,5 +1,5 @@
-import 'package:carbonless/providers/controllers/highscores/highscores_entry_controller_provider.dart';
-import 'package:carbonless/providers/states/highscores/highscores_filter_state.dart';
+import '/providers/controllers/highscores/highscores_entry_controller_provider.dart';
+import '/providers/states/highscores/highscores_filter_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HighscoresFilterController extends StateNotifier<HighscoresFilterState> {

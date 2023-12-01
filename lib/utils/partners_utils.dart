@@ -1,5 +1,5 @@
-import 'package:carbonless/models/partner_model.dart';
-import 'package:carbonless/providers/states/partner/partners_filter_state.dart';
+import '/models/partner_model.dart';
+import '/providers/states/partner/partners_filter_state.dart';
 import 'package:flutter/foundation.dart';
 
 class PartnersUtils {

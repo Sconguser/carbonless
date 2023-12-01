@@ -1,5 +1,4 @@
-import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
-import 'package:carbonless/providers/states/app_navigation_state.dart';
+import '/providers/states/app_navigation_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../shared/bottom_nav_bar.dart';

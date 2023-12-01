@@ -1,8 +1,8 @@
-import 'package:carbonless/auth/views/stylesheet.dart';
-import 'package:carbonless/main.dart';
-import 'package:carbonless/providers/controllers/auth_controller_provider.dart';
-import 'package:carbonless/providers/controllers/error_message_controller_provider.dart';
-import 'package:carbonless/providers/controllers/signup_controller_provider.dart';
+import '/auth/views/stylesheet.dart';
+import '/main.dart';
+import '/providers/controllers/auth_controller_provider.dart';
+import '/providers/controllers/error_message_controller_provider.dart';
+import '/providers/controllers/signup_controller_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:carbonless/auth/auth_service.dart';
+import '/auth/auth_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'auth_models/user_model.dart';

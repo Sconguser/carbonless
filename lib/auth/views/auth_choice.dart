@@ -1,7 +1,6 @@
-import 'package:carbonless/auth/views/stylesheet.dart';
-import 'package:carbonless/providers/controllers/login_controller_provider.dart';
-import 'package:carbonless/shared/constants.dart';
-import 'package:carbonless/views/loading_view.dart';
+import '/auth/views/stylesheet.dart';
+import '/providers/controllers/login_controller_provider.dart';
+import '/views/loading_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
