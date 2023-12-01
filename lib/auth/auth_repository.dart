@@ -1,11 +1,10 @@
 import 'dart:convert';
 
+import '/auth/auth_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'auth_models/user_model.dart';
 import 'package:http/http.dart' as http;
-
-import 'auth_service.dart';
 
 enum AuthorizationStatus {
   uninitialized,

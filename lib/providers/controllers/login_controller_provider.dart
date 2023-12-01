@@ -1,12 +1,12 @@
+import '/auth/auth_repository.dart';
+import '/main.dart';
+import '/providers/controllers/auth_controller_provider.dart';
+import '/providers/controllers/error_message_controller_provider.dart';
+import '/providers/controllers/local_storage/secure_storage.dart';
+import '/providers/states/login_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../auth/auth_repository.dart';
 import '../../localization/messages.i18n.dart';
-import '../../main.dart';
-import '../states/login_state.dart';
-import 'auth_controller_provider.dart';
-import 'error_message_controller_provider.dart';
-import 'local_storage/secure_storage.dart';
 
 class LoginController extends StateNotifier<LoginState> {
   LoginController(this.ref) : super(const LoginStateInitial()) {

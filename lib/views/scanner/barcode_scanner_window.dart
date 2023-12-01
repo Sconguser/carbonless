@@ -1,12 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import '/providers/controllers/qr_scanner_controller_provider.dart';
+import '/providers/states/qr_scanner_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-
-import '../../providers/controllers/qr_scanner_controller_provider.dart';
-import '../../providers/states/qr_scanner_state.dart';
 
 class BarcodeScannerWithScanWindow extends ConsumerStatefulWidget {
   const BarcodeScannerWithScanWindow({Key? key}) : super(key: key);

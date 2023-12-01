@@ -1,12 +1,16 @@
-import 'dart:convert';
-
+import '/auth/auth_repository.dart';
+import '/localization/messages.i18n.dart';
+import '/providers/controllers/geolocation/geolocation_controller_provider.dart';
+import '/providers/controllers/notifications/local_notifications/local_notifications_controller_provider.dart';
+import '/providers/controllers/travel_session_controller_provider/travel_session_controller_provider.dart';
+import '/providers/states/qr_scanner_state.dart';
+import '/providers/states/travel_session_state.dart';
+import '/services/http_utils/http_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../main.dart';
+import '../../models/qr_model.dart';
 import 'package:http/http.dart' as http;
-
-import '../../services/http_utils/http_service.dart';
-import '../../services/http_utils/request_provider.dart';
-import '../states/qr_scanner_state.dart';
 
 import '../../services/http_utils/request_provider.dart';
 

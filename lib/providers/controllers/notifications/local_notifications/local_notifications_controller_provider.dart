@@ -1,11 +1,10 @@
 import 'dart:async';
 
+import '/localization/messages.i18n.dart';
+import '/main.dart';
+import '/providers/states/notifications/local_notification_state.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../../../localization/messages.i18n.dart';
-import '../../../../main.dart';
-import '../../../states/notifications/local_notification_state.dart';
 
 class LocalNotificationController
     extends StateNotifier<LocalNotificationState> {

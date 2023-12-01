@@ -1,13 +1,12 @@
-import 'dart:math';
-
+import '/auth/views/widgets.dart';
+import '/main.dart';
+import '/providers/states/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import '../../providers/states/login_state.dart';
-import 'widgets.dart';
+
 import '../../localization/messages.i18n.dart';
-import '../../main.dart';
 import '../../providers/controllers/login_controller_provider.dart';
 import '../../shared/widgets.dart';
 

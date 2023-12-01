@@ -1,4 +1,4 @@
-import 'url_provider.dart';
+import '/services/http_utils/url_provider.dart';
 
 enum Endpoint {
   ALL_PRIZES,

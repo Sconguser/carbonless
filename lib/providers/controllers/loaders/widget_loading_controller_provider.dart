@@ -1,6 +1,5 @@
+import '/providers/states/loading_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../states/loading_state.dart';
 
 class WidgetLoadingController extends StateNotifier<LoadingState> {
   WidgetLoadingController() : super(const LoadingOff());

@@ -1,9 +1,9 @@
 import 'dart:convert';
 
+import '/auth/auth_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-import '../../auth/auth_repository.dart';
 import 'request_provider.dart';
 import 'url_provider.dart';
 

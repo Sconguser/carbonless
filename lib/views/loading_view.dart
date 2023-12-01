@@ -1,6 +1,5 @@
+import '/shared/widgets.dart';
 import 'package:flutter/material.dart';
-
-import '../shared/widgets.dart';
 
 class LoadingView extends StatelessWidget {
   const LoadingView({Key? key}) : super(key: key);

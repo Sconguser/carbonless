@@ -1,19 +1,20 @@
+import '/providers/controllers/app_navigation_controller_provider.dart';
+import '/providers/controllers/loaders/view_loading_controller_provider.dart';
+import '/providers/states/loading_state.dart';
+import '/shared/carbonless_appbar.dart';
+import '/shared/carbonless_drawer/carbonless_drawer.dart';
+import '/shared/constants.dart';
+import '/shared/widgets.dart';
+import '/views/carbonless_map/carbonless_map_view.dart';
+import '/views/loading_view.dart';
+import '/views/scanner/scanner_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../main.dart';
 import '../localization/messages.i18n.dart';
-import '../providers/controllers/app_navigation_controller_provider.dart';
-import '../providers/controllers/loaders/view_loading_controller_provider.dart';
-import '../providers/states/loading_state.dart';
-import '../views/loading_view.dart';
 import '../views/prize/prize_view.dart';
-import '../views/scanner/scanner_view.dart';
-import 'carbonless_appbar.dart';
-import 'carbonless_drawer/carbonless_drawer.dart';
 import 'carbonless_scaffold.dart';
-import 'constants.dart';
-import 'widgets.dart';
 
 Messages _locale = Messages();
 
@@ -47,6 +48,7 @@ class BottomNavigationBarView extends ConsumerWidget {
             children: const [
               PrizeView(),
               ScannerView(),
+              CarbonlessMapView(),
             ],
           ),
       bottomNavigationBar: BottomNavigationBar(

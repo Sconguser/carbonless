@@ -1,11 +1,11 @@
+import '/providers/controllers/app_settings/app_settings_controller_provider.dart';
+import '/providers/router_provider.dart';
+import '/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'localization/messages.i18n.dart';
 import 'localization/messages_pl.i18n.dart';
-import 'providers/controllers/app_settings/app_settings_controller_provider.dart';
-import 'providers/router_provider.dart';
-import 'shared/constants.dart';
 
 final messagesProvider = StateProvider((ref) => const Messages());
 

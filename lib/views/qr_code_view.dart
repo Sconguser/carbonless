@@ -8,7 +8,7 @@ class QrCodeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: QrImage(
+      child: QrImageView(
         data: value,
         version: QrVersions.auto,
         size: 200.0,

@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'app_settings_controller_provider.dart';
 
 class AppSettings {
   final ThemeMode theme;

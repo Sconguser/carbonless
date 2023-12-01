@@ -1,10 +1,14 @@
+import '../providers/states/app_navigation_state.dart';
+import '../providers/states/login_state.dart';
+import '../auth/views/sign_up.dart';
+import '../providers/states/auth_state.dart';
+import '../providers/states/signup_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../auth/views/auth_choice.dart';
 import '../auth/views/sign_in.dart';
-import '../auth/views/sign_up.dart';
 import '../shared/bottom_nav_bar.dart';
 import '../views/auxiliary_view/auxiliary_view.dart';
 import 'controllers/app_navigation_controller_provider.dart';
@@ -12,10 +16,6 @@ import 'controllers/auth_controller_provider.dart';
 import 'controllers/error_message_controller_provider.dart';
 import 'controllers/login_controller_provider.dart';
 import 'controllers/signup_controller_provider.dart';
-import 'states/app_navigation_state.dart';
-import 'states/auth_state.dart';
-import 'states/login_state.dart';
-import 'states/signup_state.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final router = RouterNotifier(ref);
@@ -49,7 +49,7 @@ class RouterNotifier extends ChangeNotifier {
     );
   }
 
-  String? _redirectLogic(GoRouterState goRouterState) {
+  String? _redirectLogic(_, GoRouterState goRouterState) {
     /// todo: pomyslec nad zastosowaniem wzorca strategii!
     final authState = _ref.read(authControllerProvider);
     _ref.read(errorMessageControllerProvider.notifier).hideError();
@@ -60,14 +60,14 @@ class RouterNotifier extends ChangeNotifier {
     } else if (authState is AuthStateSignup) {
       return signUpRedirect(goRouterState);
     } else if (authState is AuthStateChoice) {
-      return goRouterState.location == '/' ? null : '/';
+      return goRouterState.matchedLocation == '/' ? null : '/';
     }
   }
 
   String? signUpRedirect(GoRouterState goRouterState) {
     final signUpState = _ref.read(signUpControllerProvider);
     if (signUpState is SignUpStateInitial || signUpState is SignUpStateError) {
-      return goRouterState.location == '/signup' ? null : '/signup';
+      return goRouterState.matchedLocation == '/signup' ? null : '/signup';
     }
     // else if (signUpState is SignUpStateSuccess) {
     //   return goRouterState.location == '/home' ? null : '/home';
@@ -77,7 +77,7 @@ class RouterNotifier extends ChangeNotifier {
 
   String? loginRedirect(GoRouterState goRouterState) {
     final loginState = _ref.read(loginControllerProvider);
-    final isLoggingIn = goRouterState.location == '/login';
+    final isLoggingIn = goRouterState.matchedLocation == '/login';
     if (loginState is LoginStateInitial || loginState is LoginStateError) {
       return isLoggingIn ? null : '/login';
     }
@@ -90,9 +90,11 @@ class RouterNotifier extends ChangeNotifier {
   String? authorizedRedirect(GoRouterState goRouterState) {
     final appNavigationState = _ref.read(appNavigationControllerProvider);
     if (appNavigationState is AppNavigationMain) {
-      return goRouterState.location == '/home' ? null : '/home';
+      return goRouterState.matchedLocation == '/home' ? null : '/home';
     } else {
-      return goRouterState.location == '/auxiliary' ? null : '/auxiliary';
+      return goRouterState.matchedLocation == '/auxiliary'
+          ? null
+          : '/auxiliary';
     }
     return null;
   }
@@ -128,4 +130,15 @@ class RouterNotifier extends ChangeNotifier {
           path: '/auxiliary',
         ),
       ];
+}
+
+extension GoRouterExtension on GoRouter {
+  String location() {
+    final RouteMatch lastMatch = routerDelegate.currentConfiguration.last;
+    final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
+        ? lastMatch.matches
+        : routerDelegate.currentConfiguration;
+    final String location = matchList.uri.toString();
+    return location;
+  }
 }

@@ -1,16 +1,13 @@
 import 'dart:convert';
 
 import '../services/http_utils/url_provider.dart';
-import 'auth_models/user_model.dart';
 import 'package:http/http.dart' as http;
 
-import 'auth_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final authServiceProvider = Provider<AuthService>((ref) => AuthService());
 
 class AuthService {
-  // final String _url = 'stark-harbor-12710.herokuapp.com';
   final String _urlSignIn = '/users/sign_in.json';
   final String _urlSignUp = '/users.json';
   final String _urlVerify = '/users/me.json';
