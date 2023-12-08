@@ -107,6 +107,7 @@ ThemeData appTheme = ThemeData(
   ),
   appBarTheme: AppBarTheme(
     backgroundColor: primaryColor,
+    foregroundColor: tertiaryColor,
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: primaryColor,
@@ -156,6 +157,7 @@ ThemeData darkTheme = ThemeData(
   ),
   appBarTheme: AppBarTheme(
     backgroundColor: primaryColor,
+    foregroundColor: tertiaryColor,
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: primaryColor,
