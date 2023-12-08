@@ -82,10 +82,12 @@ class QrScannerController extends StateNotifier<QrScannerState> {
     );
     try {
       http.Response response = await ref.read(httpServiceProvider).executeHttp(
-          RequestType.POST,
-          qrdto.toJsonPurchase(),
-          null,
-          Endpoint.POINTS_PURCHASE);
+            RequestType.POST,
+            qrdto.toJsonPurchase(),
+            null,
+            Endpoint.POINTS_PURCHASE,
+            ref.read(authRepositoryProvider).getToken(),
+          );
     } catch (e) {
       state = const QrScannerStateError();
     }

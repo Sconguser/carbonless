@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import '/auth/auth_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
+import 'http_config.dart';
 import 'request_provider.dart';
 import 'url_provider.dart';
 
@@ -17,13 +17,15 @@ class HttpService {
     Map<String, dynamic>? body,
     Map<String, dynamic>? queryParameters,
     Endpoint endpoint,
+    String? authorization,
   ) async {
-    String? authorization = _getToken();
-    if (authorization == null) {
-      throw Exception('Did not find bearer token');
-    }
     try {
-      Uri resolvedUrl = Uri.https(url, endpoint.toEndpoint(), queryParameters);
+      Uri resolvedUrl;
+      if (HttpConfig.useHttps) {
+        resolvedUrl = Uri.https(url, endpoint.toEndpoint(), queryParameters);
+      } else {
+        resolvedUrl = Uri.http(url, endpoint.toEndpoint(), queryParameters);
+      }
       final response =
           await _execute(resolvedUrl, authorization, requestType, body);
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -55,13 +57,13 @@ class HttpService {
     }
   }
 
-  String? _getToken() {
-    String? bearerToken = ref.read(authRepositoryProvider).bearerToken;
-    if (bearerToken != null) {
-      return bearerToken;
-    }
-    return null;
-  }
+  // String? _getToken() {
+  //   String? bearerToken = ref.read(authRepositoryProvider).bearerToken;
+  //   if (bearerToken != null) {
+  //     return bearerToken;
+  //   }
+  //   return null;
+  // }
 
   Future<http.Response> _httpGet(String? authorization, Uri url) {
     Map<String, String> headers = _createHeaders(authorization);

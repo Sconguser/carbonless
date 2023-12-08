@@ -37,9 +37,10 @@ class SignInButton extends ConsumerWidget {
         if (formKey.currentState!.validate() &&
             (loginState is LoginStateInitial ||
                 loginState is LoginStateError)) {
-          ref
-              .read(loginControllerProvider.notifier)
-              .login(email, password, autoLogin);
+          // ref
+          //     .read(loginControllerProvider.notifier)
+          //     .login(email, password, autoLogin);
+          ref.read(loginControllerProvider.notifier).debugLogin();
         }
       },
     );

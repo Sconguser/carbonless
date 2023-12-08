@@ -59,6 +59,10 @@ class AuthRepository {
     bearerToken = response.headers['authorization'];
     return true;
   }
+
+  String? getToken() {
+    return bearerToken;
+  }
 }
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {

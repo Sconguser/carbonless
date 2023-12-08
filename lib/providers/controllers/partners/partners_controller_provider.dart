@@ -48,9 +48,13 @@ class PartnersNotifier extends StateNotifier<List<Partner>> {
       'longitude': long.toString(),
       'range': range.toString()
     };
-    http.Response response = await ref
-        .read(httpServiceProvider)
-        .executeHttp(RequestType.GET, null, queryParameters, Endpoint.PARTNERS);
+    http.Response response = await ref.read(httpServiceProvider).executeHttp(
+          RequestType.GET,
+          null,
+          queryParameters,
+          Endpoint.PARTNERS,
+          ref.read(authRepositoryProvider).getToken(),
+        );
 
     List<dynamic> decodedList = jsonDecode(response.body);
     ref.read(partnersNotifier.notifier).setListOfPartners(decodedList);
