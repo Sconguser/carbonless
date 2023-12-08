@@ -8,6 +8,9 @@ enum Endpoint {
   HIGHSCORE,
   PRIZE_PURCHASE,
   GENERATE_QR_CODE,
+  SIGN_IN,
+  SIGN_UP,
+  VERIFY,
 }
 
 extension ParseToString on Endpoint {
@@ -27,6 +30,12 @@ extension ParseToString on Endpoint {
         return prizePurchase;
       case Endpoint.GENERATE_QR_CODE:
         return generateCode;
+      case Endpoint.SIGN_IN:
+        return signIn;
+      case Endpoint.SIGN_UP:
+        return signUp;
+      case Endpoint.VERIFY:
+        return verify;
     }
   }
 
