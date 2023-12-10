@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:carbonless/services/http_utils/http_service.dart';
-import 'package:carbonless/services/http_utils/request_provider.dart';
+import '/services/http_utils/http_service.dart';
+import '/services/http_utils/request_provider.dart';
 
 import '../services/http_utils/url_provider.dart';
 import 'package:http/http.dart' as http;
