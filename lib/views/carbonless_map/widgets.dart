@@ -1,10 +1,9 @@
-import 'package:carbonless/models/partner_model.dart';
-import 'package:carbonless/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 
+import '../../models/partner_model.dart';
+import '../../shared/constants.dart';
 import 'map_utils.dart';
 
 class PartnerMarker extends Marker {
@@ -15,7 +14,7 @@ class PartnerMarker extends Marker {
           point: location,
           width: 80,
           height: 80,
-          builder: (context) => SizedBox(
+          child: SizedBox(
             child: Icon(
               Icons.location_on,
               color: primaryColor,
@@ -29,7 +28,7 @@ Marker partnerMarker(Partner partner, LatLng point) {
     width: 80,
     height: 80,
     point: point,
-    builder: (context) => Container(
+    child: Container(
       width: 80,
       height: 80,
       child: Icon(
@@ -37,7 +36,7 @@ Marker partnerMarker(Partner partner, LatLng point) {
         color: Colors.red,
       ),
     ),
-    anchorPos: AnchorPos.align(AnchorAlign.top),
+    // anchorPos: AnchorPos.align(AnchorAlign.top),
     // rotateAlignment: AnchorAlign.top,
   );
 }

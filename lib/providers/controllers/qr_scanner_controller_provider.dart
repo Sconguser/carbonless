@@ -1,12 +1,11 @@
-import 'package:carbonless/auth/auth_repository.dart';
-import 'package:carbonless/localization/messages.i18n.dart';
-import 'package:carbonless/providers/controllers/geolocation/geolocation_controller_provider.dart';
-import 'package:carbonless/providers/controllers/notifications/local_notifications/local_notifications_controller_provider.dart';
-import 'package:carbonless/providers/controllers/travel_session_controller_provider/travel_session_controller_provider.dart';
-import 'package:carbonless/providers/states/qr_scanner_state.dart';
-import 'package:carbonless/providers/states/travel_session_state.dart';
-import 'package:carbonless/services/http_utils/http_service.dart';
-import 'package:carbonless/services/qr_code_service.dart';
+import '/auth/auth_repository.dart';
+import '/localization/messages.i18n.dart';
+import '/providers/controllers/geolocation/geolocation_controller_provider.dart';
+import '/providers/controllers/notifications/local_notifications/local_notifications_controller_provider.dart';
+import '/providers/controllers/travel_session_controller_provider/travel_session_controller_provider.dart';
+import '/providers/states/qr_scanner_state.dart';
+import '/providers/states/travel_session_state.dart';
+import '/services/http_utils/http_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../main.dart';
@@ -83,10 +82,12 @@ class QrScannerController extends StateNotifier<QrScannerState> {
     );
     try {
       http.Response response = await ref.read(httpServiceProvider).executeHttp(
-          RequestType.POST,
-          qrdto.toJsonPurchase(),
-          null,
-          Endpoint.POINTS_PURCHASE);
+            RequestType.POST,
+            qrdto.toJsonPurchase(),
+            null,
+            Endpoint.POINTS_PURCHASE,
+            ref.read(authRepositoryProvider).getToken(),
+          );
     } catch (e) {
       state = const QrScannerStateError();
     }

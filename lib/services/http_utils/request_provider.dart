@@ -1,4 +1,4 @@
-import 'package:carbonless/services/http_utils/url_provider.dart';
+import '/services/http_utils/url_provider.dart';
 
 enum Endpoint {
   ALL_PRIZES,
@@ -8,6 +8,9 @@ enum Endpoint {
   HIGHSCORE,
   PRIZE_PURCHASE,
   POINTS_PURCHASE,
+  SIGN_IN,
+  SIGN_UP,
+  VERIFY,
 }
 
 extension ParseToString on Endpoint {
@@ -27,6 +30,12 @@ extension ParseToString on Endpoint {
         return prizePurchase;
       case Endpoint.POINTS_PURCHASE:
         return pointsPurchase;
+      case Endpoint.SIGN_IN:
+        return signIn;
+      case Endpoint.SIGN_UP:
+        return signUp;
+      case Endpoint.VERIFY:
+        return verify;
     }
   }
 

@@ -1,4 +1,4 @@
-import 'package:carbonless/providers/states/prize_list/prize_tile_state.dart';
+import '/providers/states/prize_list/prize_tile_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PrizeTileStateNotifier extends StateNotifier<PrizeTileState> {

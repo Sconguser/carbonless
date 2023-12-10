@@ -1,4 +1,4 @@
-import 'package:carbonless/providers/states/travel_session_state.dart';
+import '/providers/states/travel_session_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TravelSessionController extends StateNotifier<TravelSessionState> {

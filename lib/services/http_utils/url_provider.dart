@@ -1,4 +1,4 @@
-const String url = 'carbonless-api.onrender.com';
+const String url = '10.10.50.119:3000';
 const String prizes = '/prizes';
 const String userPrizes = '/users_prizes';
 const String partners = '/partners';
@@ -6,3 +6,6 @@ const String history = '/points_histories';
 const String highscores = '/high_scores.json';
 const String prizePurchase = '/users_prizes';
 const String pointsPurchase = '/machine_handlers';
+const String signIn = '/users/sign_in.json';
+const String signUp = '/users.json';
+const String verify = '/users/me.json';

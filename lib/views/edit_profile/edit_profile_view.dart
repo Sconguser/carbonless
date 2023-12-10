@@ -1,6 +1,6 @@
-import 'package:carbonless/auth/auth_repository.dart';
-import 'package:carbonless/main.dart';
-import 'package:carbonless/shared/widgets.dart';
+import '/auth/auth_repository.dart';
+import '/main.dart';
+import '/shared/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -52,11 +52,11 @@ class EditProfileView extends ConsumerWidget {
                       if (index == 0) {
                         ref
                             .read(editDataExpansionStateProvider.notifier)
-                            .state = !isOpen;
+                            .state = isOpen;
                       } else if (index == 1) {
                         ref
                             .read(changePasswordExpansionStateProvider.notifier)
-                            .state = !isOpen;
+                            .state = isOpen;
                       }
                     },
                     children: [

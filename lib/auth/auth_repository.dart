@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:carbonless/auth/auth_service.dart';
+import '/auth/auth_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'auth_models/user_model.dart';
@@ -58,6 +58,10 @@ class AuthRepository {
     _user = User.fromJson(jsonDecode(response.body));
     bearerToken = response.headers['authorization'];
     return true;
+  }
+
+  String? getToken() {
+    return bearerToken;
   }
 }
 

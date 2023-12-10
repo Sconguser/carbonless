@@ -1,9 +1,10 @@
 import 'dart:convert';
 
-import 'package:carbonless/models/user_prize_model.dart';
-import 'package:carbonless/providers/controllers/loaders/view_loading_controller_provider.dart';
-import 'package:carbonless/providers/controllers/loaders/widget_loading_controller_provider.dart';
-import 'package:carbonless/services/http_utils/http_service.dart';
+import '../../../auth/auth_repository.dart';
+import '/models/user_prize_model.dart';
+import '/providers/controllers/loaders/view_loading_controller_provider.dart';
+import '/providers/controllers/loaders/widget_loading_controller_provider.dart';
+import '/services/http_utils/http_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../models/prize_model.dart';
@@ -92,9 +93,13 @@ class PrizesNotifier extends StateNotifier<List<Prize>> {
 
   Future<List<Prize>?> _fetchPrizes() async {
     try {
-      http.Response response = await ref
-          .read(httpServiceProvider)
-          .executeHttp(RequestType.GET, null, null, Endpoint.ALL_PRIZES);
+      http.Response response = await ref.read(httpServiceProvider).executeHttp(
+            RequestType.GET,
+            null,
+            null,
+            Endpoint.ALL_PRIZES,
+            ref.read(authRepositoryProvider).getToken(),
+          );
       List<Prize> prizeList = [];
       Map<String, dynamic> decodedList = jsonDecode(response.body);
       for (dynamic prize in decodedList["records"]) {
@@ -109,9 +114,13 @@ class PrizesNotifier extends StateNotifier<List<Prize>> {
 
   Future<List<UserPrize>?> _fetchUserPrizes() async {
     try {
-      http.Response response = await ref
-          .read(httpServiceProvider)
-          .executeHttp(RequestType.GET, null, null, Endpoint.USER_PRIZES);
+      http.Response response = await ref.read(httpServiceProvider).executeHttp(
+            RequestType.GET,
+            null,
+            null,
+            Endpoint.USER_PRIZES,
+            ref.read(authRepositoryProvider).getToken(),
+          );
       List<UserPrize> userPrizeList = [];
       Map<String, dynamic> decodedList = jsonDecode(response.body);
       for (dynamic userPrize in decodedList["records"]) {
@@ -132,9 +141,13 @@ class PrizesNotifier extends StateNotifier<List<Prize>> {
           "prize_id": id,
         }
       };
-      http.Response response = await ref
-          .read(httpServiceProvider)
-          .executeHttp(RequestType.POST, body, null, Endpoint.PRIZE_PURCHASE);
+      http.Response response = await ref.read(httpServiceProvider).executeHttp(
+            RequestType.POST,
+            body,
+            null,
+            Endpoint.PRIZE_PURCHASE,
+            ref.read(authRepositoryProvider).getToken(),
+          );
       _resetState();
       return true;
     } catch (e) {

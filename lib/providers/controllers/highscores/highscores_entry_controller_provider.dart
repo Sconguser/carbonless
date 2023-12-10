@@ -1,7 +1,8 @@
 import 'dart:convert';
 
-import 'package:carbonless/providers/controllers/highscores/highscores_filter_controller_provider.dart';
-import 'package:carbonless/providers/controllers/highscores/leaderboard_model.dart';
+import '../../../auth/auth_repository.dart';
+import '/providers/controllers/highscores/highscores_filter_controller_provider.dart';
+import '/providers/controllers/highscores/leaderboard_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:core';
 import '../../../services/http_utils/http_service.dart';
@@ -25,9 +26,13 @@ class LeaderboardNotifier extends StateNotifier<Leaderboard> {
   }
 
   Future<void> _getHighscoresWithoutScope() async {
-    http.Response response = await ref
-        .read(httpServiceProvider)
-        .executeHttp(RequestType.GET, null, null, Endpoint.HIGHSCORE);
+    http.Response response = await ref.read(httpServiceProvider).executeHttp(
+          RequestType.GET,
+          null,
+          null,
+          Endpoint.HIGHSCORE,
+          ref.read(authRepositoryProvider).getToken(),
+        );
     Map<String, dynamic> decodedMap = jsonDecode(response.body);
     _setLeaderboardFromJson(decodedMap);
   }
@@ -38,7 +43,12 @@ class LeaderboardNotifier extends StateNotifier<Leaderboard> {
       "country": "Poland"
     };
     http.Response response = await ref.read(httpServiceProvider).executeHttp(
-        RequestType.GET, null, queryParameters, Endpoint.HIGHSCORE);
+          RequestType.GET,
+          null,
+          queryParameters,
+          Endpoint.HIGHSCORE,
+          ref.read(authRepositoryProvider).getToken(),
+        );
     Map<String, dynamic> decodedMap = jsonDecode(response.body);
     _setLeaderboardFromJson(decodedMap);
   }
@@ -46,7 +56,12 @@ class LeaderboardNotifier extends StateNotifier<Leaderboard> {
   Future<void> _getHighscoresCityScoped() async {
     Map<String, dynamic> queryParameters = {"scope": "city", "country": "Lodz"};
     http.Response response = await ref.read(httpServiceProvider).executeHttp(
-        RequestType.GET, null, queryParameters, Endpoint.HIGHSCORE);
+          RequestType.GET,
+          null,
+          queryParameters,
+          Endpoint.HIGHSCORE,
+          ref.read(authRepositoryProvider).getToken(),
+        );
     Map<String, dynamic> decodedMap = jsonDecode(response.body);
     _setLeaderboardFromJson(decodedMap);
   }

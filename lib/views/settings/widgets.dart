@@ -1,4 +1,4 @@
-import 'package:carbonless/providers/controllers/app_settings/app_settings_controller_provider.dart';
+import '/providers/controllers/app_settings/app_settings_controller_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

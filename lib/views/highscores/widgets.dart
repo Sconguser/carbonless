@@ -1,11 +1,9 @@
-import 'package:carbonless/localization/messages.i18n.dart';
-import 'package:carbonless/main.dart';
-import 'package:carbonless/models/highscores_entry_model.dart';
-import 'package:carbonless/providers/controllers/highscores/highscores_entry_controller_provider.dart';
-import 'package:carbonless/providers/controllers/highscores/highscores_filter_controller_provider.dart';
-import 'package:carbonless/providers/controllers/highscores/leaderboard_model.dart';
-import 'package:carbonless/providers/states/highscores/highscores_filter_state.dart';
-import 'package:carbonless/shared/constants.dart';
+import '/localization/messages.i18n.dart';
+import '/main.dart';
+import '/models/highscores_entry_model.dart';
+import '/providers/controllers/highscores/highscores_filter_controller_provider.dart';
+import '/providers/states/highscores/highscores_filter_state.dart';
+import '/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

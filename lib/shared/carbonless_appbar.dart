@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CarbonLessAppBar extends StatelessWidget with PreferredSizeWidget {
+class CarbonLessAppBar extends StatelessWidget implements PreferredSizeWidget {
   final BuildContext context;
   final Widget title;
   final String? subtitle;

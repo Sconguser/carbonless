@@ -1,5 +1,5 @@
-import 'package:carbonless/main.dart';
-import 'package:carbonless/shared/carbonless_drawer/drawer_controller_provider.dart';
+import '/main.dart';
+import '/shared/carbonless_drawer/drawer_controller_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

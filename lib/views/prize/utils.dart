@@ -1,5 +1,5 @@
-import 'package:carbonless/providers/states/prize_list/prize_filter_state.dart';
-import 'package:carbonless/shared/constants.dart';
+import '/providers/states/prize_list/prize_filter_state.dart';
+import '/shared/constants.dart';
 import 'package:flutter/material.dart';
 import '../../models/prize_model.dart';
 

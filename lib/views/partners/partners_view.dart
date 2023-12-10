@@ -1,5 +1,5 @@
-import 'package:carbonless/shared/constants.dart';
-import 'package:carbonless/views/partners/widgets.dart';
+import '/shared/constants.dart';
+import '/views/partners/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

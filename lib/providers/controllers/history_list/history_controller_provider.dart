@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../auth/auth_repository.dart';
 import '../../../models/history_model.dart';
 import '../../../services/http_utils/http_service.dart';
 import '../../../services/http_utils/request_provider.dart';
@@ -24,9 +25,13 @@ class HistoryNotifier extends StateNotifier<List<History>> {
   }
 
   Future<void> _getHistories() async {
-    http.Response response = await ref
-        .read(httpServiceProvider)
-        .executeHttp(RequestType.GET, null, null, Endpoint.HISTORY);
+    http.Response response = await ref.read(httpServiceProvider).executeHttp(
+          RequestType.GET,
+          null,
+          null,
+          Endpoint.HISTORY,
+          ref.read(authRepositoryProvider).getToken(),
+        );
 
     List<dynamic> decodedList = jsonDecode(response.body);
     // ref.read(historyNotifier.notifier).setListOfHistoriesFromJson(decodedList);
