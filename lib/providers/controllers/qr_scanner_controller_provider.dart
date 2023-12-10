@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import '/auth/auth_repository.dart';
 import '/localization/messages.i18n.dart';
 import '/providers/controllers/geolocation/geolocation_controller_provider.dart';
@@ -25,7 +27,13 @@ class QrScannerController extends StateNotifier<QrScannerState> {
   Future<void> validatePrize(String qr_value) async {
     state = const QrScannerStateBusy();
     http.Response response = await ref.read(httpServiceProvider).executeHttp(
-        RequestType.GET, null, null, Endpoint.USER_PRIZES, [qr_value]);
+      RequestType.GET,
+      null,
+      null,
+      Endpoint.USER_PRIZES,
+      ref.read(authRepositoryProvider).bearerToken,
+      [qr_value],
+    );
     bool isValid = jsonDecode(response.body);
     if (isValid) {
       state = const QrScannerStateSuccess();
@@ -37,7 +45,13 @@ class QrScannerController extends StateNotifier<QrScannerState> {
   Future<void> usePrize(String prizeId) async {
     state = const QrScannerStateBusy();
     http.Response response = await ref.read(httpServiceProvider).executeHttp(
-        RequestType.PUT, null, null, Endpoint.USER_PRIZES, [prizeId]);
+      RequestType.PUT,
+      null,
+      null,
+      Endpoint.USER_PRIZES,
+      ref.read(authRepositoryProvider).bearerToken,
+      [prizeId],
+    );
     bool isValid = jsonDecode(response.body);
     // if (isValid) {
     //   state = const QrScannerStateSuccess();

@@ -48,7 +48,6 @@ class BottomNavigationBarView extends ConsumerWidget {
             children: const [
               PrizeView(),
               ScannerView(),
-              CarbonlessMapView(),
             ],
           ),
       bottomNavigationBar: BottomNavigationBar(

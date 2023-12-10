@@ -1,3 +1,5 @@
+import '/providers/controllers/qr_generator_controller_provider.dart';
+
 import '/providers/controllers/app_navigation_controller_provider.dart';
 import '/providers/controllers/error_message_controller_provider.dart';
 import '/providers/controllers/local_storage/secure_storage.dart';

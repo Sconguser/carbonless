@@ -23,7 +23,6 @@ class HttpService {
     try {
       String endPoint = concatenateEndpoint(endpoint.toEndpoint(), segments);
       Uri resolvedUrl = Uri.https(url, endPoint, queryParameters);
-      Uri resolvedUrl;
       if (HttpConfig.useHttps) {
         resolvedUrl = Uri.https(url, endpoint.toEndpoint(), queryParameters);
       } else {
@@ -129,7 +128,7 @@ class HttpService {
 
     // Add a leading '/' to the endpoint if it's not already there
     if (!endpoint.startsWith('/')) {
-      endpoint = '/' + endpoint;
+      endpoint = '/$endpoint';
     }
 
     // Combine the base endpoint and the concatenated path

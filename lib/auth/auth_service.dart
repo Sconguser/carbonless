@@ -1,9 +1,6 @@
-import 'dart:convert';
+import '/services/http_utils/http_service.dart';
+import '/services/http_utils/request_provider.dart';
 
-import 'package:carbonless/services/http_utils/http_service.dart';
-import 'package:carbonless/services/http_utils/request_provider.dart';
-
-import '../services/http_utils/url_provider.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,9 +9,6 @@ final authServiceProvider =
     Provider<AuthService>((ref) => AuthService(ref: ref));
 
 class AuthService {
-  final String _urlSignIn = '/users/sign_in.json';
-  final String _urlSignUp = '/users.json';
-  final String _urlVerify = '/users/me.json';
   final Ref ref;
 
   AuthService({required this.ref});
@@ -26,15 +20,13 @@ class AuthService {
         'password': password,
       }
     };
-    return ref
-        .read(httpServiceProvider)
-        .executeHttp(RequestType.POST, body, null, Endpoint.SIGN_IN, null);
+    return ref.read(httpServiceProvider).executeHttp(
+        RequestType.POST, body, null, Endpoint.SIGN_IN, null, null);
   }
 
   Future<http.Response> autoLogin(String bearerToken) async {
-    return ref
-        .read(httpServiceProvider)
-        .executeHttp(RequestType.GET, null, null, Endpoint.VERIFY, bearerToken);
+    return ref.read(httpServiceProvider).executeHttp(
+        RequestType.GET, null, null, Endpoint.VERIFY, bearerToken, null);
   }
 
   Future<http.Response> registerUser(String email, String password,
@@ -48,8 +40,7 @@ class AuthService {
         'password_confirmation': passwordConfirmation
       }
     };
-    return ref
-        .read(httpServiceProvider)
-        .executeHttp(RequestType.POST, body, null, Endpoint.SIGN_UP, null);
+    return ref.read(httpServiceProvider).executeHttp(
+        RequestType.POST, body, null, Endpoint.SIGN_UP, null, null);
   }
 }
