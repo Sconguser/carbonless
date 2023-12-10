@@ -99,6 +99,7 @@ class PrizesNotifier extends StateNotifier<List<Prize>> {
             null,
             Endpoint.ALL_PRIZES,
             ref.read(authRepositoryProvider).getToken(),
+            null,
           );
       List<Prize> prizeList = [];
       Map<String, dynamic> decodedList = jsonDecode(response.body);
@@ -120,6 +121,7 @@ class PrizesNotifier extends StateNotifier<List<Prize>> {
             null,
             Endpoint.USER_PRIZES,
             ref.read(authRepositoryProvider).getToken(),
+            null,
           );
       List<UserPrize> userPrizeList = [];
       Map<String, dynamic> decodedList = jsonDecode(response.body);
@@ -147,6 +149,7 @@ class PrizesNotifier extends StateNotifier<List<Prize>> {
             null,
             Endpoint.PRIZE_PURCHASE,
             ref.read(authRepositoryProvider).getToken(),
+            null,
           );
       _resetState();
       return true;

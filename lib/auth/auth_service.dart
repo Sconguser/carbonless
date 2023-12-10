@@ -26,15 +26,13 @@ class AuthService {
         'password': password,
       }
     };
-    return ref
-        .read(httpServiceProvider)
-        .executeHttp(RequestType.POST, body, null, Endpoint.SIGN_IN, null);
+    return ref.read(httpServiceProvider).executeHttp(
+        RequestType.POST, body, null, Endpoint.SIGN_IN, null, null);
   }
 
   Future<http.Response> autoLogin(String bearerToken) async {
-    return ref
-        .read(httpServiceProvider)
-        .executeHttp(RequestType.GET, null, null, Endpoint.VERIFY, bearerToken);
+    return ref.read(httpServiceProvider).executeHttp(
+        RequestType.GET, null, null, Endpoint.VERIFY, bearerToken, null);
   }
 
   Future<http.Response> registerUser(String email, String password,
@@ -48,8 +46,7 @@ class AuthService {
         'password_confirmation': passwordConfirmation
       }
     };
-    return ref
-        .read(httpServiceProvider)
-        .executeHttp(RequestType.POST, body, null, Endpoint.SIGN_UP, null);
+    return ref.read(httpServiceProvider).executeHttp(
+        RequestType.POST, body, null, Endpoint.SIGN_UP, null, null);
   }
 }

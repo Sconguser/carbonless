@@ -32,6 +32,7 @@ class LeaderboardNotifier extends StateNotifier<Leaderboard> {
           null,
           Endpoint.HIGHSCORE,
           ref.read(authRepositoryProvider).getToken(),
+          null,
         );
     Map<String, dynamic> decodedMap = jsonDecode(response.body);
     _setLeaderboardFromJson(decodedMap);
@@ -48,6 +49,7 @@ class LeaderboardNotifier extends StateNotifier<Leaderboard> {
           queryParameters,
           Endpoint.HIGHSCORE,
           ref.read(authRepositoryProvider).getToken(),
+          null,
         );
     Map<String, dynamic> decodedMap = jsonDecode(response.body);
     _setLeaderboardFromJson(decodedMap);
@@ -61,6 +63,7 @@ class LeaderboardNotifier extends StateNotifier<Leaderboard> {
           queryParameters,
           Endpoint.HIGHSCORE,
           ref.read(authRepositoryProvider).getToken(),
+          null,
         );
     Map<String, dynamic> decodedMap = jsonDecode(response.body);
     _setLeaderboardFromJson(decodedMap);

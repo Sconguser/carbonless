@@ -31,6 +31,7 @@ class HistoryNotifier extends StateNotifier<List<History>> {
           null,
           Endpoint.HISTORY,
           ref.read(authRepositoryProvider).getToken(),
+          null,
         );
 
     List<dynamic> decodedList = jsonDecode(response.body);

@@ -18,9 +18,11 @@ class HttpService {
     Map<String, dynamic>? queryParameters,
     Endpoint endpoint,
     String? authorization,
+    List<String>? segments,
   ) async {
     try {
-      Uri resolvedUrl;
+      String endPoint = concatenateEndpoint(endpoint.toEndpoint(), segments);
+      Uri resolvedUrl = Uri.https(url, endPoint, queryParameters);
       if (HttpConfig.useHttps) {
         resolvedUrl = Uri.https(url, endpoint.toEndpoint(), queryParameters);
       } else {
@@ -115,6 +117,24 @@ class HttpService {
       headers['Authorization'] = authorization;
     }
     return headers;
+  }
+
+  String concatenateEndpoint(String baseEndpoint, List<String>? segments) {
+    if (segments == null || segments.isEmpty) {
+      return baseEndpoint;
+    }
+    // Join the list of segments using '/' as a separator
+    String endpoint = segments.join('/');
+
+    // Add a leading '/' to the endpoint if it's not already there
+    if (!endpoint.startsWith('/')) {
+      endpoint = '/$endpoint';
+    }
+
+    // Combine the base endpoint and the concatenated path
+    endpoint = baseEndpoint + endpoint;
+
+    return endpoint;
   }
 }
 

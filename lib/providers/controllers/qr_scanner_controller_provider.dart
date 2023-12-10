@@ -87,6 +87,7 @@ class QrScannerController extends StateNotifier<QrScannerState> {
             null,
             Endpoint.POINTS_PURCHASE,
             ref.read(authRepositoryProvider).getToken(),
+            null,
           );
     } catch (e) {
       state = const QrScannerStateError();

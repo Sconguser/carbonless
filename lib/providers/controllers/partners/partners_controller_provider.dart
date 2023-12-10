@@ -54,6 +54,7 @@ class PartnersNotifier extends StateNotifier<List<Partner>> {
           queryParameters,
           Endpoint.PARTNERS,
           ref.read(authRepositoryProvider).getToken(),
+          null,
         );
 
     List<dynamic> decodedList = jsonDecode(response.body);
