@@ -1,4 +1,4 @@
-# carbonless
+# carbonless free
 
 App encouraging users to make more ecologically-friendly choices
 
