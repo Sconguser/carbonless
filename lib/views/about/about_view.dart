@@ -29,9 +29,9 @@ class AboutView extends ConsumerWidget {
                   showLicensePage(
                     context: context,
                     applicationIcon: const FlutterLogo(),
-                    applicationName: 'Carbonless',
+                    applicationName: 'Carbonless Free',
                     applicationVersion: 'September 2023',
-                    applicationLegalese: '\u{a9} 2023 Carbonless Authors',
+                    applicationLegalese: '\u{a9} 2023 Carbonless Free Authors',
                   );
                 },
               ),

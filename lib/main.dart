@@ -32,7 +32,7 @@ class MyApp extends ConsumerWidget {
       }
     });
     return MaterialApp.router(
-      title: 'Carbonless',
+      title: 'Carbonless Free',
       locale: Locale.fromSubtags(languageCode: appSettings.language),
       theme: appTheme,
       darkTheme: darkTheme,
