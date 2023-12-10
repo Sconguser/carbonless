@@ -52,11 +52,11 @@ class EditProfileView extends ConsumerWidget {
                       if (index == 0) {
                         ref
                             .read(editDataExpansionStateProvider.notifier)
-                            .state = !isOpen;
+                            .state = isOpen;
                       } else if (index == 1) {
                         ref
                             .read(changePasswordExpansionStateProvider.notifier)
-                            .state = !isOpen;
+                            .state = isOpen;
                       }
                     },
                     children: [
