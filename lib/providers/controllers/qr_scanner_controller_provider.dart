@@ -8,6 +8,8 @@ import '../../services/http_utils/http_service.dart';
 import '../../services/http_utils/request_provider.dart';
 import '../states/qr_scanner_state.dart';
 
+import '../../services/http_utils/request_provider.dart';
+
 class QrScannerController extends StateNotifier<QrScannerState> {
   QrScannerController(this.ref) : super(const QrScannerStateInitial());
   final Ref ref;

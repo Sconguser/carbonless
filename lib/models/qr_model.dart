@@ -26,4 +26,10 @@ class QRDTO {
           'end_latitude': latitude,
         }
       };
+  Map<String, dynamic> toJsonPurchase() => <String, dynamic>{
+        'handler': {
+          'uuid': uuid,
+          'expires': expiration,
+        }
+      };
 }
