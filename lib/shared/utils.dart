@@ -32,3 +32,7 @@ Map<int, Color> getSwatch(Color color) {
     900: (hslColor.withLightness(lightness - (highStep * 4))).toColor(),
   };
 }
+
+String dateTimeToString(DateTime dateTime) {
+  return '${dateTime.day}-${dateTime.month}-${dateTime.year}';
+}

@@ -1,3 +1,5 @@
+import 'package:carbonless_free/views/exchange/exchanges_list/exchange_list_view.dart';
+
 import '/providers/controllers/app_navigation_controller_provider.dart';
 import '/providers/controllers/loaders/view_loading_controller_provider.dart';
 import '/providers/states/loading_state.dart';
@@ -46,9 +48,8 @@ class BottomNavigationBarView extends ConsumerWidget {
           IndexedStack(
             index: ref.watch(bottomNavIndexProvider),
             children: const [
-              PrizeView(),
+              ExchangeListView(),
               ScannerView(),
-              CarbonlessMapView(),
             ],
           ),
       bottomNavigationBar: BottomNavigationBar(
@@ -78,25 +79,14 @@ class BottomNavigationBarView extends ConsumerWidget {
           ),
           BottomNavigationBarItem(
             icon: const Icon(
-              Icons.qr_code,
+              Icons.star_border,
               size: 30,
             ),
             activeIcon: Icon(
-              Icons.qr_code_scanner,
+              Icons.star,
               size: 30,
             ),
-            label: _locale.bottomNavBar.scanner,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(
-              Icons.map_outlined,
-              size: 30,
-            ),
-            activeIcon: const Icon(
-              Icons.map,
-              size: 30,
-            ),
-            label: _locale.bottomNavBar.map,
+            label: 'scanner',
           ),
         ],
       ),
@@ -107,7 +97,7 @@ class BottomNavigationBarView extends ConsumerWidget {
 final bottomNavIndexProvider = StateProvider((ref) => 0);
 
 enum bottomNavViewIndex {
-  PRIZE,
+  EXCHANGE,
   SCANNER,
-  MAP,
+  // MAP,
 }

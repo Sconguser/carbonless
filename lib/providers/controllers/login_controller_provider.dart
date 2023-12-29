@@ -67,10 +67,10 @@ class LoginController extends StateNotifier<LoginState> {
   }
 
   void debugLogin() async {
-    state = const LoginStateLoading();
-    await ref.read(authRepositoryProvider).debugLogin();
-    state = const LoginStateSuccess();
-    showApp();
+    // state = const LoginStateLoading();
+    login('test1@test.com', 'Test1234!', true);
+    // state = const LoginStateSuccess();
+    // showApp();
   }
 
   void showChoice() {

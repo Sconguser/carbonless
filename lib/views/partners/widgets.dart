@@ -107,8 +107,8 @@ class ShowOnMapButton extends ConsumerWidget {
             .read(partnersFilterControllerProvider.notifier)
             .filterByPartner(partner);
         ref.read(appNavigationControllerProvider.notifier).showMain();
-        ref.read(bottomNavIndexProvider.notifier).state =
-            bottomNavViewIndex.MAP.index;
+        // ref.read(bottomNavIndexProvider.notifier).state =
+        //     bottomNavViewIndex.MAP.index;
       },
       child: Text(_locale.partners.show_on_map),
     );

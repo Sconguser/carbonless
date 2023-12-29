@@ -1,3 +1,5 @@
+import 'package:carbonless_free/providers/controllers/exchange/exchange_list_controller_provider.dart';
+
 import '/providers/controllers/app_navigation_controller_provider.dart';
 import '/providers/controllers/error_message_controller_provider.dart';
 import '/providers/controllers/local_storage/secure_storage.dart';
@@ -32,7 +34,7 @@ class AuthController extends StateNotifier<AuthState> {
   }
 
   void initializeMain() {
-    ref.read(prizesProvider.notifier).initialize();
+    ref.read(exchangeOfferListNotifier.notifier).initialize();
   }
 
   void logout() {
