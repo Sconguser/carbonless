@@ -114,3 +114,9 @@ market:
   location: location
   user: user
   details: details
+  make_offer: make an offer
+  offer_message: put your offer message here
+  submit: submit
+
+exceptions:
+  not_authorized: User not authorized

@@ -114,3 +114,9 @@ market:
   location: lokalizacja
   user: użytkownik
   details: szczegóły
+  make_offer: złóż ofertę
+  offer_message: opisz tu swoją ofertę
+  submit: wyślij
+
+exceptions:
+  not_authorized: Użytkownik niezalogowany
