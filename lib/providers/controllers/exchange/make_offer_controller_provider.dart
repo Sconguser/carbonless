@@ -4,6 +4,7 @@ import 'package:carbonless_free/providers/states/exchange/make_offer_state.dart'
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../localization/messages.i18n.dart';
+import '../notifications/toast/toast_controller_provider.dart';
 
 class MakeOfferController extends StateNotifier<MakeOfferState> {
   final Ref ref;
@@ -22,6 +23,7 @@ class MakeOfferController extends StateNotifier<MakeOfferState> {
       await Future.delayed(Duration(seconds: 5));
 
       state = const MakeOfferSuccess();
+      ref.read(toastProvider).showToast(_locale.toast.message_sent);
     } catch (e) {
       state = MakeOfferError(error: e.toString());
     }

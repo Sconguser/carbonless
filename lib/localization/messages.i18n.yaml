@@ -120,3 +120,6 @@ market:
 
 exceptions:
   not_authorized: User not authorized
+
+toast:
+  message_sent: Your message has been sent
