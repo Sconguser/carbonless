@@ -28,11 +28,7 @@ class ExchangeListView extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: ExchangeTile(
-                date: dateTimeToString(offer.created_at),
-                username: offer.username,
-                title: offer.title,
-                description: offer.description,
-                location: offer.location,
+                offer: offer,
               ),
             )
         ],

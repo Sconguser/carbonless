@@ -16,10 +16,12 @@ Widget buildTextFormField(
   String name,
   String? Function(String?) validator, {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
+  int? maxlines = 1,
 }) {
   return ClipRRect(
     borderRadius: BorderRadius.circular(10),
     child: FormBuilderTextField(
+      maxLines: maxlines,
       validator: validator,
       autovalidateMode: autovalidateMode,
       name: name,

@@ -108,3 +108,9 @@ notifications:
 about:
   what: Carbonless to aplikacja stworzona i rozwijana przez zespół Carbonless - Macieja Ciepłucha i Miłosz Taranowicza
   show_licenses: pokaż listę licencji
+
+market:
+  added: dodano
+  location: lokalizacja
+  user: użytkownik
+  details: szczegóły

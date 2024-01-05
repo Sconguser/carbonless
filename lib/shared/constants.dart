@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 int maxCharactersInForm = 20;
+int maxCharactersInMultilineForm = 250;
 int minPasswordCharacters = 6;
 Color textInputFillColor = const Color(0xFFFD9D9D9);
 Color firstPositionColor = const Color(0xFF9BBD95);
