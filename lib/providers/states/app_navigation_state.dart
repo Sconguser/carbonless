@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+enum MainView { Exchange, Scanner }
+
 class AppNavigationState extends Equatable {
   const AppNavigationState();
   @override
@@ -7,7 +9,8 @@ class AppNavigationState extends Equatable {
 }
 
 class AppNavigationMain extends AppNavigationState {
-  const AppNavigationMain();
+  MainView view;
+  AppNavigationMain({required this.view});
   @override
   List<Object?> get props => [];
 }

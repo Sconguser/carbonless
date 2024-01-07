@@ -1,3 +1,4 @@
+import 'package:carbonless_free/providers/controllers/appbar/appbar_actions_controller_provider.dart';
 import 'package:carbonless_free/views/exchange/exchanges_list/exchange_list_view.dart';
 
 import '/providers/controllers/app_navigation_controller_provider.dart';
@@ -7,7 +8,6 @@ import '/shared/carbonless_appbar.dart';
 import '/shared/carbonless_drawer/carbonless_drawer.dart';
 import '/shared/constants.dart';
 import '/shared/widgets.dart';
-import '/views/carbonless_map/carbonless_map_view.dart';
 import '/views/loading_view.dart';
 import '/views/scanner/scanner_view.dart';
 import 'package:flutter/material.dart';
@@ -15,13 +15,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../main.dart';
 import '../localization/messages.i18n.dart';
-import '../views/prize/prize_view.dart';
 import 'carbonless_scaffold.dart';
 
 Messages _locale = Messages();
 
 class BottomNavigationBarView extends ConsumerWidget {
   Widget? scaffoldChild;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   BottomNavigationBarView({
     Key? key,
     this.scaffoldChild,
@@ -35,12 +35,15 @@ class BottomNavigationBarView extends ConsumerWidget {
       return const LoadingView();
     }
     return DefaultScaffold(
+      scaffoldKey: _scaffoldKey,
       appBar: CarbonLessAppBar(
+        scaffoldKey: _scaffoldKey,
         context: context,
         title: LogoText(
           color: Colors.white,
         ),
-        showLeading: false,
+        showLeading: true,
+        actions: ref.watch(appbarActionsControllerNotifier),
       ),
       drawer: const CarbonlessDrawer(),
       context: context,
@@ -58,8 +61,9 @@ class BottomNavigationBarView extends ConsumerWidget {
             ? 0
             : ref.read(bottomNavIndexProvider),
         onTap: (index) {
-          ref.read(appNavigationControllerProvider.notifier).showMain();
-          ref.read(bottomNavIndexProvider.notifier).state = index;
+          ref
+              .read(appNavigationControllerProvider.notifier)
+              .changeMainView(index);
         },
         selectedItemColor: ref.read(bottomNavIndexProvider) == -1
             ? unselectedIndexColor
@@ -99,5 +103,4 @@ final bottomNavIndexProvider = StateProvider((ref) => 0);
 enum bottomNavViewIndex {
   EXCHANGE,
   SCANNER,
-  // MAP,
 }

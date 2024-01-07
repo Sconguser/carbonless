@@ -115,6 +115,8 @@ market:
   user: user
   details: details
   make_offer: make an offer
+  title: title
+  description: description
   offer_message: put your offer message here
   submit: submit
 

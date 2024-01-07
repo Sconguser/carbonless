@@ -7,7 +7,9 @@ class DefaultScaffold extends StatelessWidget {
   final FloatingActionButton? floatingActionButton;
   final BottomNavigationBar? bottomNavigationBar;
   final Widget? drawer;
+  final Key scaffoldKey;
   const DefaultScaffold({
+    required this.scaffoldKey,
     required this.context,
     this.appBar,
     required this.body,
@@ -18,13 +20,14 @@ class DefaultScaffold extends StatelessWidget {
   }) : super(key: key);
 
   @override
-    Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar,
       body: SafeArea(child: body),
       floatingActionButton: floatingActionButton,
       bottomNavigationBar: bottomNavigationBar,
       endDrawer: drawer,
+      key: scaffoldKey,
     );
   }
 }

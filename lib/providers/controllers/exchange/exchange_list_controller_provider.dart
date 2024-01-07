@@ -1,6 +1,7 @@
+import 'package:carbonless_free/providers/controllers/appbar/appbar_actions_controller_provider.dart';
 import 'package:carbonless_free/providers/controllers/loaders/view_loading_controller_provider.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:http/http.dart' as http;
 
 import '../../../models/exchange_offer_model.dart';
 

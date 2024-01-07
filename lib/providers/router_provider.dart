@@ -1,3 +1,8 @@
+import 'package:carbonless_free/providers/controllers/exchange/exchange_list_controller_provider.dart';
+import 'package:carbonless_free/providers/controllers/exchange/exchange_navigation_controller_provider.dart';
+import 'package:carbonless_free/providers/states/exchange/exchange_navigation_state.dart';
+import 'package:carbonless_free/views/exchange/create/create_view.dart';
+
 import '../providers/states/app_navigation_state.dart';
 import '../providers/states/login_state.dart';
 import '../auth/views/sign_up.dart';
@@ -47,6 +52,10 @@ class RouterNotifier extends ChangeNotifier {
       appNavigationControllerProvider,
       (_, __) => notifyListeners(),
     );
+    _ref.listen<ExchangeNavigationState>(
+      exchangeNavigationControllerProvider,
+      (_, __) => notifyListeners(),
+    );
   }
 
   String? _redirectLogic(_, GoRouterState goRouterState) {
@@ -90,7 +99,7 @@ class RouterNotifier extends ChangeNotifier {
   String? authorizedRedirect(GoRouterState goRouterState) {
     final appNavigationState = _ref.read(appNavigationControllerProvider);
     if (appNavigationState is AppNavigationMain) {
-      return goRouterState.matchedLocation == '/home' ? null : '/home';
+      return mainRedirect(goRouterState, appNavigationState.view);
     } else {
       return goRouterState.matchedLocation == '/auxiliary'
           ? null
@@ -99,9 +108,26 @@ class RouterNotifier extends ChangeNotifier {
     return null;
   }
 
-  // String? drawerRedirect(GoRouterState goRouterState) {
-  //   final drawerState = _ref.read(drawerControllerProvider);
-  // }
+  String? mainRedirect(GoRouterState goRouterState, MainView viewType) {
+    switch (viewType) {
+      case MainView.Exchange:
+        return exchangeRedirect(goRouterState);
+      default:
+        return goRouterState.matchedLocation == '/home' ? null : '/home';
+    }
+  }
+
+  String? exchangeRedirect(GoRouterState goRouterState) {
+    ExchangeNavigationState exchangeNavigationState =
+        _ref.read(exchangeNavigationControllerProvider);
+    if (exchangeNavigationState == const CreateOffer()) {
+      return goRouterState.matchedLocation == '/create_offer'
+          ? null
+          : '/create_offer';
+    } else {
+      return goRouterState.matchedLocation == '/home' ? null : '/home';
+    }
+  }
 
   List<GoRoute> get _routes => [
         GoRoute(
@@ -129,6 +155,11 @@ class RouterNotifier extends ChangeNotifier {
           builder: (context, state) => AuxiliaryView(),
           path: '/auxiliary',
         ),
+        GoRoute(
+          name: 'Create Offer',
+          builder: (context, state) => CreateOfferView(),
+          path: '/create_offer',
+        )
       ];
 }
 

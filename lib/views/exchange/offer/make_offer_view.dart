@@ -25,49 +25,44 @@ class MakeOfferView extends ConsumerWidget {
     return BottomNavigationBarView(
       scaffoldChild: Container(
         padding: standardOuterPadding,
-        child: Column(
-          children: [
-            FormBuilder(
-              key: _formKey,
-              child: Column(
-                children: [
-                  buildTextFormField(
-                    offer,
-                    ref,
-                    offerStateProvider,
-                    false,
-                    _locale.market.offer_message,
-                    'offer',
-                    FormBuilderValidators.compose(
-                      [
-                        FormBuilderValidators.required(
-                            errorText:
-                                _locale.validators.errors.cannot_be_empty),
-                        FormBuilderValidators.max(
-                          maxCharactersInMultilineForm,
-                          errorText: _locale
-                              .validators.errors.password_max_20_characters,
-                        ),
-                      ],
+        child: FormBuilder(
+          key: _formKey,
+          child: Column(
+            children: [
+              buildTextFormField(
+                offer,
+                ref,
+                offerStateProvider,
+                false,
+                _locale.market.offer_message,
+                'offer',
+                FormBuilderValidators.compose(
+                  [
+                    FormBuilderValidators.required(
+                        errorText: _locale.validators.errors.cannot_be_empty),
+                    FormBuilderValidators.max(
+                      maxCharactersInMultilineForm,
+                      errorText:
+                          _locale.validators.errors.password_max_20_characters,
                     ),
-                    maxlines: 10,
-                  ),
-                  makeOfferState == const MakeOfferLoading()
-                      ? spinner
-                      : ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              ref
-                                  .read(makeOfferControllerProvider.notifier)
-                                  .sendOffer(offer);
-                            }
-                          },
-                          child: Text(_locale.market.submit),
-                        ),
-                ],
+                  ],
+                ),
+                maxlines: 10,
               ),
-            ),
-          ],
+              makeOfferState == const MakeOfferLoading()
+                  ? spinner
+                  : ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          ref
+                              .read(makeOfferControllerProvider.notifier)
+                              .sendOffer(offer);
+                        }
+                      },
+                      child: Text(_locale.market.submit),
+                    ),
+            ],
+          ),
         ),
       ),
     );

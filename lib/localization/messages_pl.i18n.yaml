@@ -115,6 +115,8 @@ market:
   user: użytkownik
   details: szczegóły
   make_offer: złóż ofertę
+  title: tytuł
+  description: opis
   offer_message: opisz tu swoją ofertę
   submit: wyślij
 

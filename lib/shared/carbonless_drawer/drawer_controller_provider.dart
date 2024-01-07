@@ -5,7 +5,6 @@ import '/providers/controllers/history_list/history_controller_provider.dart';
 import '/providers/controllers/partners/partners_controller_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../bottom_nav_bar.dart';
 import 'drawer_state.dart';
 
 class DrawerController extends StateNotifier<DrawerState> {
@@ -53,7 +52,6 @@ class DrawerController extends StateNotifier<DrawerState> {
 
   void _setAppNavigationToAuxiliary() {
     ref.read(appNavigationControllerProvider.notifier).showAuxiliary();
-    ref.read(bottomNavIndexProvider.notifier).state = -1;
   }
 }
 
