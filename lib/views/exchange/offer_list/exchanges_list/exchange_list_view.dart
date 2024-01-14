@@ -1,3 +1,4 @@
+import 'package:carbonless_free/views/exchange/offer_list/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,7 +24,7 @@ class ExchangeListView extends ConsumerWidget {
       child: ListView(
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          for (ExchangeOffer offer in offers!)
+          for (ExchangeOffer offer in sortOffers(offers))
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: ExchangeTile(
@@ -33,16 +34,5 @@ class ExchangeListView extends ConsumerWidget {
         ],
       ),
     );
-  }
-
-  void sortOffers(List<ExchangeOffer>? offers) {
-    if (offers == null || offers.isEmpty) return;
-    offers.sort((a, b) {
-      if (a.created_at.compareTo(b.created_at) < 0) {
-        return 1;
-      } else {
-        return -1;
-      }
-    });
   }
 }

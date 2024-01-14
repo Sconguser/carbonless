@@ -1,11 +1,12 @@
-import 'package:carbonless_free/providers/controllers/exchange/my_offer_list_controller_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../localization/messages.i18n.dart';
 import '../../../../main.dart';
 import '../../../../models/exchange_offer_model.dart';
+import '../../../../providers/controllers/exchange/my_offer_list_controller_provider.dart';
 import '../../../../shared/constants.dart';
+import '../utils.dart';
 import '../widgets.dart';
 
 class MyOffersListView extends ConsumerWidget {
@@ -20,7 +21,7 @@ class MyOffersListView extends ConsumerWidget {
       child: ListView(
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          for (ExchangeOffer offer in offers!)
+          for (ExchangeOffer offer in sortOffers(offers))
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: ExchangeTile(
