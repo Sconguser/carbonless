@@ -47,6 +47,7 @@ drawer:
   log_out: wyloguj się
   history: historia
   about: o aplikacji
+  my_offers: moje oferty
 
 bottomNavBar:
   prizes: nagrody

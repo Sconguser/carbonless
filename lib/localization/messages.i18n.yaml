@@ -47,6 +47,7 @@ drawer:
   log_out: log out
   history: history
   about: about
+  my_offers: my offers
 
 bottomNavBar:
   prizes: prizes

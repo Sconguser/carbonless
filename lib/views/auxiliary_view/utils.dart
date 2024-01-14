@@ -1,3 +1,4 @@
+import '../exchange/offer_list/my_offers_list/my_offers_list_view.dart';
 import '/views/about/about_view.dart';
 import '/views/edit_profile/edit_profile_view.dart';
 import '/views/highscores/highscores_view.dart';
@@ -30,6 +31,9 @@ Widget getDrawerView(DrawerState drawerState) {
   }
   if (drawerState == const About()) {
     return const AboutView();
+  }
+  if (drawerState == const MyOffers()) {
+    return const MyOffersListView();
   }
   return const ErrorView();
 }

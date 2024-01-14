@@ -7,6 +7,7 @@ import '../../localization/messages.i18n.dart';
 
 enum DRAWER_TILES {
   EDIT_DATA,
+  MY_OFFERS,
   HIGHSCORES,
   HISTORY,
   PARTNERS,
@@ -85,6 +86,13 @@ class DrawerMenuItems extends ConsumerWidget {
             },
           ),
           DrawerButton(
+            icon: const Icon(Icons.local_offer_outlined),
+            text: _locale.drawer.my_offers,
+            onPressed: () {
+              handleButtonPress(ref, DRAWER_TILES.MY_OFFERS, context);
+            },
+          ),
+          DrawerButton(
             icon: const Icon(Icons.people),
             text: _locale.drawer.highscores,
             onPressed: () {
@@ -155,6 +163,9 @@ void handleButtonPress(WidgetRef ref, DRAWER_TILES tile, BuildContext context) {
     case DRAWER_TILES.LOGOUT:
       ref.read(drawerControllerProvider.notifier).logout();
       return;
+    case DRAWER_TILES.MY_OFFERS:
+      ref.read(drawerControllerProvider.notifier).showMyOffers();
+      break;
   }
   Navigator.pop(context);
 }

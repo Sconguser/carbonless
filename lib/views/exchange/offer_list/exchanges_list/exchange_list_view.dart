@@ -1,13 +1,12 @@
-import 'package:carbonless_free/providers/controllers/exchange/exchange_list_controller_provider.dart';
-import 'package:carbonless_free/shared/constants.dart';
-import 'package:carbonless_free/shared/utils.dart';
-import 'package:carbonless_free/views/exchange/exchanges_list/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../localization/messages.i18n.dart';
-import '../../../main.dart';
-import '../../../models/exchange_offer_model.dart';
+import '../../../../localization/messages.i18n.dart';
+import '../../../../main.dart';
+import '../../../../models/exchange_offer_model.dart';
+import '../../../../providers/controllers/exchange/exchange_list_controller_provider.dart';
+import '../../../../shared/constants.dart';
+import '../widgets.dart';
 
 class ExchangeListView extends ConsumerWidget {
   const ExchangeListView({

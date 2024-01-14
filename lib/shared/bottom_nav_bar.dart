@@ -1,6 +1,5 @@
-import 'package:carbonless_free/providers/controllers/appbar/appbar_actions_controller_provider.dart';
-import 'package:carbonless_free/views/exchange/exchanges_list/exchange_list_view.dart';
-
+import '../providers/controllers/appbar/appbar_actions_controller_provider.dart';
+import '/views/exchange/offer_list/exchanges_list/exchange_list_view.dart';
 import '/providers/controllers/app_navigation_controller_provider.dart';
 import '/providers/controllers/loaders/view_loading_controller_provider.dart';
 import '/providers/states/loading_state.dart';

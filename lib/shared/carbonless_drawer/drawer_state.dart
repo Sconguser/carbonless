@@ -8,7 +8,6 @@ class DrawerState extends Equatable {
 
 class DrawerInitialState extends DrawerState {
   const DrawerInitialState();
-
   @override
   List<Object?> get props => [];
 }
@@ -51,6 +50,12 @@ class Logout extends DrawerState {
 
 class About extends DrawerState {
   const About();
+  @override
+  List<Object?> get props => [];
+}
+
+class MyOffers extends DrawerState {
+  const MyOffers();
   @override
   List<Object?> get props => [];
 }
