@@ -6,6 +6,7 @@ button:
   redeem: odbierz nagrodę
   save_changes: zapisz zmiany
   change_password: zmień hasło
+  add_offer: dodaj ofertę
 
 text:
   log_in: logowanie

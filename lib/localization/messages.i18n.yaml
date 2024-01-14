@@ -6,6 +6,7 @@ button:
   redeem: reedem prize
   save_changes: save changes
   change_password: change password
+  add_offer: add offer
 
 text:
   log_in: log in

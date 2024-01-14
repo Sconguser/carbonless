@@ -1,3 +1,4 @@
+import 'package:carbonless_free/main.dart';
 import 'package:carbonless_free/providers/controllers/exchange/exchange_navigation_controller_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -35,8 +36,8 @@ List<Widget> getActionsForOffersView(Ref ref) {
     return [];
   }
   return [
-    IconButton(
-      icon: const Icon(Icons.add),
+    ElevatedButton(
+      child: Text(ref.read(messagesProvider).button.add_offer),
       onPressed: () {
         ref.read(exchangeNavigationControllerProvider.notifier).createOffer();
       },
