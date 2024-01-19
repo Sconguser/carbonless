@@ -49,6 +49,7 @@ drawer:
   history: history
   about: about
   my_offers: my offers
+  my_requests: my requests
 
 bottomNavBar:
   prizes: prizes

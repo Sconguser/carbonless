@@ -1,5 +1,6 @@
-import 'package:carbonless_free/providers/controllers/exchange/my_offer_list_controller_provider.dart';
+import 'package:carbonless_free/providers/controllers/exchange/requests/my_request_list_controller_provider.dart';
 
+import '../../providers/controllers/exchange/offers/my_offer_list_controller_provider.dart';
 import '/providers/controllers/app_navigation_controller_provider.dart';
 import '/providers/controllers/auth_controller_provider.dart';
 import '/providers/controllers/highscores/highscores_entry_controller_provider.dart';
@@ -34,6 +35,12 @@ class DrawerController extends StateNotifier<DrawerState> {
   void showMyOffers() {
     state = const MyOffers();
     ref.read(myOfferListNotifier.notifier).initialize();
+    _setAppNavigationToAuxiliary();
+  }
+
+  void showMyRequests() {
+    state = const MyRequests();
+    ref.read(myRequestListNotifier.notifier).initialize();
     _setAppNavigationToAuxiliary();
   }
 

@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../localization/messages.i18n.dart';
 import '../../../../../main.dart';
 import '../../../../../models/exchange_offer_model.dart';
-import '../../../../../providers/controllers/exchange/exchange_list_controller_provider.dart';
+import '../../../../../providers/controllers/exchange/offers/exchange_list_controller_provider.dart';
 import '../../../../../shared/constants.dart';
 import '../utils.dart';
 import '../widgets.dart';

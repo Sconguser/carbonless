@@ -1,3 +1,5 @@
+import 'package:carbonless_free/views/exchange/requests/my_requests/my_requests_list_view.dart';
+
 import '../exchange/offers/offer_list/my_offers_list/my_offers_list_view.dart';
 import '/views/about/about_view.dart';
 import '/views/edit_profile/edit_profile_view.dart';
@@ -34,6 +36,9 @@ Widget getDrawerView(DrawerState drawerState) {
   }
   if (drawerState == const MyOffers()) {
     return const MyOffersListView();
+  }
+  if (drawerState == const MyRequests()) {
+    return const MyRequestsListView();
   }
   return const ErrorView();
 }

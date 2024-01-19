@@ -1,26 +1,27 @@
-import 'package:carbonless_free/providers/controllers/loaders/view_loading_controller_provider.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../models/exchange_offer_model.dart';
+import '../../../../models/exchange_offer_model.dart';
+import '../../loaders/view_loading_controller_provider.dart';
 
-class MyOfferListNotifier extends StateNotifier<List<ExchangeOffer>> {
-  MyOfferListNotifier(List<ExchangeOffer> initialState, this.ref)
-      : super(initialState);
+class ExchangeListNotifier extends StateNotifier<List<ExchangeOffer>> {
+  ExchangeListNotifier(List<ExchangeOffer> state, this.ref) : super(state);
   final Ref ref;
+
   bool _initialized = false;
 
   void initialize() async {
-    if (_initialized) {
-      return;
+    if (!_initialized) {
+      ref.read(viewLoadingControllerProvider.notifier).viewLoadingOn();
+      await _getOffers();
+      _initialized = true;
+      ref.read(viewLoadingControllerProvider.notifier).viewLoadingOff();
     }
-    ref.read(viewLoadingControllerProvider.notifier).viewLoadingOn();
-    await _getMyOffers();
-    _initialized = true;
-    ref.read(viewLoadingControllerProvider.notifier).viewLoadingOff();
   }
 
-  Future<void> _getMyOffers() async {
+  Future<void> _getOffers() async {
     await Future.delayed(const Duration(milliseconds: 2000));
+    // List<dynamic> decodedList = jsonDecode(response.body);
     setListOfOffersFromJson([]);
   }
 
@@ -71,7 +72,7 @@ class MyOfferListNotifier extends StateNotifier<List<ExchangeOffer>> {
   }
 }
 
-final myOfferListNotifier =
-    StateNotifierProvider<MyOfferListNotifier, List<ExchangeOffer>>((ref) {
-  return MyOfferListNotifier([], ref);
+final exchangeOfferListNotifier =
+    StateNotifierProvider<ExchangeListNotifier, List<ExchangeOffer>>((ref) {
+  return ExchangeListNotifier([], ref);
 });

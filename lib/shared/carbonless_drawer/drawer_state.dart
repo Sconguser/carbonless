@@ -59,3 +59,9 @@ class MyOffers extends DrawerState {
   @override
   List<Object?> get props => [];
 }
+
+class MyRequests extends DrawerState {
+  const MyRequests();
+  @override
+  List<Object?> get props => [];
+}

@@ -1,5 +1,3 @@
-import 'package:carbonless_free/providers/controllers/exchange/exchange_list_controller_provider.dart';
-
 import '/providers/controllers/app_navigation_controller_provider.dart';
 import '/providers/controllers/error_message_controller_provider.dart';
 import '/providers/controllers/local_storage/secure_storage.dart';
@@ -9,6 +7,7 @@ import '/providers/controllers/signup_controller_provider.dart';
 import '/providers/states/auth_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'exchange/offers/exchange_list_controller_provider.dart';
 import 'login_controller_provider.dart';
 
 class AuthController extends StateNotifier<AuthState> {

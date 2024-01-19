@@ -15,7 +15,7 @@ import '../views/exchange/offers/create/create_view.dart';
 import 'controllers/app_navigation_controller_provider.dart';
 import 'controllers/auth_controller_provider.dart';
 import 'controllers/error_message_controller_provider.dart';
-import 'controllers/exchange/exchange_navigation_controller_provider.dart';
+import 'controllers/exchange/offers/exchange_navigation_controller_provider.dart';
 import 'controllers/login_controller_provider.dart';
 import 'controllers/signup_controller_provider.dart';
 import 'states/exchange/exchange_navigation_state.dart';

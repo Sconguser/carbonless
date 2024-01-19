@@ -8,6 +8,7 @@ import '../../localization/messages.i18n.dart';
 enum DRAWER_TILES {
   EDIT_DATA,
   MY_OFFERS,
+  MY_REQUESTS,
   HIGHSCORES,
   HISTORY,
   PARTNERS,
@@ -93,6 +94,13 @@ class DrawerMenuItems extends ConsumerWidget {
             },
           ),
           DrawerButton(
+            icon: const Icon(Icons.request_quote_outlined),
+            text: _locale.drawer.my_requests,
+            onPressed: () {
+              handleButtonPress(ref, DRAWER_TILES.MY_REQUESTS, context);
+            },
+          ),
+          DrawerButton(
             icon: const Icon(Icons.people),
             text: _locale.drawer.highscores,
             onPressed: () {
@@ -141,30 +149,34 @@ class DrawerMenuItems extends ConsumerWidget {
 }
 
 void handleButtonPress(WidgetRef ref, DRAWER_TILES tile, BuildContext context) {
+  var drawerController = ref.read(drawerControllerProvider.notifier);
   switch (tile) {
     case DRAWER_TILES.EDIT_DATA:
-      ref.read(drawerControllerProvider.notifier).showEditDataView();
+      drawerController.showEditDataView();
       break;
     case DRAWER_TILES.HIGHSCORES:
-      ref.read(drawerControllerProvider.notifier).showHighscores();
+      drawerController.showHighscores();
       break;
     case DRAWER_TILES.HISTORY:
-      ref.read(drawerControllerProvider.notifier).showHistory();
+      drawerController.showHistory();
       break;
     case DRAWER_TILES.PARTNERS:
-      ref.read(drawerControllerProvider.notifier).showPartners();
+      drawerController.showPartners();
       break;
     case DRAWER_TILES.SETTINGS:
-      ref.read(drawerControllerProvider.notifier).showSettings();
+      drawerController.showSettings();
       break;
     case DRAWER_TILES.ABOUT:
-      ref.read(drawerControllerProvider.notifier).showAbout();
+      drawerController.showAbout();
       break;
     case DRAWER_TILES.LOGOUT:
-      ref.read(drawerControllerProvider.notifier).logout();
+      drawerController.logout();
       return;
     case DRAWER_TILES.MY_OFFERS:
-      ref.read(drawerControllerProvider.notifier).showMyOffers();
+      drawerController.showMyOffers();
+      break;
+    case DRAWER_TILES.MY_REQUESTS:
+      drawerController.showMyRequests();
       break;
   }
   Navigator.pop(context);

@@ -1,3 +1,4 @@
+import 'package:carbonless_free/models/exchange_request_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,7 +7,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import '../../../../localization/messages.i18n.dart';
 import '../../../../main.dart';
 import '../../../../models/exchange_offer_model.dart';
-import '../../../../providers/controllers/exchange/make_offer_controller_provider.dart';
+import '../../../../providers/controllers/exchange/requests/make_request_controller_provider.dart';
 import '../../../../providers/states/exchange/make_offer_state.dart';
 import '../../../../shared/bottom_nav_bar.dart';
 import '../../../../shared/constants.dart';
@@ -20,8 +21,8 @@ class MakeOfferView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Messages _locale = ref.watch(messagesProvider);
-    String offer = ref.watch(offerStateProvider);
-    MakeOfferState makeOfferState = ref.watch(makeOfferControllerProvider);
+    String requestBody = ref.watch(requestBodyStateProvider);
+    MakeRequestState makeOfferState = ref.watch(makeRequestControllerProvider);
     return BottomNavigationBarView(
       scaffoldChild: Container(
         padding: standardOuterPadding,
@@ -30,12 +31,12 @@ class MakeOfferView extends ConsumerWidget {
           child: Column(
             children: [
               buildTextFormField(
-                offer,
+                requestBody,
                 ref,
-                offerStateProvider,
+                requestBodyStateProvider,
                 false,
                 _locale.market.offer_message,
-                'offer',
+                'requestBody',
                 FormBuilderValidators.compose(
                   [
                     FormBuilderValidators.required(
@@ -49,14 +50,14 @@ class MakeOfferView extends ConsumerWidget {
                 ),
                 maxlines: 10,
               ),
-              makeOfferState == const MakeOfferLoading()
+              makeOfferState == const MakeRequestLoading()
                   ? spinner
                   : ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           ref
-                              .read(makeOfferControllerProvider.notifier)
-                              .sendOffer(offer);
+                              .read(makeRequestControllerProvider.notifier)
+                              .sendRequest(requestBody);
                         }
                       },
                       child: Text(_locale.market.submit),
@@ -68,7 +69,7 @@ class MakeOfferView extends ConsumerWidget {
     );
   }
 
-  final offerStateProvider = StateProvider<String>((ref) {
+  final requestBodyStateProvider = StateProvider<String>((ref) {
     return '';
   });
 }

@@ -49,6 +49,7 @@ drawer:
   history: historia
   about: o aplikacji
   my_offers: moje oferty
+  my_requests: moje zapytania
 
 bottomNavBar:
   prizes: nagrody

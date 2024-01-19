@@ -1,4 +1,4 @@
-const String url = '192.168.109.50:3000';
+const String url = '10.10.50.147:3000';
 const String prizes = '/prizes';
 const String userPrizes = '/users_prizes';
 const String partners = '/partners';

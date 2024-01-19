@@ -5,7 +5,7 @@ import '../../../../localization/messages.i18n.dart';
 import '../../../../main.dart';
 import '../../../../models/exchange_offer_model.dart';
 import '../../../../shared/bottom_nav_bar.dart';
-import '../make_offer/make_offer_view.dart';
+import '../../requests/make_request/create_request_view.dart';
 
 class ExchangeDetailsView extends ConsumerWidget {
   final ExchangeOffer offer;
