@@ -21,6 +21,7 @@ forms:
   password_confirmation: password confirmation
   name: name
   lastname: lastname
+
 validators:
   errors:
     passwords_must_match: passwords must match
@@ -30,6 +31,7 @@ validators:
     lastname_max_20_characters: lastname can only have up to 20 characters
     password_min_6_characters: password needs to have at least 6 characters
     password_max_20_characters: password can only have up to 20 characters
+    max_characters(int chars): you can only put $chars characters
 
 authErrors:
   invalid_credentials: invalid credentials
@@ -122,6 +124,7 @@ market:
   description: description
   offer_message: put your offer message here
   submit: submit
+  exchange_value: exchange value
 
 exceptions:
   not_authorized: User not authorized

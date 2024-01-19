@@ -21,6 +21,7 @@ forms:
   password_confirmation: potwierdzenie hasła
   name: imię
   lastname: nazwisko
+
 validators:
   errors:
     passwords_must_match: hasła muszą się zgadzać
@@ -30,6 +31,7 @@ validators:
     lastname_max_20_characters: nazwisko może mieć maksymalnie 20 znaków
     password_min_6_characters: hasło musi mieć minimum 6 znaków
     password_max_20_characters: hasło może mieć maksymalnie 20 znaków
+    max_characters(int chars): możesz tu wpisać tylko $chars znaków
 
 authErrors:
   invalid_credentials: niepoprawne dane
@@ -122,6 +124,7 @@ market:
   description: opis
   offer_message: opisz tu swoją ofertę
   submit: wyślij
+  exchange_value: wartość wymiany
 
 exceptions:
   not_authorized: Użytkownik niezalogowany

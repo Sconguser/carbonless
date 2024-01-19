@@ -1,6 +1,6 @@
 import 'package:carbonless_free/auth/auth_repository.dart';
 import 'package:carbonless_free/main.dart';
-import 'package:carbonless_free/providers/states/exchange/make_offer_state.dart';
+import 'package:carbonless_free/providers/states/exchange/make_request_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../localization/messages.i18n.dart';

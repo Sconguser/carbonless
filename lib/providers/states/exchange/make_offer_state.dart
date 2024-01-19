@@ -1,32 +1,32 @@
 import 'package:equatable/equatable.dart';
 
-class MakeRequestState extends Equatable {
-  const MakeRequestState();
+class MakeOfferState extends Equatable {
+  const MakeOfferState();
   @override
   List<Object?> get props => [];
 }
 
-class MakeRequestStateInitial extends MakeRequestState {
-  const MakeRequestStateInitial();
+class MakeOfferStateInitial extends MakeOfferState {
+  const MakeOfferStateInitial();
   @override
   List<Object?> get props => [];
 }
 
-class MakeRequestLoading extends MakeRequestState {
-  const MakeRequestLoading();
+class MakeOfferLoading extends MakeOfferState {
+  const MakeOfferLoading();
   @override
   List<Object?> get props => [];
 }
 
-class MakeRequestSuccess extends MakeRequestState {
-  const MakeRequestSuccess();
+class MakeOfferSuccess extends MakeOfferState {
+  const MakeOfferSuccess();
   @override
   List<Object?> get props => [];
 }
 
-class MakeRequestError extends MakeRequestState {
+class MakeOfferError extends MakeOfferState {
   final String error;
-  const MakeRequestError({required this.error});
+  const MakeOfferError({required this.error});
   @override
   List<Object?> get props => [];
 }

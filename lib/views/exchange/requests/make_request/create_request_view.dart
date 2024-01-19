@@ -8,7 +8,7 @@ import '../../../../localization/messages.i18n.dart';
 import '../../../../main.dart';
 import '../../../../models/exchange_offer_model.dart';
 import '../../../../providers/controllers/exchange/requests/make_request_controller_provider.dart';
-import '../../../../providers/states/exchange/make_offer_state.dart';
+import '../../../../providers/states/exchange/make_request_state.dart';
 import '../../../../shared/bottom_nav_bar.dart';
 import '../../../../shared/constants.dart';
 import '../../../../shared/widgets.dart';
@@ -22,7 +22,8 @@ class MakeOfferView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     Messages _locale = ref.watch(messagesProvider);
     String requestBody = ref.watch(requestBodyStateProvider);
-    MakeRequestState makeOfferState = ref.watch(makeRequestControllerProvider);
+    MakeRequestState makeRequestState =
+        ref.watch(makeRequestControllerProvider);
     return BottomNavigationBarView(
       scaffoldChild: Container(
         padding: standardOuterPadding,
@@ -43,14 +44,14 @@ class MakeOfferView extends ConsumerWidget {
                         errorText: _locale.validators.errors.cannot_be_empty),
                     FormBuilderValidators.max(
                       maxCharactersInMultilineForm,
-                      errorText:
-                          _locale.validators.errors.password_max_20_characters,
+                      errorText: _locale.validators.errors
+                          .max_characters(maxCharactersInMultilineForm),
                     ),
                   ],
                 ),
                 maxlines: 10,
               ),
-              makeOfferState == const MakeRequestLoading()
+              makeRequestState == const MakeRequestLoading()
                   ? spinner
                   : ElevatedButton(
                       onPressed: () {
