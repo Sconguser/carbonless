@@ -1,4 +1,4 @@
-import '../providers/controllers/appbar/appbar_actions_controller_provider.dart';
+import '../providers/controllers/view_behavior_controllers/appbar/appbar_actions_controller_provider.dart';
 import '/views/exchange/offer_list/exchanges_list/exchange_list_view.dart';
 import '/providers/controllers/app_navigation_controller_provider.dart';
 import '/providers/controllers/loaders/view_loading_controller_provider.dart';
@@ -46,14 +46,19 @@ class BottomNavigationBarView extends ConsumerWidget {
       ),
       drawer: const CarbonlessDrawer(),
       context: context,
-      body: scaffoldChild ??
-          IndexedStack(
-            index: ref.watch(bottomNavIndexProvider),
-            children: const [
-              ExchangeListView(),
-              ScannerView(),
-            ],
-          ),
+      body: RefreshIndicator(
+        child: scaffoldChild ??
+            IndexedStack(
+              index: ref.watch(bottomNavIndexProvider),
+              children: const [
+                ExchangeListView(),
+                ScannerView(),
+              ],
+            ),
+        onRefresh: () {
+          return _handleRefresh(ref);
+        },
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: ref.watch(bottomNavIndexProvider) == -1
@@ -95,6 +100,8 @@ class BottomNavigationBarView extends ConsumerWidget {
       ),
     );
   }
+
+  Future<void> _handleRefresh(WidgetRef ref) async {}
 }
 
 final bottomNavIndexProvider = StateProvider((ref) => 0);

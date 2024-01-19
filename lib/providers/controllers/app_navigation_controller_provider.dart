@@ -1,9 +1,8 @@
-import '/providers/controllers/appbar/appbar_actions_controller_provider.dart';
-
 import '/providers/states/app_navigation_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../shared/bottom_nav_bar.dart';
+import 'view_behavior_controllers/appbar/appbar_actions_controller_provider.dart';
 
 class AppNavigationController extends StateNotifier<AppNavigationState> {
   AppNavigationController(this.ref)

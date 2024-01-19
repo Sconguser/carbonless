@@ -1,9 +1,8 @@
-import 'package:carbonless_free/providers/controllers/appbar/appbar_actions_controller_provider.dart';
-import 'package:carbonless_free/providers/controllers/loaders/view_loading_controller_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../models/exchange_offer_model.dart';
+import '../loaders/view_loading_controller_provider.dart';
 
 class ExchangeListNotifier extends StateNotifier<List<ExchangeOffer>> {
   ExchangeListNotifier(List<ExchangeOffer> state, this.ref) : super(state);

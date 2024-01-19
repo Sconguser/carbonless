@@ -3,7 +3,7 @@ import 'package:carbonless_free/providers/controllers/exchange/exchange_navigati
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../states/exchange/exchange_navigation_state.dart';
+import '../../../states/exchange/exchange_navigation_state.dart';
 
 enum ViewType { OFFERS, OTHER }
 
