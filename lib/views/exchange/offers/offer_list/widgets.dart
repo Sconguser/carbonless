@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../localization/messages.i18n.dart';
-import '../../../main.dart';
-import '../../../models/exchange_offer_model.dart';
-import '../../../shared/constants.dart';
-import '../../../shared/utils.dart';
+import '../../../../localization/messages.i18n.dart';
+import '../../../../main.dart';
+import '../../../../models/exchange_offer_model.dart';
+import '../../../../shared/constants.dart';
+import '../../../../shared/utils.dart';
 import '../exchange_details/exchange_details_view.dart';
 
 class ExchangeTile extends ConsumerWidget {

@@ -1,11 +1,11 @@
-import 'package:carbonless_free/main.dart';
-import 'package:carbonless_free/views/exchange/offer/make_offer_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 
-import '../../../localization/messages.i18n.dart';
-import '../../../models/exchange_offer_model.dart';
-import '../../../shared/bottom_nav_bar.dart';
+import '../../../../localization/messages.i18n.dart';
+import '../../../../main.dart';
+import '../../../../models/exchange_offer_model.dart';
+import '../../../../shared/bottom_nav_bar.dart';
+import '../make_offer/make_offer_view.dart';
 
 class ExchangeDetailsView extends ConsumerWidget {
   final ExchangeOffer offer;

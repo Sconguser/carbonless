@@ -1,13 +1,13 @@
-import 'package:carbonless_free/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
-import '../../../localization/messages.i18n.dart';
-import '../../../main.dart';
-import '../../../shared/bottom_nav_bar.dart';
-import '../../../shared/widgets.dart';
+import '../../../../localization/messages.i18n.dart';
+import '../../../../main.dart';
+import '../../../../shared/bottom_nav_bar.dart';
+import '../../../../shared/constants.dart';
+import '../../../../shared/widgets.dart';
 
 class CreateOfferView extends ConsumerWidget {
   final _formKey = GlobalKey<FormBuilderState>();

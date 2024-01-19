@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../localization/messages.i18n.dart';
-import '../../../../main.dart';
-import '../../../../models/exchange_offer_model.dart';
-import '../../../../providers/controllers/exchange/my_offer_list_controller_provider.dart';
-import '../../../../shared/constants.dart';
+import '../../../../../localization/messages.i18n.dart';
+import '../../../../../main.dart';
+import '../../../../../models/exchange_offer_model.dart';
+import '../../../../../providers/controllers/exchange/exchange_list_controller_provider.dart';
+import '../../../../../shared/constants.dart';
 import '../utils.dart';
 import '../widgets.dart';
 
-class MyOffersListView extends ConsumerWidget {
-  const MyOffersListView({Key? key}) : super(key: key);
+class ExchangeListView extends ConsumerWidget {
+  const ExchangeListView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Messages _locale = ref.watch(messagesProvider);
-    List<ExchangeOffer>? offers = ref.watch(myOfferListNotifier);
+    List<ExchangeOffer>? offers = ref.watch(exchangeOfferListNotifier);
+
     return Container(
       padding: standardOuterPadding,
       child: ListView(

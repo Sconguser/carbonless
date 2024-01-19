@@ -1,4 +1,4 @@
-import '../../../models/exchange_offer_model.dart';
+import '../../../../models/exchange_offer_model.dart';
 
 List<ExchangeOffer> sortOffers(List<ExchangeOffer>? offers) {
   if (offers == null || offers.isEmpty) return [];

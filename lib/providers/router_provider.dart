@@ -1,8 +1,3 @@
-import 'package:carbonless_free/providers/controllers/exchange/exchange_list_controller_provider.dart';
-import 'package:carbonless_free/providers/controllers/exchange/exchange_navigation_controller_provider.dart';
-import 'package:carbonless_free/providers/states/exchange/exchange_navigation_state.dart';
-import 'package:carbonless_free/views/exchange/create/create_view.dart';
-
 import '../providers/states/app_navigation_state.dart';
 import '../providers/states/login_state.dart';
 import '../auth/views/sign_up.dart';
@@ -16,11 +11,14 @@ import '../auth/views/auth_choice.dart';
 import '../auth/views/sign_in.dart';
 import '../shared/bottom_nav_bar.dart';
 import '../views/auxiliary_view/auxiliary_view.dart';
+import '../views/exchange/offers/create/create_view.dart';
 import 'controllers/app_navigation_controller_provider.dart';
 import 'controllers/auth_controller_provider.dart';
 import 'controllers/error_message_controller_provider.dart';
+import 'controllers/exchange/exchange_navigation_controller_provider.dart';
 import 'controllers/login_controller_provider.dart';
 import 'controllers/signup_controller_provider.dart';
+import 'states/exchange/exchange_navigation_state.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final router = RouterNotifier(ref);

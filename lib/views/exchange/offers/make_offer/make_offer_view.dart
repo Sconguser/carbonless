@@ -1,16 +1,16 @@
-import 'package:carbonless_free/main.dart';
-import 'package:carbonless_free/providers/controllers/exchange/make_offer_controller_provider.dart';
-import 'package:carbonless_free/shared/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
-import '../../../localization/messages.i18n.dart';
-import '../../../models/exchange_offer_model.dart';
-import '../../../providers/states/exchange/make_offer_state.dart';
-import '../../../shared/bottom_nav_bar.dart';
-import '../../../shared/constants.dart';
+import '../../../../localization/messages.i18n.dart';
+import '../../../../main.dart';
+import '../../../../models/exchange_offer_model.dart';
+import '../../../../providers/controllers/exchange/make_offer_controller_provider.dart';
+import '../../../../providers/states/exchange/make_offer_state.dart';
+import '../../../../shared/bottom_nav_bar.dart';
+import '../../../../shared/constants.dart';
+import '../../../../shared/widgets.dart';
 
 class MakeOfferView extends ConsumerWidget {
   final ExchangeOffer offer;
