@@ -24,8 +24,37 @@ class RequestTile extends ConsumerWidget {
           color: cardBackgroundColor,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Text(exchangeRequest.body),
+        child: Stack(children: [
+          Align(
+            alignment: Alignment.topRight,
+            child: RequestPopupMenu(exchangeRequest: exchangeRequest),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(exchangeRequest.body),
+          ),
+        ]),
       ),
+    );
+  }
+}
+
+class RequestPopupMenu extends ConsumerWidget {
+  const RequestPopupMenu({Key? key, required this.exchangeRequest})
+      : super(key: key);
+  final ExchangeRequest exchangeRequest;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return PopupMenuButton<String>(
+      onSelected: (value) => {},
+      itemBuilder: (BuildContext context) {
+        return {'Delete'}.map((String choice) {
+          return PopupMenuItem<String>(
+            value: choice,
+            child: Text(choice),
+          );
+        }).toList();
+      },
     );
   }
 }
