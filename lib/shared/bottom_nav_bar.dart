@@ -107,6 +107,6 @@ class BottomNavigationBarView extends ConsumerWidget {
 final bottomNavIndexProvider = StateProvider((ref) => 0);
 
 enum bottomNavViewIndex {
-  EXCHANGE,
+  OFFERS_LIST,
   SCANNER,
 }

@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../main.dart';
-import '../../../states/exchange/exchange_navigation_state.dart';
-import '../../exchange/offers/exchange_navigation_controller_provider.dart';
-
-enum ViewType { OFFERS, OTHER }
-
 class AppbarActionsController extends StateNotifier<List<Widget>> {
   AppbarActionsController(List<Widget> actions, this.ref) : super(actions);
   final Ref ref;
@@ -15,38 +9,29 @@ class AppbarActionsController extends StateNotifier<List<Widget>> {
     state = actions;
   }
 
-  void setActionsForTypeView(ViewType viewType) {
-    switch (viewType) {
-      case ViewType.OFFERS:
-        setActions(getActionsForOffersView(ref));
-        break;
-      default:
-        clearActions();
-        break;
-    }
-  }
+  void setActionsForTypeView() {}
 
   void clearActions() {
     state = [];
   }
 }
 
-List<Widget> getActionsForOffersView(Ref ref) {
-  if (ref.read(exchangeNavigationControllerProvider) == const CreateOffer()) {
-    return [];
-  }
-  return [
-    ElevatedButton(
-      child: Text(ref.read(messagesProvider).button.add_offer),
-      onPressed: () {
-        ref.read(exchangeNavigationControllerProvider.notifier).createOffer();
-      },
-    )
-  ];
-}
+// List<Widget> getActionsForOffersView(Ref ref) {
+//   if (ref.read(exchangeNavigationControllerProvider) == const CreateOffer()) {
+//     return [];
+//   }
+//   return [
+//     ElevatedButton(
+//       child: Text(ref.read(messagesProvider).button.add_offer),
+//       onPressed: () {
+//         ref.read(exchangeNavigationControllerProvider.notifier).createOffer();
+//       },
+//     )
+//   ];
+// }
 
 final appbarActionsControllerNotifier =
     StateNotifierProvider<AppbarActionsController, List<Widget>>((ref) {
-  List<Widget>? actions = getActionsForOffersView(ref);
-  return AppbarActionsController(actions, ref);
+  // List<Widget>? actions = getActionsForOffersView(ref);
+  return AppbarActionsController([], ref);
 });

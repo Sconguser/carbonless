@@ -1,4 +1,5 @@
-import '../providers/states/app_navigation_state.dart';
+import 'states/navigation/exchanges/offers_navigation_state.dart';
+import 'states/navigation/app_navigation_state.dart';
 import '../providers/states/login_state.dart';
 import '../auth/views/sign_up.dart';
 import '../providers/states/auth_state.dart';
@@ -15,10 +16,8 @@ import '../views/exchange/offers/create/create_view.dart';
 import 'controllers/app_navigation_controller_provider.dart';
 import 'controllers/auth_controller_provider.dart';
 import 'controllers/error_message_controller_provider.dart';
-import 'controllers/exchange/offers/exchange_navigation_controller_provider.dart';
 import 'controllers/login_controller_provider.dart';
 import 'controllers/signup_controller_provider.dart';
-import 'states/exchange/exchange_navigation_state.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final router = RouterNotifier(ref);
@@ -50,10 +49,10 @@ class RouterNotifier extends ChangeNotifier {
       appNavigationControllerProvider,
       (_, __) => notifyListeners(),
     );
-    _ref.listen<ExchangeNavigationState>(
-      exchangeNavigationControllerProvider,
-      (_, __) => notifyListeners(),
-    );
+    // _ref.listen<ExchangeNavigationState>(
+    //   exchangeNavigationControllerProvider,
+    //   (_, __) => notifyListeners(),
+    // );
   }
 
   String? _redirectLogic(_, GoRouterState goRouterState) {
@@ -61,7 +60,7 @@ class RouterNotifier extends ChangeNotifier {
     final authState = _ref.read(authControllerProvider);
     _ref.read(errorMessageControllerProvider.notifier).hideError();
     if (authState is AuthStateSuccess) {
-      return authorizedRedirect(goRouterState);
+      return _authorizedRedirect(goRouterState);
     } else if (authState is AuthStateLogin) {
       return loginRedirect(goRouterState);
     } else if (authState is AuthStateSignup) {
@@ -94,10 +93,10 @@ class RouterNotifier extends ChangeNotifier {
     return null;
   }
 
-  String? authorizedRedirect(GoRouterState goRouterState) {
+  String? _authorizedRedirect(GoRouterState goRouterState) {
     final appNavigationState = _ref.read(appNavigationControllerProvider);
     if (appNavigationState is AppNavigationMain) {
-      return mainRedirect(goRouterState, appNavigationState.view);
+      return _mainRedirect(goRouterState, appNavigationState);
     } else {
       return goRouterState.matchedLocation == '/auxiliary'
           ? null
@@ -106,19 +105,17 @@ class RouterNotifier extends ChangeNotifier {
     return null;
   }
 
-  String? mainRedirect(GoRouterState goRouterState, MainView viewType) {
-    switch (viewType) {
-      case MainView.Exchange:
-        return exchangeRedirect(goRouterState);
-      default:
-        return goRouterState.matchedLocation == '/home' ? null : '/home';
+  String? _mainRedirect(
+      GoRouterState goRouterState, AppNavigationState appNavigationState) {
+    if (appNavigationState is AppNavigationOffers) {
+      return offersRedirect(goRouterState, appNavigationState);
     }
+    return goRouterState.matchedLocation == '/home' ? null : '/home';
   }
 
-  String? exchangeRedirect(GoRouterState goRouterState) {
-    ExchangeNavigationState exchangeNavigationState =
-        _ref.read(exchangeNavigationControllerProvider);
-    if (exchangeNavigationState == const CreateOffer()) {
+  String? offersRedirect(
+      GoRouterState goRouterState, AppNavigationOffers appNavigationExchange) {
+    if (appNavigationExchange is NewOfferView) {
       return goRouterState.matchedLocation == '/create_offer'
           ? null
           : '/create_offer';
@@ -145,12 +142,12 @@ class RouterNotifier extends ChangeNotifier {
         ),
         GoRoute(
           name: 'AuthChoice',
-          builder: (context, state) => AuthChoice(),
+          builder: (context, state) => const AuthChoice(),
           path: '/',
         ),
         GoRoute(
           name: 'Auxiliary',
-          builder: (context, state) => AuxiliaryView(),
+          builder: (context, state) => const AuxiliaryView(),
           path: '/auxiliary',
         ),
         GoRoute(

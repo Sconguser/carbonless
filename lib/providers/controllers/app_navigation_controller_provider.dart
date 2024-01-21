@@ -1,54 +1,48 @@
-import '/providers/states/app_navigation_state.dart';
+import '../states/navigation/app_navigation_state.dart';
+import '../states/navigation/exchanges/offers_navigation_state.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../shared/bottom_nav_bar.dart';
 import 'view_behavior_controllers/appbar/appbar_actions_controller_provider.dart';
 
 class AppNavigationController extends StateNotifier<AppNavigationState> {
-  AppNavigationController(this.ref)
-      : super(AppNavigationMain(view: MainView.Exchange));
+  AppNavigationController(this.ref) : super(const OfferListView());
   final Ref ref;
 
   void changeMainView(int index) {
     ref.read(bottomNavIndexProvider.notifier).state = index;
-    showMain();
+    switch (index) {
+      case 0:
+        showMain(const OfferListView());
+        break;
+      case 1:
+        showMain(const ScannerView());
+        break;
+      default:
+        showMain(const ErrorView());
+    }
   }
 
-  void showMain() {
-    ViewType viewType = getViewTypeForState();
-    ref
-        .read(appbarActionsControllerNotifier.notifier)
-        .setActionsForTypeView(viewType);
-    state = AppNavigationMain(
-        view:
-            viewType == ViewType.OFFERS ? MainView.Exchange : MainView.Scanner);
+  void showMain(AppNavigationState state) {
+    ref.read(appbarActionsControllerNotifier.notifier).setActionsForTypeView();
+    this.state = state;
   }
 
-  void showAuxiliary() {
-    ref
-        .read(appbarActionsControllerNotifier.notifier)
-        .setActionsForTypeView(getViewTypeForState());
-    state = const AppNavigationAuxiliary();
+  void showAuxiliary(AppNavigationState state) {
+    // ref.read(appbarActionsControllerNotifier.notifier).setActionsForTypeView();
+    this.state = state;
     ref.read(bottomNavIndexProvider.notifier).state = -1;
   }
 
   void reset() {
     ref.read(appbarActionsControllerNotifier.notifier).clearActions();
-    state = AppNavigationMain(view: MainView.Exchange);
+    state = getDefaultView();
     ref.read(bottomNavIndexProvider.notifier).state = 0;
   }
 
-  ViewType getViewTypeForState() {
-    if (state is AppNavigationMain) {
-      switch (ref.read(bottomNavIndexProvider)) {
-        case 0:
-          return ViewType.OFFERS;
-        default:
-          return ViewType.OTHER;
-      }
-    } else {
-      return ViewType.OTHER;
-    }
+  AppNavigationState getDefaultView() {
+    return const OfferListView();
   }
 }
 
