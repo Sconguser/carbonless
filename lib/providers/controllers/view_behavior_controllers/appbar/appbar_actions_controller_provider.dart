@@ -1,12 +1,10 @@
-import 'package:carbonless_free/providers/controllers/app_navigation_controller_provider.dart';
-import 'package:carbonless_free/providers/states/navigation/exchanges/offers_navigation_state.dart';
-import 'package:carbonless_free/views/exchange/offers/create/create_view.dart';
-import 'package:carbonless_free/views/exchange/offers/offer_list/exchanges_list/exchange_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../main.dart';
 import '../../../states/navigation/app_navigation_state.dart';
+import '../../../states/navigation/exchanges/offers_navigation_state.dart';
+import '../../app_navigation_controller_provider.dart';
 
 class AppbarActionsController extends StateNotifier<List<Widget>> {
   AppbarActionsController(List<Widget> actions, this.ref) : super(actions) {
