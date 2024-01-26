@@ -1,5 +1,5 @@
-import '/auth/views/widgets.dart';
-import '/main.dart';
+import 'widgets.dart';
+import '../../main.dart';
 import '/providers/states/signup_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
