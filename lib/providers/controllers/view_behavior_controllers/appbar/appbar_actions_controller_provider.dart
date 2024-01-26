@@ -7,7 +7,7 @@ import '../../../states/navigation/exchanges/offers_navigation_state.dart';
 import '../../app_navigation_controller_provider.dart';
 
 class AppbarActionsController extends StateNotifier<List<Widget>> {
-  AppbarActionsController(List<Widget> actions, this.ref) : super(actions) {
+  AppbarActionsController(super.actions, this.ref) {
     ref.watch(appNavigationControllerProvider.notifier).addListener((state) {
       setActions(getActionsForState(ref, state));
     });
@@ -28,18 +28,22 @@ List<Widget> getActionsForState(Ref ref, AppNavigationState state) {
     return [];
   }
   if (state is OfferListView) {
-    return [
-      ElevatedButton(
-        child: Text(ref.read(messagesProvider).button.add_offer),
-        onPressed: () {
-          ref
-              .read(appNavigationControllerProvider.notifier)
-              .showMain(const NewOfferView());
-        },
-      )
-    ];
+    return getOfferListActions(ref);
   }
   return [];
+}
+
+List<Widget> getOfferListActions(Ref<Object?> ref) {
+  return [
+    ElevatedButton(
+      child: Text(ref.read(messagesProvider).button.add_offer),
+      onPressed: () {
+        ref
+            .read(appNavigationControllerProvider.notifier)
+            .showMain(const NewOfferView());
+      },
+    )
+  ];
 }
 
 final appbarActionsControllerNotifier =
